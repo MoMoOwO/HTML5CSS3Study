@@ -56,6 +56,3 @@
     | placeholder | 输入框提示信息，提示占位 |
     | autofocus | 自动获取焦点 |
     | autocomplete | 自动完成，on/off，需指定name属性并成功提交一次 |
-    | tel | 电话号码输入，主要针对移动端调用数字键盘输入 |
-    | url | 网址输入 |
-    | search | 哎呦清空按钮的文本输入 |

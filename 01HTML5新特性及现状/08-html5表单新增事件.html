@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" name="userName" id="userName"><br>
+        电话：<input type="tel" name="userPhone" id="userPhone" pattern="^(\+86)?1\d{10}$"><br>
+        <input type="submit">
+    </form>
+
+    <script> 
+        // 1.oninput：监听当前指定元素内容的改变，只要内容改变（添加内容，删除内容）就会触发该事件
+        document.getElementById("userName").oninput = function(){
+            console.log("oninput" + this.value);
+        };
+
+        // onkeyup:键盘谈起的时候触发，每一个键的谈起都会触发一次
+        document.getElementById("userName").onkeyup = function(){
+            console.log("onkeyup" + this.value);
+        };
+
+        // oninvalid:当验证不通过时触发
+        document.getElementById("userPhone").oninvalid = function(){
+            console.log("请输入合法的11位手机号！");
+            this.setCustomValidity("请输出合法的11位手机号！");
+        }
+
+    </script>
+</body>
+</html>

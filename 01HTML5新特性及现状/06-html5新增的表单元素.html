@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <!-- 专业：<select name="" id="">
+            <option value="1">前端与移动开发</option>
+            <option value="1">JavaScript</option>
+            <option value="1">Java</option>
+            <option value="1">C++</option>
+            <option value="1">Python</option>
+        </select> -->
+
+        <!-- 有时候需要不仅能选择，还应该可以输入 -->
+        <!-- 建立输入框和datalist之间的关联 list="datalist的id号" -->
+        <!-- 火狐浏览器支持不好，所以不常用 -->
+        专业：<input type="text" list="subjects">
+        <!-- 还能通过datalist创建选择列表 -->
+        <!-- 建立datalist -->
+        <datalist id="subjects">
+            <!-- 创建选项值：value：具体的值， label：提示信息，辅助值 -->
+            <option value="前端与移动开发" label="前景非常好"></option>
+            <option value="JavaScript" label="666"></option>
+            <option value="Java" label="老大哥"></option>
+            <option value="Python" label="AI大佬"></option>
+            <!-- option可以是但标签也可以是双标签 -->
+            <option value="英语" label="难" />
+        </datalist>
+
+        <br>
+
+        网址：<input type="url" list="urls">
+        <datalist id="urls">
+            <!-- 如果input的输入框type类型为url，则value值则必须添加http:// -->
+            <option value="http:// www.baidu.com" label="百度"></option>
+            <option value="http:// www.bing.com" label="网易"></option>
+            <option value="http:// www.google.com" label="谷歌"></option>
+        </datalist>
+    </form>
+</body>
+</html>

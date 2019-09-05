@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 之前的方式：1.embed:直接插入视频文件，它的本质是调用本机上已经安装的软件，有兼容性 -->
+    <!-- 2.flash插件：安装flash；缺点：学习flash，增加学习成本，苹果设备不支持flash -->
+
+    <!-- audio：音频，src：音频路径,contorls:播放器控制面板,autoplay:自动播放，loop：循环 -->
+    <audio src="./assets/贝瓦儿歌-两只老虎.mp3" controls></audio>
+    <br>
+
+    <!-- video：视频 src：音频路径,contorls:播放器控制面板,autoplay:自动播放，loop：循环 -->
+    <!-- width:宽度，height:高度，
+        poster:当视频还没有完全下载，或者用户还没有点击破防前的默认显示的封面，默认先当前视频文件的第一帧画面
+        当设置宽高的时候一般情况下只会设置宽度或者高度，让其等比缩放，如果同时设置高度合宽度，那么视频并不会真正的
+        调整到设置的高宽，除非设置的值刚好是等比例的。
+     -->
+    <video src="./assets/两只老虎(贝瓦儿歌).mp4" poster="./assets/2.jpg" controls width="800"></video>
+    <br>
+
+    <!-- 重点说明source的使用：因为不同浏览器支持的视频文件格式不一样，所以我们在进行视频添加的时候
+    需要考虑到浏览器是否支持。我们可以准备多个格式的视频文件，让浏览器自动的选择 -->
+
+    <video controls>
+        <source src="./assets/1.flv" type="video/flv">
+            <source src="./assets/两只老虎(贝瓦儿歌).mp4" type="video/mp4">
+        你的浏览器不支持当前视频格式的播放
+    </video>
+</body>
+</html>

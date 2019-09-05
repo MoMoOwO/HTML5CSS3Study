@@ -1,0 +1,46 @@
+*{
+    /* 清除边距 */
+    padding: 0px;
+    margin: 0px;
+}
+
+form{
+    /* 表单 */
+    width: 600px;
+    margin: 10px auto;
+}
+
+form > fieldset{
+    /* 内边距 */
+    padding: 10px;
+}
+
+form > fieldset > span{
+    color: red;
+    position: relative; 
+    top: 3px;
+}
+
+form > fieldset > meter,
+form > fieldset > input{
+    /* 表单空间位置 */
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    /* 外边距 */
+    margin: 10px 0;
+    /* 先清除外边，再添加设置外面以清除外边框内阴影 */
+    border: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* 输入框字体和左间距 */
+    font-size: 16px;
+    padding-left: 5px;
+    /* width=内容+padding+border */
+    box-sizing: border-box;
+}
+
+form > fieldset > meter{
+    /* 清除左侧边距 */
+    padding-left: 0;
+}

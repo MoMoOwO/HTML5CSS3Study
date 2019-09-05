@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" name="userName"><br>
+        密码：<input type="password" name="userPwd"><br>
+        <!-- keygen:生成公钥，私钥，提交数据的时候：信息+私钥->二次加密 -->
+        <!-- 服务器使用公钥和二次加密之后的数据,进行解密 -->
+        <!-- 很多浏览器不支持，所以不常用 -->
+        加密：<keygen></keygen>
+        <input type="submit">
+    </form>
+
+    <!-- output显示输出信息,只能显示不能修改 -->
+    <!-- 语义性更强，值需要自己去设置，不能自动计算 -->
+    <output>总金额：￥1000</output>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>学生档案</legend>
+
+            <span>*</span>
+            <label for="userName">姓名：</label>
+            <input type="text" name="userName" id="userName" required placeholder="请输入用户名">
+
+            <label for="userPhone">手机号码：</label>
+            <input type="tel" name="userPhone" id="userPhone">
+
+            <span>*</span>
+            <label for="userEmail">邮箱地址：</label>
+            <input type="email" name="userEmail" id="userEmail" required>
+
+            <label for="collage">所属学院：</label>
+            <input type="text" name="collage" id="collage" list="collageList" placeholder="请选择">
+            <datalist id="collageList">
+                <option value="JavaScript学院">JavaScript学院</option>
+                <option value="Java学院">Java学院</option>
+                <option value="C++学院">C++学院</option>
+                <option value="Python学院">Python学院</option>
+            </datalist>
+
+            <label for="source">入学成绩：</label>
+            <input type="number" name="source" id="source" max="100" min="0" >
+
+            <label for="level">基础水平：</label>
+            <meter name="level" id="level" max="100" min="0"></meter>
+
+            <label for="inTime">入学日期：</label>
+            <input type="date" name="inTime" id="inTime">
+
+            <label for="outTime">毕业日期：</label>
+            <input type="date" name="outTime" id="outTime">
+
+            <span>*</span>
+            <font>标识为必填项！</font>
+
+            <input type="submit">
+        </fieldset>
+    </form>
+
+    <script>
+        document.getElementById('source').oninput = function(){
+            document.getElementById("level").value = this.value;
+        }
+    </script>
+</body>
+</html>

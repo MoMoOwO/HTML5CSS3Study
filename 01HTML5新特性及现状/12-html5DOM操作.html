@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="red">JavaScript</li>
+        <li class="green">Java</li>
+        <li class="blue">C++</li>
+        <li id="c">Python</li>
+    </ul>
+    
+    <script>
+        // 获取第一个li标签
+            window.onload = function(){
+                // document.getElementsByTagName("li")获取的是数组
+                // 不提倡使用索引值来获取数组元素，原因：不直观，以后的数据都是从后台动态获取，前台动态的添加
+                // var liarr = document.getElementsByTagName("li")[0];
+                // console.log(liarr);
+
+                // query：查询 Selector：选择器 querySelector（传入选择器名称）
+                // querySelector:获取单个元素，如果获取的元素不止一个，那么只会返回满足条件的第一个元素
+                // 参数要求：弱国是类选择器，必须添加“.”，如果是id选择器，必须添加“#”;
+                var javali = document.querySelector('.green');
+                //var javali = document.querySelector('#c');
+                console.log(javali);
+
+                // 获取满足条件的所有元素--数组
+                var liarr2 = document.querySelectorAll("li");
+                console.log(liarr2);
+            }
+    </script>
+
+</body>
+</html>

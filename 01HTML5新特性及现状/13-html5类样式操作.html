@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+        .underline{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>JavaScript</li>
+        <li class="blue">Java</li>
+        <li>C++</li>
+        <li>Python</li>
+    </ul>
+
+    <input type="button" value="为第一个li元素添加样式" id="add">
+    <input type="button" value="为第二个li元素移除样式" id="remove">
+    <input type="button" value="为第三个li元素切换样式" id="toggle">
+    <input type="button" value="判断第一个li元素是否包含某个样式" id="contain">
+
+    <script>
+        window.onload = function(){
+            // add:为元素添加指定名称的样式，一次只能添加一个样式
+            document.querySelector("#add").onclick= function(){
+                // classList：当前元素的所有的样式列表-数组
+                // querySelector("li")选中第一个li标签
+                document.querySelector("li").classList.add("red");
+                document.querySelector("li").classList.add("underline");
+
+                // 旧方式，此方法会顶替掉之前的所有样式
+                //document.querySelector("li").className = "red";
+                // 获取样式
+                console.log(document.querySelector("li").classList.item(3));
+            }
+            // remove:为元素移除指定名称的样式（是移除样式不是移除class属性），一次只能移除一个
+            document.querySelector("#remove").onclick = function(){
+                document.querySelector(".blue").classList.remove("blue");
+            }
+            // toggle:切换元素的样式，如果元素之前没有指定名称的样式，如果有则移除
+            document.querySelector("#toggle").onclick = function(){
+                document.querySelectorAll("li")[2].classList.toggle("green");
+            }
+            // contain:判断元素是否包含指定名称的样式，返回true,false
+            document.querySelector("#contain").onclick = function(){
+                console.log(document.querySelectorAll("li")[3].classList.contains("green"));
+            }
+        }
+    </script>
+</body>
+</html>

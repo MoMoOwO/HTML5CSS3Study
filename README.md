@@ -66,3 +66,4 @@
 10. HTML5两种进度条：progress,meter。
 11. HTML5提供的媒体标签：audio，video，注意source的使用。
 12. HTML5提供的获取DOM元素的两种方式：querySelector，querySelectorAll。
+13. HTML5提供的类样式操作classList.add()/.toggle()/.remove()/.contains()/.item()

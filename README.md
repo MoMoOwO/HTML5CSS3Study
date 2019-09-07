@@ -3,7 +3,7 @@
 1. [视频链接](https://www.bilibili.com/video/av53158375)
 2. 笔记为个人纪录，章节号与文件夹序号对应
 
-## 01什么是HTML5,HTML5新特性概览
+## 01什么是HTML5,HTML5新特性概览-新的标签属性
 
 1. H5并不是新的语言，而是HTML语言的第五次重大版本修改。
 2. 支持：所有的主流浏览器都支持H5（Chrome,FireFox,Safari,IE9及以上版本,IE9为有选择的支持非全部支持）。
@@ -66,4 +66,10 @@
 10. HTML5两种进度条：progress,meter。
 11. HTML5提供的媒体标签：audio，video，注意source的使用。
 12. HTML5提供的获取DOM元素的两种方式：querySelector，querySelectorAll。
-13. HTML5提供的类样式操作classList.add()/.toggle()/.remove()/.contains()/.item()
+13. HTML5提供的类样式操作classList.add()/.toggle()/.remove()/.contains()/.item()。
+14. HTML5提供的自定义属性(data-)：定义和获取的方法。
+
+## 02HTML5提供的新的接口
+
+1. 网络接口：online，offline，分别监听网络链接与断开。
+2. 全屏API：requestFullScreen():开启全屏,cancelFullScreen()：取消全屏,fullScreenElement:监听全屏状态。

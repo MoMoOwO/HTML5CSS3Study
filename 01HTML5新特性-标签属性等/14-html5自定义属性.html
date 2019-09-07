@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1.定义 -->
+    <!-- 规范：
+    1. data- 开头
+    2. data- 后面必须至少有一个字符，多个单词使用-链接
+    建议：
+    1. 名称应该都是用小写--不要包含任何的大写字符
+    2. 名称不要有任何的特殊字符
+    3. 名称不要使用纯数字 -->
+    <p data-school-name="xccs">呵呵哒</p>
+
+    <!-- 2.取值 -->
+    <script>
+        window.onload = function(){
+            // 获取自定义属性值
+            // 将data-后面的单词使用camel命名规则链接 -- 必须使用camel合法获取值，否则有可能无法获取到值
+            // p.dataset["schoolname"] --- data-schoolname
+            // p.dataset["schoolName"] --- data-school-name
+            console.log(p.dataset["schoolName"]);
+        }
+    </script>
+</body>
+</html>

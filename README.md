@@ -73,3 +73,24 @@
 
 1. 网络接口：online，offline，分别监听网络链接与断开。
 2. 全屏API：requestFullScreen():开启全屏,cancelFullScreen()：取消全屏,fullScreenElement:监听全屏状态。
+3. 文件读取接口FileReader
+
+    + 方法
+
+    | 方法名 | 作用 |
+    | :--: | :--: |
+    | readAsText() | 读取文本文件(可以使用txt打开的文件)，返回文本字符串值，默认编码是UTF-8 |
+    | resadAsBinaryString() | 读取任意类型的文件，返回二进制字符串 |
+    | readAsDataURL() | 读取文件获取一段以data开头的字符串，这段字符串的本质就是DataURL |
+    | abort() | 中断读取 |
+
+    + FileReader提供了一个完整的事件模型，用来捕获读取文件时的状态
+
+    | 事件名 | 作用 |
+    | :--: | :--: |
+    | onabort | 读取文件断开时触发 |
+    | onerror | 读取错误时触发 |
+    | onload | 文件读取成功完成时触发 |
+    | onloadend | 读取完成时触发，无论成功还失败 |
+    | onloadstart | 开始读取时触发 |
+    | onprogress | 读取文件过程中持续触发 |

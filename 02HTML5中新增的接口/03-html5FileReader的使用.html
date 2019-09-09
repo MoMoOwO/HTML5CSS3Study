@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 展示图片 -->
+    <!-- src:指定路径(资源定位--url):src请求的是外部文件，一般来说是服务器的资源，意味着它需要
+    向服务器发送请求，它占用服务器资源 -->
+    <!-- <img src="./images/1.jpg" alt=""> -->
+
+    <!-- 需求：即时预览
+     即时：当用户选择完图片之后立刻进行预览处理
+     预览：通过文件读取对象的readAsDataURL() -->
+    <form action="">
+        <input type="file" name="myFile" id="myFile" multiple onchange="getFileContent();"><br>
+        <input type="submit">
+    </form>
+    <img src="" alt="">
+    <script>
+    /* FileReader:读取文件内容
+     1.readAsText()：读取文本文件(可以使用txt打开的文件)，返回文本字符串值，默认编码是UTF-8；
+     2.resadAsBinaryString()：读取任意类型的文件，返回二进制字符串，这个方法不是用来读取文件展示给用户看，
+     而是存储文件；例如读取文件的内容，获取二进制数据，传递给后台，后台接受了数据之后，在将数据存储；
+     3.readAsDataURL()：读取文件获取一段以data开头的字符串，这段字符串的本质就是DataURL。DataURL是一种将文件嵌入到文档的方案，
+     这个文件一般是指图像或其他能够嵌入到文档的文件格式，DataURL是将资源转换为base64编码的字符串形式，
+     把并且将这些内容直接存储在url中，来优化网站的加载速度和执行效率
+     4.abort():中断读取
+     
+     */
+
+     function getFileContent(){
+         //console.log('222');
+         // 创建文件读取对象
+         var reader = new FileReader();
+         // 读取文件，获取DataURL
+         // 细节：没有返回值void，但是（读取完文件之后）他会将读取的结果存储在文件读取对象的result中；
+         // 需要传递一个参数binary large object：文件（图片或者其他可以嵌入到文档中的类型）；
+         // 文件存储在file表单元素的files属性中，他是一个数组
+         var file = document.querySelector("#myFile").files[0];
+         //console.log(file);
+         reader.readAsDataURL(file);
+         // 获取数据
+         /* FileReader提供了一个完整的事件模型，用来捕获读取文件时的状态
+          onabort:读取文件断开时触发
+          onerror:读取错误时触发
+          onload:文件读取成功完成时触发
+          onloadend:读取完成时触发，无论成功还失败
+          onloadstart:开始读取时触发
+          onprogress:读取文件过程中持续触发 */
+         reader.onload = function(){
+            //console.log(reader.result);
+            document.querySelector("img").src = reader.result;
+         }
+         
+     }
+    </script>
+</body>
+</html>

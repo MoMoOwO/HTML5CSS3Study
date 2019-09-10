@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    
+    <p>sessionStorage的使用：存储数据到本地。存储的容量5MB左右，
+        1.这个数据本质是存储在当前页面当中
+        2.它的生命周期为关闭当前页面，关闭页面，数据会自动清除
+        setItem(key, value):存储数据，以键值对的方式存储
+        getItem(key):获取数据，通过指定名称的key获取对应的value值
+        removeItem(key):删除数据，通过指定名称key删除对应的值
+        clear():清空所有存储的内容</p>
+    <input type="text" id="userName" /><br />
+    <input type="button" value="设置数据" id="setData" />
+    <input type="button" value="获取数据" id="getData" />
+    <input type="button" value="删除数据" id="removeData" />
+
+    <script>
+        //存储数据
+        document.querySelector("#setData").onclick = function(){
+            // 获取用户名
+            let name = document.querySelector("#userName").value;
+            // 存储值
+            window.sessionStorage.setItem("userName", name);
+        }
+        // 获取数据
+        document.querySelector("#getData").onclick = function(){
+            // 如果找不到对应名称(key)的值，那么就会返回null
+            let name = window.sessionStorage.getItem("userName");
+            console.log(name);
+        }
+        // 删除数据
+        document.querySelector("#removeData").onclick = function(){
+            // 在删除的时候如果key值不存在，不会报错，但是也不会删除数据
+            window.sessionStorage.removeItem("userName");
+        }
+    </script>
+  </body>
+</html>

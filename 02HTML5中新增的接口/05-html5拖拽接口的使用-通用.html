@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+    .div1, .div2, .div3{
+        width: 200px;
+        height: 200px;
+    }
+    .div1{
+        position: relative;
+        border: 1px solid red;
+        float: left;
+    }
+    .div2{
+        position: relative;
+        margin-left: 20px;
+        float: left;
+        border: 1px solid green;
+    }
+    .div3{
+        position: relative;
+        margin-left: 20px;
+        float: left;
+        border: 1px solid blue;
+    }
+    p{
+        margin-top: 5px;
+        background-color: orange;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="div1" id="div1">
+        <!-- 在html5中如果想拖拽元素，就必须为元素添加draggable="true"；图片和超链接无需添加该属性，自身支持拖拽。 -->
+        <p id="pe1" draggable="true">试着也把我拖过去</p>
+        <p id="pe" draggable="true">试着把我拖过去</p>
+    </div>
+
+    <div class="div2" id="div2">
+
+    </div>
+
+    <div class="div3" id="div3">
+
+    </div>
+
+    <script>
+        // 学习拖拽，主要就是学习拖拽事件
+
+        var obj = null; // 被拖拽的对象
+
+        // 被拖拽元素
+
+        document.ondragstart = function(e){
+            // 通过事件捕获来获取当前被拖拽的子元素
+            //console.log(e.target);
+            // 修改透明度
+            e.target.style.opacity = 0.5;
+            // 修改父元素div边框粗细
+            //e.target.parentNode.style.borderWidth = "5px";
+
+            //obj = e.target; // 通过全局变量保存被拖拽的，添加到目标元素中
+
+            // 通过事件源参数dataTransfer来实现数据的存储和获取
+            /*
+            setData(format, data):
+            format: 数据的类型: text/html text/url-list
+            data: 数据: 一般来说时字符串值
+            */
+            e.dataTransfer.setData("text/html", e.target.id);
+        }
+        document.ondrag = function(e){
+            
+        }
+        document.ondragleave = function(e){
+            
+        }
+        document.ondragend = function(e){
+            // 还原透明度
+            e.target.style.opacity = 1;
+            // 还原父元素边框
+            //e.target.parentNode.style.borderWidth = "1px";
+        }
+
+        // 目标元素
+
+        document.ondragenter = function(e){
+            
+        }
+        document.ondragover = function(e){
+            // 如果想要触发ondrap事件，那么必须在ondragover中阻止浏览器的默认行为
+            e.preventDefault();
+        }
+        // 浏览器默认会组织ondrap事件：我们必须在ondragover中阻止浏览器的默认行为
+        document.ondrop = function(e){
+            // 添加元素
+            //e.target.appendChild(obj); // 通过全局变量保存被拖拽的，添加到目标元素中
+
+            // 通过dataTransfer.setData()存储的数据，只能在drop事件中获取
+            var id = e.dataTransfer.getData("text/html");
+            //console.log(id);
+            e.target.appendChild(document.getElementById(id));
+        }
+        document.ondragleave = function(e){
+            
+        }
+    </script>
+</body>
+</html>

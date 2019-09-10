@@ -94,3 +94,41 @@
     | onloadend | 读取完成时触发，无论成功还失败 |
     | onloadstart | 开始读取时触发 |
     | onprogress | 读取文件过程中持续触发 |
+
+4. HTML5提供的元素拖拽接口，主要是通过元素拖拽事件来完成，分为两类：
+
+    + 应用于被拖拽元素的事件：
+
+    | 事件名 | 调用时刻 |
+    | :--: | :--: |
+    | ondrag | 整个拖拽过程都会调用 |
+    | ondragstart | 当拖拽动作开始时调用 |
+    | ondragleave | 当鼠标离开拖拽元素原始位置时调用 |
+    | ondragend | 当拖拽结束时调用 |
+
+    + 应用于目标元素的事件：
+
+    | 事件名 | 调用时刻 |
+    | :--: | :--: |
+    | ondragenter | 当拖拽元素进入时调用 |
+    | ondragover | 当停留在目标元素上时调用 |
+    | ondrop | 当在目标元素上松开鼠标时调用(浏览器默认阻止) |
+    | ondragleave | 当鼠标离开目标元素时调用 |
+
+    + 通过事件捕获来获取当前元素e.target
+
+    + 通过事件源参数e.dataTransfer()来实现数据的存储和获取
+
+5. HTML5提供的获取地理位置的接口navigator.geolocation，通常浏览器禁止定位获取，需要地图开发的时候采用第三方工具的支持，如百度地图api。
+6. HTML5提供的两种web存储方式，sessionStorage和localStorage
+
+    + sessionStorage，数据存储到当前页面中，页面关闭则数据消失
+
+    | 方法名 | 作用 |
+    | :--: | :--: |
+    | setItem(key, value) | 存储数据，键值对方式 |
+    | getItem(key) | 获取数据，按键获取 |
+    | removeItem(key) | 删除数据，按键删除 |
+    | clear() | 清空所有sessionStorage存储数据 |
+
+    + localStorage，数据存储到硬盘中；页面关闭数据不消失，同浏览器不同窗口共享数据，但是不同浏览器不共享数据，删除数据需要手动删除；常用方法与sessionStorage相似。

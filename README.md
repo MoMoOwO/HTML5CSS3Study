@@ -132,3 +132,5 @@
     | clear() | 清空所有sessionStorage存储数据 |
 
     + localStorage，数据存储到硬盘中；页面关闭数据不消失，同浏览器不同窗口共享数据，但是不同浏览器不共享数据，删除数据需要手动删除；常用方法与sessionStorage相似。
+
+7. HTML5提供的应用缓存

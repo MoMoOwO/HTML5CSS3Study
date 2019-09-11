@@ -133,4 +133,34 @@
 
     + localStorage，数据存储到硬盘中；页面关闭数据不消失，同浏览器不同窗口共享数据，但是不同浏览器不共享数据，删除数据需要手动删除；常用方法与sessionStorage相似。
 
-7. HTML5提供的应用缓存
+7. HTML5提供的应用缓存；cache manifest文件
+
+    + 优势：可配置需要缓存的资源；网络无连接应用仍可使用；本地读取缓存资源，提升访问速度，增加用户体验；减少请求，缓解服务器负担。
+
+    + Cache Manifest基础：CACHE MANIFEST文件开头、CACHE:要缓存的文件、NETWORK:需要向服务器请求的文件、FALLBACK:无法获取时替换的文件
+
+8. 自定义媒体播放控件。[HTML5视频/音频参考手册](https://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp)
+
+    + 常用方法
+
+    | 方法名 | 功能 |
+    | :--: | :--: |
+    | load() | 加载 |
+    | play() | 播放 |
+    | pause() | 暂停 |
+
+    + 常用属性
+
+    | 属性名 | 作用 |
+    | :--: | :--: |
+    | currentTime | 视频播放的当前进度 |
+    | duration | 视频总时长 |
+    | pause | 当前视频播放状态 |
+
+    + 常用事件
+
+    | 事件名 | 调用时机 |
+    | :--: | :--: |
+    | oncanplay | 视频可以开始播放时触发 |
+    | ontimeupdate | currentTime变化时触发，如开始播放等 |
+    | onended | 播放完毕时触发 |

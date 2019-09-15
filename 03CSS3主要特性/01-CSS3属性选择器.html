@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+        .darkred{
+            color: darkred;
+        }
+        .blueviolet{
+            color: blueviolet;
+        }
+
+        /* 属性选择器，属性是相对于标签而言的；所谓的属性选择器就是根据指定名称的属性的值来查找元素 */
+        /* 1.E[attr]：查找指定的拥有attr属性的E标签 */
+        /* 查找拥有style属性的li标签 */
+        li[style]{
+            text-decoration: underline;
+        }
+
+        /* 2.E[attr=value]：查找拥有指定的attr属性并且属性值为value的E标签；=为严格匹配 */
+        /* 查找拥有class属性，并且class值为red的li标签 */
+        li[class="red"]{
+            /* font-size: 30px; */
+        }
+
+        /* 3.E[attr*=value]：查找拥有指定的attr属性，并且属性值中包含(可以时任意位置)value的E标签 */
+        /* 查找拥有class标签，且class值中含有red的li标签 */
+        li[class*="red"]{
+            /* font-size: 30px; */
+        }
+
+        /* 4.E[attr^=value]：查找拥有指定的attr属性，并且属性值以value开头的E标签 */
+        li[class^="red"]{
+            font-size: 30px;
+        }
+
+        /* 4.E[attr$=value]：查找拥有指定的attr属性，并且属性值以value结束的E标签 */
+        li[class$="blue"]{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <p style="">看看能不能也添加样式</p>
+    <ol>
+        <li class="red" style="">河南再次发生矿难，死伤人数超过100人</li>
+        <li class="blue">禽流感再次发生蔓延，温家宝指示</li>
+        <li class="darkred" style="">南方农作物减产，绝收面积上亩</li>
+        <li class="blue">猪流感害惨农民</li>
+        <li class="red">跟党走，听党指挥</li>
+        <li class="blueviolet">哈哈哈哈哈哈哈！</li>
+    </ol>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .first{
+            color: red;
+        }
+
+        /* 兄弟伪类
+        +：获取当前元素的相邻的满足条件的元素
+        ~：获取当前元素的满足条件的兄弟元素
+         */
+
+        /* 查找添加了.first样式的相邻的li元素；两个条件：必须相邻，必须是指定的元素 */
+        .first + li{
+            color: blue;
+        }
+
+        /* 查找添加了.first样式的所有的li兄弟元素 */
+        .first ~ li{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="first">前端与移动开发</li>
+        <span>能不能变成蓝色？</span>
+        <li>HTML5</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+</body>
+</html>

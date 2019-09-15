@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #F7F7F7;
+		}
+
+		.content {
+			width: 960px;
+			margin: 0 auto;
+			padding: 30px;
+		}
+
+		p {
+			font-size: 18px;
+			line-height: 1.75;
+		}
+
+		ul {
+			position: fixed;
+			top: 100px;
+			left: 30px;
+			margin: 0;
+			padding: 0;
+		}
+
+		/* E:target 为描点目标元素添加样式，放目标元素被触发为当前锚点元素时触发此伪类样式 */
+		h2:target{
+			color: red;
+		}
+	</style>
+
+</head>
+<body>
+    <ul class="nav">
+		<!-- href添加锚点 -->
+		<li><a href="#title1">CSS (层叠样式表)</a></li>
+		<li><a href="#title2">实例</a></li>
+		<li><a href="#title3">发展历史</a></li>
+		<li><a href="#title4">使用方法</a></li>
+		<li><a href="#title5">布局特点</a></li>
+		<li><a href="#title6">创建编辑</a></li>
+	</ul>
+	<div class="content">
+		<h2 id="title1">CSS (层叠样式表)</h2>
+		<p>层叠样式表是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。</p>
+		<p>CSS目前最新版本为CSS3，是能够真正做到网页表现与内容分离的一种样式设计语言。相对于传统HTML的表现而言，CSS能够对网页中的对象的位置排版进行像素级的精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力，并能够进行初步交互设计，是目前基于文本展示最优秀的表现设计语言。CSS能够根据不同使用者的理解能力，简化或者优化写法，针对各类人群，有较强的易读性。</p>
+		<h2 id="title2">实例</h2>
+		<p>如果你要在HTML元素中设置CSS样式，你需要在元素中设置"id" 和 "class"选择器。[1] d 选择器可以为标有特定 id 的 HTML 元素指定特定的样式。HTML元素以id属性来设置id选择器,CSS 中 id 选择器以 "#" 来定义。以下的样式规则应用于元素属性 id="para1":</p>
+		<p>class 选择器用于描述一组元素的样式，class选择器有别于id选择器，class可以在多个元素中使用。class 选择器在HTML中以class属性表示, 在 CSS 中，类选择器以一个点"."号显示：在以下的例子中，所有拥有 center 类的 HTML 元素均为居中。</p>
+		<h2 id="title3">发展历史</h2>
+		<p>作为一项W3C推荐，CSS1发布于 1996年12月17 日。1999 年1月11日，此推荐被重新修订。</p>
+		<p>作为一项 W3C 推荐，CSS2发布于 1999年1月11日。CSS2添加了对媒介（打印机和听觉设备）和可下载字体的支持。</p>
+		<h2 id="title4">使用方法</h2>
+		<p>有三种方法可以在站点网页上使用样式表：外联式Linking（也叫外部样式）：将网页链接到外部样式表。嵌入式Embedding（也叫内页样式）：在网页上创建嵌入的样式表。内联式Inline（也叫行内样式）：应用内嵌样式到各个网页元素。其中，优先级：内联式 > 嵌入式 > 外联式</p>
+		<p>当样式需要被应用到很多页面的时候，外部样式表将是理想的选择。使用外部样式表，你就可以通过更改一个文件来改变整个站点的外观。</p>
+		<p>当特殊的样式需要应用到个别元素时，就可以使用内联样式。 使用内联样式的方法是在相关的标签中使用样式属性。样式属性可以包含任何 CSS 属性。以下实例显示出如何改变段落的颜色和左外边距。</p>
+		<h2 id="title5">布局特点</h2>
+		<p>对于蜘蛛在爬行一个网站的页面时，若是有太多的垃圾代码，会使搜索蜘蛛对其产生不友好、不信任感，同时蜘蛛的爬行速度也会因此而减缓，对于网站SEO而言，可谓一大忌。就如传统的用table页面，对此我们就需要对网站进行代码优化，而这便需要动用CSS+div了，下面便来谈谈使用CSS+div进行代码优化的一些益处。</p>
+		<p>网站使用DIV+CSS布局使代码很是精简，相信大多朋友也都略有所闻，css文件可以在网站的任意一个页面进行调用，而若是使用table表格修改部分页面却是显得很麻烦。要是一个门户网站的话，需手动改很多页面，而且看着那些表格也会感觉很乱也很浪费时间，但是使用css+div布局只需修改css文件中的一个代码即可。</p>
+		<p>采用div-css布局的网站对于搜索引擎很是友好，因此其避免了Table嵌套层次过多而无法被搜索引擎抓取的问题，而且简洁、结构化的代码更加有利于突出重点和适合搜索引擎抓取。</p>
+		<h2 id="title6">创建编辑</h2>
+		<p>创建和编辑css更加常用的是AdobeDreamweaver系列软件，可视化编辑更利于web工程师快速的创建和编辑css，新版本CS5.0、CS5.5、CS6.0、CC，包含Adobe BrowserLab，用于针对多种浏览器测试css的兼容性。Adobe Dreamweaver是一个css创建和编辑必不可少的利器！</p>
+		<p>FrontPage2000 包含有能用来为站点创建外部样式表的模板。可以用空白模板或已包含样式的模板来创建（例如 Arcs）。当保存样式表时， FrontPage 会以 . css 作为文件扩展名。要编辑样式表，请双击文件夹列表中的样式表。</p>
+	</div>
+</body>
+</html>

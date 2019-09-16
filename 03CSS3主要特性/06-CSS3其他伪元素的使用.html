@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 通过EE::first-letter实现首字下沉 */
+        p::first-letter{
+            color: red;
+            font-size: 30px;
+            float: left; /* 文本环绕 */
+        }
+        /* 获取第一行内容，如果设置了first-letter，那么无法同时设置它的样式 */
+        p::first-line{
+            text-decoration: underline;
+        }
+        /* 设置当前选中内容的样式 */
+        p::selection{
+            background-color: pink;
+            /* 只能设置显示的样式，而不能设置内容大小 */
+            /* font-size: 30px; */
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        外媒报道称，今年iPhone 11系列全球的首批订单量预计在800万台左右，相比去年2018款iPhone至少减少了10%。其中，iPhone 11占订单总数的60%，iPhone 11 Pro占10%，iPhone 11 Pro Max占30%。
+        <br>
+        据报道，目前来看，富士康承接了全部的iPhone 11 Pro和iPhone 11 Pro Max的订单。而iPhone 11则由和硕、纬创、富士康三家共同代工。值得一提的是，iPhone 11的备货比例也达到了65%。
+    </p>
+</body>
+</html>

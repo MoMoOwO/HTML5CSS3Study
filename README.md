@@ -139,7 +139,7 @@
 
     + Cache Manifest基础：CACHE MANIFEST文件开头、CACHE:要缓存的文件、NETWORK:需要向服务器请求的文件、FALLBACK:无法获取时替换的文件
 
-8. 自定义媒体播放控件。[HTML5视频/音频参考手册](https://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp)
+8. 视频播放器案例-自定义媒体播放控件。[HTML5视频/音频参考手册](https://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp)
 
     + 常用方法
 
@@ -222,6 +222,62 @@
     | E::first-line | 文本的第一行 |
     | E::selection | 可改变选中文本的样式 |
 
-3.颜色
+3. 颜色
     + RGBA：R:红色，G:绿色，B:蓝色，A:透明度；数值(0-255)、百分比(0%-100%)，A取值为0-1。
     + HSLA：Hue：色相，色调，0(或360)表示红色，120表示绿色，240表示蓝色，也可去其他数值来指定颜色。取值为0-360，过渡为：红橙黄绿青蓝紫红；Saturation：饱和度，取值为0.0%-100.0%；Lightness：亮度，取值为0.0%-100.0%，50%为平衡值；Alpha：透明度，取值为0-1之间。
+    + opacity：只能针对整个盒子设置透明度，子盒子及内容会继承父盒子的透明度；使用rgba来控制颜色，相对于opacity不具有继承性。
+    + transparent：不可调节透明度，始终完全透明。
+
+4. 文本阴影(shadow):text-shadow
+
+    + 语法：
+
+    ``` html
+    text-shadow: none|<length>none|[<shadow>,]*<shadow>
+    或
+    text-shadow: none|<color>[,<color>]*
+    ```
+
+    也就是：
+    text-shadow: [颜色(color)] x轴(X Offset) y轴(Y Offset) 模糊半径(Blur),[颜色(color) x轴(X Offset) y轴(Y Offset) 模糊半径(Blur)]...
+    或者
+    text-shadow: [x轴(X Offset) y轴(Y Offset) 模糊半径(blur) 颜色(color)],[x轴(X Offset) y轴(Y Offset) 模糊半径(blur) 颜色(color)]...
+
+    + 取值：
+
+    <length>：长度值，可以是负值，用来指定阴影的延伸距离。其中X Offset是水平偏移值，Y Offset是垂直偏移值。
+    <shadow>：阴影的模糊值，不可以是负值，用来指定模糊效果的作用距离。
+    <color>：指定阴影颜色，也可以是rgba透明色。
+
+    + 图示：
+    ![text-shadow](https://i.loli.net/2019/09/17/LSpi34w5YXRoDZq.jpg)
+
+5. 盒模型
+
+    + 默认情况下，CSS设置的盒子宽度仅仅是内容区的宽度，而非和子的宽度。同样，高度类似。真正盒子的宽度(在页面呈现出来的宽度)和高度，需要加上一下其他的属性。例如：
+    padding + border + width = 盒子的宽度；
+    padding + border + height = 盒子的高度；
+    很明显，这部只管很容易出错，造成网页中其他元素的错位。
+
+    + CSS3种可以通过box-sizing来制定和模型，即可指定为content-box、border-box,这样我们计算盒子大小的方式就发生了改变；
+    content-box：对象的 实际宽度等于设置的width值和border、padding之和；
+    border-box：对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度。
+
+6. 圆角:border-radius
+
+    + 等宽高容器 - 向圆形进行设置
+
+    | 参数个数 | 修改方面 |
+    | :--: | :--: |
+    | 一个参数 | 四个角都改变圆角，容器宽高一半时为正圆 |
+    | 两个个参数 | 左上和右下，右上和左下搭配改变圆角 |
+    | 三个参数 | 左上，右上和左下，右下搭配进行改变 |
+    | 四个参数 | 左上，右上，右下，左下进行改变 |
+
+    + 非等宽高容器 - 向椭圆进行设置，一个角有水平/垂直两个方向上的圆角设置，设置时以“/”进行分割。
+
+    + 单独设置某个角的圆角：border-top-left-radius、border-top-right-radius、border-bottom-left-radius、border-bottom-right-radius
+
+7. 使用CSS3设计一个安卓机器人，主要使用圆角、伪元素before、after，盒模型。
+
+8. 边框阴影

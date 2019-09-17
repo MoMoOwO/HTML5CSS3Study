@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            height: 65px;
+            margin: 100px auto;
+        }
+        .left{
+            width: 14px;
+            height: 100%;
+            background: url("./images/left.gif") no-repeat;
+            float: left;
+        }
+        .center{
+            width: 800px;
+            height: 100%;
+            background: url("./images/center.gif");
+            float: left;
+        }
+        .right{
+            width: 11px;
+            height: 100%;
+            background: url("./images/right.gif") no-repeat;
+            float: left;
+        }
+
+        .circle{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 100px auto;
+            /* 添加边框圆角 */
+            /* 参数设置方式
+            1. 设置一个值：四个角的圆角都一样
+            2. 设置两个值：左上和右下，右上和左下
+            3.设置三个值：左上，右上和左下，右下
+            4.设置四个值：左上，右上，右下，左下
+             */
+            /* border-radius: 10px 30px 60px 80px; */            
+            /* 圆形 */
+            border-radius: 100px;
+
+            /* 只在某个角添加圆角 */
+            /* border-top-right-radius: 30px; */
+            /* border-top-left-radius: 30px; */
+            /* border-bottom-right-radius: 30px; */
+            /* border-bottom-left-radius: 30px; */
+        }
+        .ellipse{
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+            margin: 150px auto;
+            /* 通过为长方形的div添加不同方向的圆角来制作椭圆 */
+            /* border-radius: 100px/50px; */
+
+            /* 设置某个角点的两个方向上的不同圆角 */
+            /* border-top-left-radius: 100px 50px;
+            border-top-right-radius: 100px 50px;
+            border-bottom-left-radius: 100px 50px;
+            border-bottom-right-radius: 100px 50px; */
+
+            /* 如果想设置四个角点的不同方向上的不同圆角值 */
+            /* 方向分别是水平方向的左上、右上、右下、左下/垂直方向的左上、右上、右下、左下 */
+            border-radius: 100px 80px 60px 40px/20px 40px 60px 80px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 之前的方法实现圆角，通过ps制作图片的形式 -->
+    <!-- <div class="nav">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </div> -->
+
+    <div class="circle"></div>
+
+    <div class="ellipse"></div>
+</body>
+</html>

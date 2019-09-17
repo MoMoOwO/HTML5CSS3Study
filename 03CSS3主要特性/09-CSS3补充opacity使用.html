@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            /* background-color: blue; */
+            /* color: white; */
+            margin: 100px auto;
+            /* 通过opacity设置透明度 */
+            /* 如果设置父容器，那么子元素也会透明 */
+            /* opacity: 0.5; */
+
+            /* 通过H5提供的hsla、rgba设置颜色的同时设置透明度 */
+            /* background-color: rgba(255, 0, 0, 0.5); */
+            background-color: hsla(170, 100%, 50%, 0.5);
+        }
+        span{
+            position: absolute;
+            left: 870px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <span>这是内容</span>
+</body>
+</html>

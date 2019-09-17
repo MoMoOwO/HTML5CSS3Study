@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 400px;
+            height: 200px;
+            background-color: #ccc;
+            margin: 100px auto;
+        }
+        .left{
+            /* 默认情况下，width设置的宽度仅仅是内容的宽度 */
+            width: 200px;
+            height: 100%;
+            background-color: red;
+            float: left;
+            /* 添加内间距 */
+            padding-left: 2px;
+            /* 添加右边框 */
+            border-right: 3px solid green;
+            
+            /* 设置盒模型 */
+            /* content-box:设置的width属性值，仅仅是内容的宽度，盒子的最终宽高值需要在w/h的基础上加上border和padding
+            border-box:设置的width属性值，是盒子最终的宽度，包含了border和padding和内容。
+            如果添加了padding和border，那么真正放置内容的区域会减小但是稳固了页面结构
+             */
+            box-sizing: border-box;
+        }
+        .right{
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+            float: left;
+        }
+
+        .items{
+            width: 100%;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .item{
+            width: 316px;
+            height: 170px;
+            display: inline-block;
+            margin: 0 10px;
+            overflow: hidden;
+            /* 添加盒模型 */
+            box-sizing: border-box;
+        }
+        .b1{
+            background-image: url("./images/1.jpg");
+        }
+        .b2{
+            background-image: url("./images/2.jpg");
+        }
+        .b3{
+            background-image: url("./images/3.jpg");
+        }
+        .item:hover{
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left">
+            在默认情况下，CSS设置的盒子宽度仅仅是内容去的宽度，而非盒子的宽度。同样，高度类似。真整的盒子的宽度(在页面呈现出来的宽度)和高度，
+            需要加上一些其他的属性。
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="items">
+        <div class="item b1"></div>
+        <div class="item b2"></div>
+        <div class="item b3"></div>
+    </div>
+</body>
+</html>

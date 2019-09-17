@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #ccc;
+        }
+
+        .content{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            margin: 50px auto;
+        }
+        .an_header{
+            width: 250px;
+            height: 125px;
+            background-color: darkgreen;
+            margin: 10px auto;
+            border-radius: 125px 125px 0 0;
+            position: relative;
+        }
+        /* 使用伪元素添加眼睛 */
+        .an_header::before,
+        .an_header::after{
+            /* 1.一定要设置content属性 */
+            content: "";
+            /* 2.如果需要设置宽度就应该转化其为块级元素，它默认是行级元素 float display position */
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: white;
+            position: absolute;
+            bottom: 40px;  
+        }
+        .an_header::before{
+            left: 70px;
+        }
+        .an_header::after{
+            right: 70px;
+        }
+        .an_body{
+            width: 250px;
+            height: 250px;
+            background-color: darkgreen;
+            border-radius: 0 0 20px 20px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .an_body::before,
+        .an_body::after{
+            content: "";
+            position: absolute;
+            top: 20px;
+            background-color: darkgreen;
+            width: 30px;
+            height: 180px;
+            border-radius: 10px;
+        }
+        .an_body::before{
+            left: -40px;
+        }
+        .an_body::after{
+            right: -40px;
+        }
+        .an_footer{
+            width: 250px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            /* background-color: #fff; */
+        }
+        .an_footer::before,
+        .an_footer::after{
+            content: "";
+            position: absolute;            
+            background-color: darkgreen;
+            width: 30px;
+            height: 90px;
+            border-radius: 0 0 10px 10px;
+        }
+        .an_footer::before{
+            left: 50px;
+        }
+        .an_footer::after{
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="an_header"></div>
+        <div class="an_body"></div>
+        <div class="an_footer"></div>
+    </div>
+</body>
+</html>

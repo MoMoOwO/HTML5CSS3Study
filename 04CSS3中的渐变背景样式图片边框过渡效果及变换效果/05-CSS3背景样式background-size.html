@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            /* 添加背景 */
+            background-image: url("../03CSS3主要特性/images/pic_1.jpg");
+            background-repeat: no-repeat;
+            /* 设置背景图片的大小 宽度/高度 宽度/auto(保持比例自动缩放)
+            建议在使用这个属性之前先确定宽高比与容器的宽高比是否一致，否则会造成图片使真变形
+              */
+            /* background-size: 300px 500px; */
+            /* background-size: 300px; */
+            /* 设置百分比是参照腐肉其可放置内容区域的百分比 */
+            /* background-size: 50% 50%; */
+
+            /* 设置content: 按比例调整图片大小使图片宽高自适应整个元素的背景区域，使图片全部包含在容器中
+            1.当图片大于容器：有可能造成容器的空白区，将图片缩小
+            2.当图片小于容器：有可能造成容器的空白区，将图片放大
+             */
+            /* background-size: contain; */
+
+            /* cover与content正好相反，背景图片按比例来缩放来自适应整个背景区域，如果整个背景区域不足以容纳整个背景图片，那么图片会溢出
+            1.当图片大于容器：等比例缩小，会填满整个区域，有可能造成图片某些区域不可见
+            2.当图片小于容器：等比例放大，填满整个区域，图片有可能造成某个方向上的内容溢出
+             */
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

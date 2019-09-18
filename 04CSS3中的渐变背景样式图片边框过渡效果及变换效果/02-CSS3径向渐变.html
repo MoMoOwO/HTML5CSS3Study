@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title> 
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            /* 添加径向渐变，产生也是图像 */
+            /* background: radial-gradient(red, blue); */
+            /* 语法：radial-gradient(形状)
+            形状shape：circle正圆;ellipse椭圆形,适配容器；如果是正方形，则两者效果相同
+            at position：坐标,默认在正中心，可以赋值坐标(参照容器左上角)，也可以赋值关键字（left,right,bottom,top）
+            大小size:最近边closest-side，最远边farthest-side，最近角closest-corner，最远边farehest-corner
+             */
+            /* background: radial-gradient(circle, red, blue); */
+            /* background: radial-gradient(circle closest-side at 50px 50px, red, blue); */
+            /* 设置颜色位置 */
+            background: radial-gradient(red, red 50%, blue 50%, blue);
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

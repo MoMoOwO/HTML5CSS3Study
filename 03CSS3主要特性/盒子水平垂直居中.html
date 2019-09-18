@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 0 auto; /* 水平居中 */
+
+            position: relative;
+            /* div顶端距离body顶端距离 */
+            top: 50%;
+            /* 上移盒高一半 */
+            margin-top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 最近碰到一道题，要求讲一个宽高为200，背景为红色的盒子水平垂直居中
+    此处提供一种方法，还可以考虑弹性布局等手段 -->
+    <div></div>
+</body>
+</html>

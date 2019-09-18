@@ -311,8 +311,74 @@
     ```
 
     参数说明：
+
     | 参数 | 说明 |
     | :--: | :--: |
     | point || angle | 表示线性渐变的方向；to left:设置渐变为从右到左，相当于270deg；to right:设置渐变从左到右，相当于90deg；to top:设置渐变从下到上，相当于0deg；to bottom:设置渐变从上到下，相当于180deg。这是默认值，等同于留空不写。该参数也可以直接指定度数，如45deg. |
     | stop | 起点颜色，可以指定颜色的位置 |
     | stop | 重点颜色，还可以在后面添加更多的参数，表示多种颜色的渐变 |
+
+    + radial_gradient径向渐变值从一个中心点开始沿着四周产生渐变效果
+    语法：
+
+    ``` html
+    <radial-gradient> = radial-gradient([[<shape>||<size>][at <position>]?, | at <position>,]?<color-stop>[,<color-stop>]+)
+    ```
+
+    参数说明：
+
+    | 参数 | 说明 |
+    | :--: | :--: |
+    | &lt;position&gt; | 确定圆心的位置。如果提供2个参数，第一个表示横坐标，第二个表示纵坐标；如果只提供一个，第二个值默认为50%，即center. |
+    | shape | 渐变的形状ellipse为椭圆形，circle为圆形。默认为ellipse，如果元素形状为正方形元素，则ellipse和circle效果一样 |
+    | size | 渐变的大小，即渐变到哪里停止，它有四个值。closest-side：最近边，farthest-side：最远边；closest-corner：最近角；farthest-corner：最远角。默认是最远的角farthest-corner。 |
+    | color | 指定颜色rgba、hsla |
+
+    + 重复渐变：repeating-linear-gradient(),repeating-radial-gradient()。
+
+2. 背景
+
+    + 背景颜色 background-color: key/rgba/hsla;
+
+    + 背景图片 background-image: url();
+
+    + 背景平铺 background-repeat: round/space; round:图片缩放后平铺，space:团片不缩放平铺，在图片之间产生相等的间距值
+
+    + 滚动容器时背景的行为 background-attachment: fixed/scroll/local; fixed:背景图片的位置固定不变，scroll:当滚动网页时背景图片也会跟随滚动。当滚动当前容器时local和scroll的区别：前者背景图片会跟随内容一起滚动，后者不会跟随滚动。
+
+    + 背景图片尺寸 background-size：
+
+    | 参数 | 说明 |
+    | :--: | :--: |
+    | 宽度 高度 | 按设置宽高设置背景图片 |
+    | 宽度 auto | 按设置宽高等比例缩放图片设置背景图片 |
+    | content | 按比例调整图片大小使图片宽高自适应整个元素的背景区域，使图片全部包含在容器中。1.当图片大于容器：将图片缩小，有可能造成容器空白区；2.当图片小于容器：将图片放大，有可能造成容器空白区。 |
+    | cover | 与content正好相反，背景图片按比例缩放自适应真个背景区域，如果真个背景区域不足以容纳整个背景图片，那么图片会溢出；1.当图片大于容器：等比例缩小，会填满整个区域，有可能造成图片某些区域不可见；2.当图片小于容器：等比例放大，填满整个区域，有可能造成某个方向上内容溢出。 |
+
+    + 背景坐标原点 background-origin
+
+    | 参数 | 效果 |
+    | :--: | :--: |
+    | border-box | 从border(边框)位置开始填充背景，会与border重叠 |
+    | padding-box | 从padding(内边距)位置开始填充背景，会与padding重叠 |
+    | content-box | 从内容区域开始填充背景 |
+
+    + 背景裁切 background-clip 设置的是裁切，控制的是显示。与background-origin来配合设计幽灵按钮，提升按钮响应区域。
+
+    | 参数 | 效果 |
+    | :--: | :--: |
+    | border-box | 实际显示border以内的内容 |
+    | padding-box | 显示padding以内的内容 |
+    | content-box | 显示content以内的内容 |
+
+3. 边框图片 border-image
+
+    + border-image-source：指定边框图片的路径，默认只是讲整个图片缩放填充到容器四个角点。
+
+    + border-image-slice：设置背景图片的四个方向的裁切距离，fill：设置内容内部填充。
+
+    + border-image-width：边框图片的宽度，如果没有设置，那么默认就是元素的原始边框宽度。图片边框的本质是背景，并不会影响元素内容的放置，内容只会被容器的border和padding影响。
+
+    + border-image-outside：扩展边框。
+
+    + border-image-repeat：设置边框的平铺，stretch默认值，拉伸效果；repeat直接重复平铺；round将内容缩放进行完整的重复平铺。

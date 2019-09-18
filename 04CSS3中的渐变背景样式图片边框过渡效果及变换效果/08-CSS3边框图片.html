@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div:first-of-type{
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border: 27px solid red;
+            /* padding: 27px; */
+            /* 添加边框图片 */
+            /* border-image-source:可以指定边框图片的路径，默认只是填充到容器的四个角点 */
+            border-image-source: url("./images/border1.png");
+            /* 让图片成为九宫格， border-image-slice:设置背景图片的四个方向的裁切距离,fill:做内容的内部填充 */
+            border-image-slice: 27 fill;
+            /* border-image-width:边框图片的宽度，如果没有设置，那么快读默认就是元素的原始边框宽度
+            细节：1.边框图片的本质是背景，并不会影响元素内容的放置，2.内容只会被容器的border和padding影响
+            建议：一般将这个值设置为原始的边框的宽度
+             */
+            border-image-width: 27px;
+            /* border-image-outset：扩展边框 */
+            border-image-outset: 0px;
+            /* border-image-repeat: 设置背景图片的平铺
+            repeat:直接重复平铺
+            round：将内容缩放进行完整的重复平铺
+             */
+            border-image-repeat: round;
+
+            /* 缩写 */
+        }
+        div:last-of-type{
+            width: 250px;
+            height: 250px;
+            margin: 30px auto;
+            border: 27px solid red;
+
+            /* 使用缩写设置边框图片 */
+            /* border-image: source slice / width/outset repeat; */
+            border-image: url("./images/border1.png") 27 / 27px/0px repeat;
+        }
+    </style>
+</head>
+<body>
+    <div>啊都发大水发射点发生搜索</div>
+    <div>ddddddddd</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        /* 提升移动端响应区域 */
+        a{
+            width: 50px;
+            height: 50px;
+            display: block; 
+            background-color: #ddd;
+            margin: 100px auto;
+            box-sizing: border-box;
+
+            background-image: url("./images/sprites.png");
+            /* 设置背景偏移，这里参照background-origin原点，默认是容器的左上角 */
+            background-position: -20px 0;
+
+            /* 添加padding */
+            padding: 14px;
+            /* 设置背景坐标的原点 
+            border-box:从border位置开始填充背景，会与border重叠
+            padding-box:从padding的位置开始填充背景，会与padding重叠
+            content-box:从内容区域开始填充背景
+            */
+            background-origin: content-box;
+            /* 设置内容的裁切,设置的是裁切，控制的是显示
+            border-box: 显示border以内的内容
+            padding-box：显示padding以内的内容
+            content-box：显示content以内的内容
+             */
+            background-clip: content-box;
+
+        }
+    </style>
+</head>
+<body>
+    <a href=""></a>
+</body>
+</html>

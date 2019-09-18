@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            overflow: scroll;
+            /* 1.添加背景颜色 */
+            /* background-color: skyblue; */
+            /* 2.添加背景图片，
+            如果图片大于容器，那么默认就从容器左上角开始放置
+            如果图片小于容器，那么图片默认会平铺
+             */
+            /* background-image: url("../03CSS3主要特性/images/bg.jpg"); */
+            background-image: url("../03CSS3主要特性/images/btn_bg.png");
+            /* 3.设置背景平铺 
+            round: 图片缩放后平铺
+            space: 图片不会缩放平铺，只是会在图片之间产生相等的间距值
+            */
+            /* background-repeat: space; */
+            /* 4.设置在滚动容器的背景的行为：跟随滚动/固定
+            fixed：背景图片的位置固定不变
+            scroll: 当滚动网页的时候背景图片也会跟随滚动
+            local: 
+             */
+            /* local和scroll的区别：前提是滚动当前容器的内容
+            local:背景图片会跟随内容一起滚动，
+            scroll：背景图片不会跟随内容一起滚动
+             */
+            background-attachment: local;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p style="height: 800px;"></p>
+    </div>
+    <span style="height: 800px; display: block;"></span>
+</body>
+</html>

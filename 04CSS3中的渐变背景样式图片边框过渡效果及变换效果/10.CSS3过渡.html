@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color:red;
+            position: absolute;
+            left:100px;
+            top: 100px;
+            /* 添加过渡效果：过渡效果执行完毕之后，默认会还原到原始状态 */
+            /* 1.transition-property: 添加过渡效果的CSS属性名称 */
+            /* transition-property: left; */
+
+            /* 2.transition-duration: 过渡效果的耗时，秒 */
+            /* transition-duration: 2s; */
+
+            /* 3.transition-timing-function: 设置时间函数--控制运动的速度 */
+            /* transition-timing-function: linear; */
+
+            /* 4.transition-delay: 过渡效果的延迟 */
+            /* transition-delay: 2s; */
+
+            /* 简写transition: 属性名称 过渡时间 时间函数 延迟 */
+            /* transition: left 2s ease-in-out 0s; */
+
+            /* 为多个样式同时添加过渡效果 */
+            /* transition: left 2s linear 0s, background-color 2s ease-in-out 0s; */
+
+            /* 为所有像是添加过渡效果：all:指所有样式属性
+            1.所有样式过渡效果一样，2.效率低下，他会去查询所有添加的样式，3.建议,以后不要这么写, 4.steps():可以让过渡效果分为指定的几次来完成  */
+            transition: all 2s 0s steps(4);
+            -moz-transition: all 2s 0s steps(4);
+            -webkit-transition: all 2s 0s steps(4);
+            -o-transition: all 2s 0s steps(4);
+        }
+        div:active{
+            left: 1000px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

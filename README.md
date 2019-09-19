@@ -232,7 +232,7 @@
 
     + 语法：
 
-    ``` html
+    ``` css
     text-shadow: none|<length>none|[<shadow>,]*<shadow>
     或
     text-shadow: none|<color>[,<color>]*
@@ -284,7 +284,7 @@
 
     + 语法
 
-    ``` html
+    ``` css
     box-shadow: h v blur spread color inset
     ```
 
@@ -321,7 +321,7 @@
     + radial_gradient径向渐变值从一个中心点开始沿着四周产生渐变效果
     语法：
 
-    ``` html
+    ``` css
     <radial-gradient> = radial-gradient([[<shape>||<size>][at <position>]?, | at <position>,]?<color-stop>[,<color-stop>]+)
     ```
 
@@ -382,3 +382,58 @@
     + border-image-outside：扩展边框。
 
     + border-image-repeat：设置边框的平铺，stretch默认值，拉伸效果；repeat直接重复平铺；round将内容缩放进行完整的重复平铺。
+
+4. 过渡 transition 通过过渡transition，我们可以在不使用Flash动画或JavaScript的情况下，当元素从一种样式变换为另一种样式是为元素添加效果，要实现这一点，必须规定两项内容：规定希望把效果添加到哪个CSS属性上，及规定效果的时长。
+
+    + 语法
+
+    ``` css
+    transition: property duration timing-function delay;
+    ```
+
+    + 参数说明：
+    transition属性是一个简写属性，用于设置四个过渡属性：transition-property|transition-duration|transition-timing-function|transition-delay
+
+    | 参数 | 说明 |
+    | :--: | :--: |
+    | transition-property | 规定设置过渡效果的CSS属性名称 |
+    | transition-duration | 规定完成过渡效果需要多少秒或毫秒 |
+    | transition-timing-function | 规定速度效果的速度曲线 |
+    | transition-delay | 定义过渡效果同时开始 |
+
+    + 补充transition-timing-function:属性规定过渡效果的速度曲线
+
+    | 值 | 说明 |
+    | :--: | :--: |
+    | linear | 规定以相同的速度开始至结束夫人过渡效果（等于cubic-bezier(0, 0, 1, 1)） |
+    | ease | 规定慢速开始，然后变快，然后提速结束的过渡效果（等于cubic-bezier(0.25, 0.1, 0.25, 1)） |
+    | ease-in | 规定以慢速开始的过渡效果（等于cubic-bezier(0.42, 0, 1, 1)） |
+    | ease-out | 规定一慢速结束的过渡效果（等于cubic-bezier(0, 0, 0.58, 1)） |
+    | ease-in-out | 规定一慢速开始和结束的过渡效果（等于cubic-bezier(0.42, 0, 0.58, 1)） |
+    | cubic-bezier(n, n, n, n) | 在cubic-bezier函数中定义自己的值。取值0-1。 |
+    | steps(num) | 设置过渡效果分几次来完成 |
+
+    + 使用建议：因为transition最早是由webkit内核浏览器提出来的，mozilla和opera都是最近版本才支持这个属性，而我们大众型的浏览器IE全家都不支持，另外由于各大现代浏览器FireFox、Safari、Chrome、Opera都还不支持W3C的标准写法，所以在应用transition时，我们有必要加上各自的前缀，最好在放上我们W3C的标准前缀的写法，只要浏览器支持我们的transition属性，那么这种效果就会自动加上去。
+
+    ``` css
+    -moz-transition: all 5s ease 1s;
+    -webkit-transition: all 5s ease 1s;
+    -o-transition: all 5s ease 1s;
+    transition: all 5s ease 1s;
+    ```
+
+5. transform 2D转换
+
+    + 通过CSS3 transform转换，我们能够对元素进行移动、缩放、旋转、斜切等操作。
+
+    + 2D移动：translate()。使用translate可以把元素从原来的位置移动，移动参照元素左上角原点。
+
+    + 语法
+
+    ``` css
+    translate(tx) | translate(tx, ty)
+    ```
+
+    + 参数
+    
+    |  |  |

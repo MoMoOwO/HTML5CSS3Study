@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px; 
+            margin: 10px auto;
+            /* 添加过渡效果 样式属性 耗时  过渡之后会恢复到原状态 */
+            transition: transform 1s;           
+        }
+        div:nth-of-type(1){
+            background-color: red;
+        }
+        /* 实现translate移动 */
+        div:nth-of-type(1):active{
+            /* 使用transform实现元素的移动，移动是参照元素的左上角 同样执行完毕之后也会恢复到原状态
+            1.如果只有一个参数就代表x方向，
+            2.如果有两个参数就代表x/y方向
+             */
+            /* transform: translate(0px, 500px); */
+
+            /* 添加水平或者垂直方向的移动 */
+            /* transform: translateX(120px); */
+            transform: translateY(120px);
+        }
+        div:nth-of-type(2){
+            background-color: green;
+        }
+        /* 实现scale缩放 */
+        div:nth-of-type(2):active{
+            /* 实现缩放，如果是1则不进行缩放，大于等于1.01进行放大，小于等于0.99进行缩放，参照元素集合中i性能
+            1.如果只有一个参数就代表x和y方向都进行等比例缩放，
+            2.如果有两个参数就代表x,y分别进行缩放 */
+            /* transform: scale(2); */
+            /* transform: scale(2, 1); */
+
+            /* 指定缩放方向 */
+            /* transform: scaleX(2); */
+            transform: scaleY(0.5);
+        }
+        div:nth-of-type(3){
+            background-color: blue;
+
+            /* 设置旋转轴芯
+            1. x y
+            2. left top right bottom */
+            transform-origin: left top;
+        }
+        /* 实现旋转 */
+        div:nth-of-type(3):active{
+            /* 实现旋转：参数为角度值，单位deg，
+            1.正值顺时针 2.负值逆时针 */
+            /* transform: rotate(-90deg); */
+            /* transform: translateX(900px); */
+            /* 同时添加旋转和移动 */
+            transform: translateX(900px) rotate(-90deg);
+        }
+        div:nth-of-type(4){
+            background-color: orange;
+        }
+        /* 实现斜切 */
+        div:nth-of-type(4):active{
+            /* 如果角度为正，则往当前轴的正方向斜切，如果为否则往当前周的负方向斜切 */
+            /* transform: skew(30deg); */
+            /* transform: skew(30deg, -30deg); */
+
+            /* 单独设置某个方向的斜切值 */
+            /* transform: skewX(-30deg); */
+            transform: skewY(50deg);
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+</body>
+</html>

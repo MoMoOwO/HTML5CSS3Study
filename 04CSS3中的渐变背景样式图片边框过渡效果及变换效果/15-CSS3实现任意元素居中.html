@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .circle{
+            width: 400px;
+            height: 400px;
+            border-radius: 200px;
+            background-color: #CCC;
+            margin: 100px auto;
+            position: relative;
+        }
+        .react{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            /* 定位后，左右编译50%，参照父容器 */
+            left: 50%;
+            top: 50%;
+            /* 通过transform实现元素的居中，百分比参照元素本身的宽高 */
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="circle">
+        <div class="react"></div>
+    </div>
+</body>
+</html>

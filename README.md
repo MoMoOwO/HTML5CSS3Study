@@ -422,18 +422,34 @@
     transition: all 5s ease 1s;
     ```
 
-5. transform 2D转换
+5. transform 通过CSS3 transform转换，我们能够对元素进行移动、缩放、旋转、斜切等操作，执行完毕之后恢复到原状态。
 
-    + 通过CSS3 transform转换，我们能够对元素进行移动、缩放、旋转、斜切等操作。
-
-    + 2D移动：translate()。使用translate可以把元素从原来的位置移动，移动参照元素左上角原点。
-
-    + 语法
+    + 2D移动：translate()。使用translate可以把元素从原来的位置移动，移动参照元素左上角原点。tx是一个代表X轴(横坐标)移动的向量长度，当其值为正值时，元素向X轴右方向移动，反之既反；ty是一个代表Y轴(纵坐标)移动的向量长度，当其值为正值时，元素向Y轴下方向移动，反之既反；也可以单独设置translateX(tx),translateY(ty)，若参数是百分比，则参照元素本身。  
+    语法：
 
     ``` css
-    translate(tx) | translate(tx, ty)
+    transform: translate(tx) | translate(tx, ty)
     ```
 
-    + 参数
-    
-    |  |  |
+    + 2D缩放：scale()，缩放scale()函数让元素根据中心原点对对象进行缩放，默认的值为1,因此0.01到0.99之间的任何值，都使这个元素缩小；而任何大于或等于1.01的值，都使这个元素放大，缩放是参照元素的中心。  sx：用来指定横向坐标(X轴)方向的缩放量，sy：用来指定纵向坐标(Y轴)方向的缩放量。也可以使用scaleX(sx)、scaleY(sy)单独进行设置。
+    语法：
+
+    ``` css
+    transform: scale(sx | sy) | scale(sx, sy);
+    ```
+
+    + 2D旋转：rotate()，旋转rotate()函数通过指定的角度参数对元素根据对象原点指定一个2D旋转。它主要在二维控件内进行操作，接受一个角度值，用来指定旋转的幅度，如果这个值为正值(单位deg)，元素相对原点中心顺时针旋转，若这个值为负值，则相对元素中心逆时针旋转。设置旋转轴心在元素中设置样式transform-origin: 参数：x,y或者关键字(left top right bottom)  
+    语法：
+
+    ``` css
+    transform: rotate(angle);
+    ```
+
+    + 2D斜切：skew()。能够让元素倾斜显示，它可以将一个对象以其中心位置围绕着X轴和Y轴按照一定的角度倾斜，角度值，单位deg。这与rotate()函数旋转不同，rotate()函数只是旋转，而不会改变元素的形状。skew()函数不会旋转而是改变元素的形状。ax用来 指定元素水平方向(X轴)倾斜角度；ay用来指定元素垂直方向(Y轴)倾斜角度，如果未显式设置这个值，其默认为0。也可以使用skewX(ax)、skewY(ay)来进行单独设置。
+    语法：
+
+    ``` css
+    transform: skew(ax) | skew(ax, ay);
+    ```
+
+    + 多个2D变化使用一个transform属性，用空格隔开。注意旋转时元素的坐标系会变化，所以一般先移动后旋转。

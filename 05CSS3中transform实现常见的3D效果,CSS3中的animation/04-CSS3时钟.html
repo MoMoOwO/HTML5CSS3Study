@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .click{
+            width: 300px;
+            height: 300px;
+            border: 10px solid #ccc;
+            /* 160为加上边框的实际宽高 */
+            /* border-radius: 160px; */
+            /* 50%为参照元素的实际宽高的比重 */
+            border-radius: 50%;
+            margin: 100px auto;
+            position: relative;
+        }
+        /* 刻度线共同样式 */
+        .line{
+            width: 8px;
+            height: 300px;
+            background-color: #ccc;
+            /* 水平居中，剧中之后再旋转 */
+            position: absolute;
+            /* 参照父元素 */
+            left: 50%;
+            top: 0;
+            /* 参照元素本身 */
+            transform: translateX(-50%);
+        }
+        /* 垂直水平刻度线较粗 */
+        .line1, .line4{
+            width: 10px;
+        }
+        /* 旋转刻度线 */
+        .line2{
+            /* 如果这样设置会将公共样式中的translateX覆盖掉 */
+            /* transform: rotate(30deg); */
+            transform: translateX(-50%) rotate(30deg);
+        }
+        .line3{
+            transform: translateX(-50%) rotate(60deg);
+        }
+        .line4{
+            transform: translateX(-50%) rotate(90deg);
+        }
+        .line5{
+            transform: translateX(-50%) rotate(120deg);
+        }
+        .line6{
+            transform: translateX(-50%) rotate(150deg);
+        }
+        /* 通过before、after实现刻度值添加 */
+        .line1:before{
+            content: "12";
+            position: absolute;
+            left: -50%;
+            top: 5px;
+        }
+        .line1:after{
+            content: "6";
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+        }
+        .line2:before{
+            content: "1";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .line2:after{
+            content: "7";
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+        }
+        .line3:before{
+            content: "2";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .line3:after{
+            content: "8";
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+        }
+        .line4:before{
+            content: "3";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .line4:after{
+            content: "9";
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+        }
+        .line5:before{
+            content: "4";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .line5:after{
+            content: "10";
+            position: absolute;
+            left: -77%;
+            bottom: 5px;
+        }
+        .line6:before{
+            content: "5";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .line6:after{
+            content: "11";
+            position: absolute;
+            left: -65%;
+            bottom: 5px;
+        }
+        /* 添加遮盖，从而将刻度线显示为刻度 */
+        .cover{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: #fff;
+            /* 居中 */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        /* 时针公共属性 */
+        .hands{
+            /* 定位到中间合适位置 */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* transform: translate(-50%, -100%) rotate(0deg); */
+            /* 设置旋转轴芯 */
+            transform-origin: center bottom;
+        }
+        /* 时针分针秒针 */
+        .hour{
+            width: 6px;
+            height: 80px;
+            background-color: red;
+            animation: clockAnimation 43200s linear infinite;
+        }
+        .minute{
+            width: 4px;
+            height: 90px;
+            background-color: green;
+            animation: clockAnimation 3600s linear infinite;
+        }
+        .second{
+            width: 2px;
+            height: 100px;
+            background-color: blue;            
+            /* 添加时针动画：动画名字，动画耗时 */
+            /* animation: clockAnimation 60s linear infinite steps(60); */
+            /* linear与steps()都是animation-timing-function的参数，两者会冲突 */
+            animation: clockAnimation 60s infinite steps(60);
+            /* animation-name: clockAnimation;
+            animation-duration: 60s; */
+        }
+        /* 圆心点 */
+        .center{
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .meridiem{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            left: 70%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 创建动画 */
+        @keyframes clockAnimation {
+            from{ 
+                /* 为空，默认所有属性从初始状态开始 */
+                /* transform: translate(-50%, -100%) rotate(0deg); */
+            }
+            to{
+                transform: translate(-50%, -100%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="click">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+        <div class="line line4"></div>
+        <div class="line line5"></div>
+        <div class="line line6"></div>
+
+        <div class="cover"></div>
+
+        <div class="hands hour"></div>
+        <div class="hands minute"></div>
+        <div class="hands second"></div>
+
+        <div class="center"></div>
+
+        <div class="meridiem">AM</div>
+    </div>
+
+    <script>
+        window.onload = function(){
+            var date = new Date();
+            // 获取时分秒
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+
+            console.log(`${hour},${minute},${second}`);
+
+            // 时分秒转动角度
+            var hourDeg = (minute / 60) * 30 + (second / 3600) * 30; // 分秒的在时针上的度数
+            if(hour >= 12){
+                document.querySelector(".meridiem").innerHTML = "PM";
+                hourDeg += ((hour - 12) / 12) * 360;
+            }else{
+                hourDeg += (hour / 12) * 360;
+            }
+
+            var minuteDeg = (minute / 60) * 360 + (second / 60) * 6;
+
+            var secondDeg = (second / 60) * 360;
+
+            document.querySelector(".hour").style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
+            document.querySelector(".minute").style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
+            document.querySelector(".second").style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
+        }
+    </script>
+</body>
+</html>

@@ -422,7 +422,7 @@
     transition: all 5s ease 1s;
     ```
 
-5. transform 通过CSS3 transform转换，我们能够对元素进行移动、缩放、旋转、斜切等操作，执行完毕之后恢复到原状态。
+5. transform 通过CSS3 transform变换，我们能够对元素进行移动、缩放、旋转、斜切等操作，执行完毕之后恢复到原状态。
 
     + 2D移动：translate()。使用translate可以把元素从原来的位置移动，移动参照元素左上角原点。tx是一个代表X轴(横坐标)移动的向量长度，当其值为正值时，元素向X轴右方向移动，反之既反；ty是一个代表Y轴(纵坐标)移动的向量长度，当其值为正值时，元素向Y轴下方向移动，反之既反；也可以单独设置translateX(tx),translateY(ty)，若参数是百分比，则参照元素本身。  
     语法：
@@ -453,3 +453,36 @@
     ```
 
     + 多个2D变化使用一个transform属性，用空格隔开。注意旋转时元素的坐标系会变化，所以一般先移动后旋转。
+
+    + 3D移动：translate3d(x, y, z)使元素在这三个维度中移动，也可以分开设置，如translateX(length),translateY(length),translateZ(length)。
+
+    + 3D缩放：scale3d(number, number, number)在这三个维度上进行缩放，也可以分开设置scaleX(),scaleY(),scaleZ()。
+
+    + 3D旋转：rotate3d(x, y, z, angle)指定需要进行旋转的坐标轴上的向量和角度(同时在三个轴进行旋转)，单独设置围绕某个轴旋转rotateX(angle),rotateY(angle),rotateZ(angle)
+
+    + 透视/景深效果：左手法则；  
+    perspective(length)为一个元素设置三维透视的距离；仅作用于元素的后代，而不是其元素的本身；当perspective:none/0时，相当于没有设置perspective(length)，比如你要建立一个小立方体，长宽高都是200px,如果你的perspective<200px,就相当于站在盒子里面开的结果，如果perspective非常大，那就是站在非常远的地方看（立方体已经成了小正方形了），一位置perspective属性制定了观察者与z=0平面的距离，使具有三维位置变换的元素产生透视效果。  
+    perspective-origin属性规定了镜头在平面上的位置。默认使放在元素的中心。  
+    transform-style:使呸转换的子元素保留其3D转换(需设置在父元素中)，取值：flat子元素将不保留其3D位置-平面方式，preserve-3d子元素将保留其3D位置-立体方式。
+
+6. 动画 animation
+
+    + 动画设置步骤，先创建动画在将动画赋值给某个元素。
+
+    + 创建动画 使用@keyframes name{}来创建动画；开始可以使用0%或from来标记，结束可以使用100%或to来标记，百分比表示动画执行到整个动画耗时时长的百分比时间。
+
+    + 之后在要设置动画的元素上进行配置，animation-name: 指定动画的名称，即使用哪个动画。animation-duration:设置动画的总耗时；这两项必须都要设置。
+
+    + animation-iteration-count:设置动画的播放次数，默认为1，可以使用数值进行设置或者infinite设置为无限次。
+
+    + animation-direction: alternate; 设置动画来回交替。
+
+    + animation-delay: 设置动画开始前的延迟。
+
+    + animation-fill-mode: 设置动画结束时的状态，默认情况下，动画执行完毕之后，会回到原始状态。forwards设置动画结束时的状态，保持动画结束时的状态；backwards：设置动画开始时的状态，如果设置有延迟且元素用开始状态，则延迟时立刻进入开始状态；both：则同时设置开始和结束时的状态，即以上两者都设置。
+
+    + animation-timing-function: 设置动画时间函数，linear、ease。
+
+    + animation-play-state: 设置动画的播放状态：paused暂停，running播放。
+
+    

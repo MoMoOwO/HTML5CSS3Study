@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 882px;
+            height: 86px;
+            margin: 100px auto;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+        div > ul{
+            /* 两倍的宽度存放元素内容 */
+            width: 200%; 
+            /* 去除列表项圆点 */
+            list-style: none;
+            /* 添加动画：1.设置动画名称，2.设置动画耗时 */
+            animation-name: roll;
+            animation-duration: 7s;
+            /* 3.设置无限循环 */
+            animation-iteration-count: infinite;
+            /* 4.设置时间函数 */
+            animation-timing-function: linear;
+        }
+        div:hover > ul{
+            /* 鼠标选否后变为点击的小手 */
+            cursor: pointer;
+            animation-play-state: paused;
+        }
+        div > ul > li{
+            width: 126px;
+            float: left;
+        }
+        div > ul > li > img{
+            width: 100%;
+        }
+
+        /* 创建动画 */
+        @keyframes roll {
+            from{
+                transform: translateX(0);
+            }
+            to{
+                transform: translateX(-882px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><img src="./images/1.jpg" alt=""></li>
+            <li><img src="./images/2.jpg" alt=""></li>
+            <li><img src="./images/3.jpg" alt=""></li>
+            <li><img src="./images/4.jpg" alt=""></li>
+            <li><img src="./images/5.jpg" alt=""></li>
+            <li><img src="./images/6.jpg" alt=""></li>
+            <li><img src="./images/7.jpg" alt=""></li>
+            <!-- 两份内容交接滚动 -->
+            <li><img src="./images/1.jpg" alt=""></li>
+            <li><img src="./images/2.jpg" alt=""></li>
+            <li><img src="./images/3.jpg" alt=""></li>
+            <li><img src="./images/4.jpg" alt=""></li>
+            <li><img src="./images/5.jpg" alt=""></li>
+            <li><img src="./images/6.jpg" alt=""></li>
+            <li><img src="./images/7.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>

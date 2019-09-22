@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /* 添加动画效果 */
+            /* 1.animation-name:指定动画的名称，先制作动画，再使用动画名称加到元素上 */
+            animation-name: moveTest;
+
+            /* 2.设置动画的总耗时 */
+            animation-duration: 2s;
+            /* 前两个属性是必须设置的 */
+
+            /* 3.设置动画的播放次数，默认为1次，可以指定具体的数值，也可以指定infinite无限的 */
+            animation-iteration-count: 1;
+
+            /* 4.设置交替动画 alternate：来回交替*/
+            animation-direction: alternate;
+
+            /* 5.设置动画开始前的延迟 */
+            animation-delay: 1s;
+
+            /* 6.设置动画结束时的状态，默认情况下，动画执行完毕之后，会回到原始状态
+            forwards: 保持动画结束时的状态
+            backwards: 不会保留动画结束时的状态，如果动画有初始状态，且添加延迟的状态下，那么会立刻进行到初始状态。 
+            both: 即保留动画结束时的状态，在有延迟的情况下也会立刻进入到元素初始状态
+             */
+            animation-fill-mode: both;
+
+            /* 7.动画的时间函数 linear ease */
+            animation-timing-function: linear;
+
+            /* 设置动画的播放状态  paused 暂停， running播放*/
+            animation-play-state: running;
+        }
+        /* 制作动画 */
+        @keyframes moveTest {
+            /* 百分比是指整个动画耗时的百分比 2s */
+            /* 开始的写法：0%或from */
+            0%{
+                transform: translate(0, 0) rotate(45deg);
+            }
+            /* 0-1s */
+            50%{
+                transform: translate(0px, 500px);
+            }
+            /* 1-2s */
+            /* 结束的写法：100%或to */
+            100%{
+                transform: translate(500px, 500px);
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div></div>
+    <input type="button" value="播放" id="play">
+    <input type="button" value="暂停" id="paused">
+
+    <script>
+        // window.onload保证dom元素创建完毕之后添加事件监听
+        window.onload = function(){
+            var div = document.querySelector("div");
+
+            // 播放
+            document.querySelector("#play").onclick = function(){
+                div.style.animationPlayState = "running";
+            }
+            // 暂停
+            document.querySelector("#paused").onclick = function(){
+                div.style.animationPlayState = "paused";
+            }
+        }
+    </script>
+</body>
+</html>

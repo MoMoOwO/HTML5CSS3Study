@@ -57,73 +57,73 @@
             transform: translateX(-50%) rotate(150deg);
         }
         /* 通过before、after实现刻度值添加 */
-        .line1:before{
+        .line1::before{
             content: "12";
             position: absolute;
             left: -50%;
             top: 5px;
         }
-        .line1:after{
+        .line1::after{
             content: "6";
             position: absolute;
             left: 0;
             bottom: 5px;
         }
-        .line2:before{
+        .line2::before{
             content: "1";
             position: absolute;
             left: 0;
             top: 5px;
         }
-        .line2:after{
+        .line2::after{
             content: "7";
             position: absolute;
             left: 0;
             bottom: 5px;
         }
-        .line3:before{
+        .line3::before{
             content: "2";
             position: absolute;
             left: 0;
             top: 5px;
         }
-        .line3:after{
+        .line3::after{
             content: "8";
             position: absolute;
             left: 0;
             bottom: 5px;
         }
-        .line4:before{
+        .line4::before{
             content: "3";
             position: absolute;
             left: 0;
             top: 5px;
         }
-        .line4:after{
+        .line4::after{
             content: "9";
             position: absolute;
             left: 0;
             bottom: 5px;
         }
-        .line5:before{
+        .line5::before{
             content: "4";
             position: absolute;
             left: 0;
             top: 5px;
         }
-        .line5:after{
+        .line5::after{
             content: "10";
             position: absolute;
             left: -77%;
             bottom: 5px;
         }
-        .line6:before{
+        .line6::before{
             content: "5";
             position: absolute;
             left: 0;
             top: 5px;
         }
-        .line6:after{
+        .line6::after{
             content: "11";
             position: absolute;
             left: -65%;
@@ -147,7 +147,7 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            /* transform: translate(-50%, -100%) rotate(0deg); */
+            transform: translate(-50%, -100%);
             /* 设置旋转轴芯 */
             transform-origin: center bottom;
         }
@@ -199,7 +199,7 @@
         @keyframes clockAnimation {
             from{ 
                 /* 为空，默认所有属性从初始状态开始 */
-                /* transform: translate(-50%, -100%) rotate(0deg); */
+                transform: translate(-50%, -100%) rotate(0deg);
             }
             to{
                 transform: translate(-50%, -100%) rotate(360deg);
@@ -224,18 +224,21 @@
 
         <div class="center"></div>
 
-        <div class="meridiem">AM</div>
+        <!-- <div class="meridiem">AM</div> -->
     </div>
 
     <script>
-        window.onload = function(){
+        /*window.onload = function(){
+            // 本打算读取本地时间来创建准确时间的时钟，但是出现了问题。
+            // bug主要是旋转角度问题，初始元素已经旋转一定角度，那么旋转一周需要360+原来初始的角度，目前尚未找到合适的处理方法
+
             var date = new Date();
             // 获取时分秒
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
 
-            console.log(`${hour},${minute},${second}`);
+            // console.log(`${hour},${minute},${second}`);
 
             // 时分秒转动角度
             var hourDeg = (minute / 60) * 30 + (second / 3600) * 30; // 分秒的在时针上的度数
@@ -253,7 +256,7 @@
             document.querySelector(".hour").style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
             document.querySelector(".minute").style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
             document.querySelector(".second").style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
-        }
+        } */
     </script>
 </body>
 </html>

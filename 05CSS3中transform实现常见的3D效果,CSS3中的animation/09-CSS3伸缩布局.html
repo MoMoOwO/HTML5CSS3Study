@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 1000px;
+            height: 200px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            /* 设置父容器为伸缩盒子 */
+            display: flex;
+            /* 设置子元素排列方式 
+            1.flex-start:让子元素从父容器起始位置排列
+            2.flex-end:让子元素从父容器的结束位置排列
+            3.center:让子元素从父容器的中间位置开始排列，子元素相对于父元素水平居中
+            4.space-between:左右对齐父容器的开始结束，中间平均分列，产生相同的间距
+            5.space-around:将多余的空间平均分布在每一个子元素两边,类似于marigin: 0 auto;造成中间盒子的间距是两边盒子外围间距的两倍
+            */
+            justify-content: space-around;
+        }
+        .first{
+            width: 200px;
+            height: 100%;
+            background-color: red;
+        }
+        .second{
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+        }
+        .third{
+            width: 200px;
+            height: 100%;
+            background-color: green;
+        }
+        .fourth{
+            width: 200px;
+            height: 100%;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="first">1</div>
+        <div class="second">2</div>
+        <div class="third">3</div>
+        <div class="fourth">4</div>
+    </div>
+</body>
+</html>

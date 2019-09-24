@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 900px;
+            height: 600px;
+            border: 1px solid red;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            /* align-items: 设置子元素(伸缩项)在侧轴方向上的对齐方式
+            center: 设置伸缩项在侧轴方向上居中对齐
+            flex-start: 设置伸缩项在侧轴方向上顶部对齐
+            flex-end: 设置伸缩项在侧轴方向上底部对齐
+            stretch: 拉伸，让伸缩项(没有设置侧轴方向上的长度时)在侧轴方向上拉伸填充满，默认值
+            baseline: 文本基线对齐
+             */
+            align-items: center;
+        }
+        .first{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            /* 设置单个元素在侧轴方向上的对齐方式 */
+            align-self: flex-end;
+        }
+        .third{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="first">aa</div>
+        <div class="second" style="font-size: 100px;">gg</div>
+        <div class="third">3</div>
+    </div>
+</body>
+</html>

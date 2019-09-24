@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+            margin: 0 auto;
+            /* 设置父容器为伸缩盒子 */
+            display: flex;
+            /* 设置元素在主轴方向上的排列方式 */
+            /* justify-content: flex-start; */
+        }
+        .left{
+            /* flex用来设置当前伸缩子项占据剩余空间的比例值 */
+            flex: 1;
+            height: 500px;
+            background-color: red;
+        }
+        .right{
+            flex: 4;
+            height: 500px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

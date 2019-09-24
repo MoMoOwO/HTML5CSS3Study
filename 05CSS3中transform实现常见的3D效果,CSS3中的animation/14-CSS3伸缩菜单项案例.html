@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 600px;
+            height: 700px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+        div > ul{
+            list-style: none;
+            width: 100%;
+            /* 如果将父元素设置为伸缩布局，那么子元素默认成为伸缩项 相当于添加float margin */
+            display: flex;
+        }
+        div > ul > li{
+            /* 宽度
+            1.菜单项数量不确定
+            2.无法设置百分比来占满顶部一行
+             */
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: orange;
+            border-right: 1px solid #ccc;
+            /* 伸缩项li平分空间 */
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>首页</li>
+            <li>商品分类</li>
+            <li>我的订单</li>
+            <li>最新商品</li>
+            <li>联系我们</li>
+        </ul>
+    </div>
+</body>
+</html>

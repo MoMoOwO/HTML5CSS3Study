@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/360page.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.fullPage.min.js"></script>
+</head>
+<body>
+    <div id="360page">
+        <div class="section first">
+            <div class="logo"></div>
+            <div class="text">
+                <img src="./images/text_1.png" alt="">
+                <img src="./images/text_2.png" alt="">
+                <img src="./images/text_3.png" alt="">
+                <img src="./images/text_4.png" alt="">
+                <img src="./images/text_5.png" alt="">
+                <img src="./images/text_6.png" alt="">
+                <img src="./images/text_7.png" alt="">
+                <img src="./images/text_8.png" alt="">
+            </div>
+            <div class="intro"></div>
+        </div>
+        <div class="section second">
+           <div class="shieldBox">
+               <img src="./images/shield_1.png" alt="">
+               <img src="./images/shield_2.png" alt="">
+               <img src="./images/shield_3.png" alt="">
+               <img src="./images/shield_4.png" alt="">
+               <img src="./images/shield_5.png" alt="">
+               <img src="./images/shield_6.png" alt="">
+               <img src="./images/shield_7.png" alt="">
+               <img src="./images/shield_8.png" alt="">
+               <img src="./images/shield_9.png" alt="">
+           </div>
+           <div class="info"></div>
+        </div>
+        <div class="section third">
+            <div class="info"></div>
+            <div class="circle">
+                <div class="rocket"></div>
+            </div>
+        </div>
+        <div class="section fourth">
+            <div class="search">
+                <div class="searchBar"></div>
+                <div class="searchText"></div>
+                <div class="searchResult"></div>
+            </div>
+            <div class="info"></div>
+        </div>
+        <div class="section fifth">
+            <div class="info"></div>
+            <div class="browser">
+                <!-- 四周的边框 -->
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <!-- 工具栏 -->
+                <div class="toolbar">
+                    <!-- 搜索框 -->
+                    <div class="react"></div>
+                </div>
+                <!-- 状态栏 -->
+                <div class="extraBox">
+                    <div class="extra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            $('#360page').fullpage({
+                // 设置每一屏的背景颜色
+                sectionsColor: ["#0da5d6", "#2AB561", "#DE8910", "#16BA9D", "#0DA5D6"],
+                // 滚动到某一屏之后的回调
+                // index为当前屏的索引，从1开始
+                afterLoad: function(anchorLink, index){
+                    // 先将其他屏的current样式清除
+                    $(".section").removeClass("current");
+                    setTimeout(function(){
+                        // 当滚动到某一屏之后，添加样式标记
+                        $(".section").eq(index - 1).addClass("current");    
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .view{
+            width: 560px;
+            height: 300px;
+            margin: 100px auto;
+            position: relative;
+        }
+        ul{
+            width: 100%;
+            height: 100%;
+            list-style: none;
+
+            /* 设置观察角度，并保留子元素li三维变换效果 */
+            /* transform: rotate3d(1, 1, 0, -30deg);  */
+            transform-style: preserve-3d;
+        }
+        ul > li{
+            /* 宽度五等分 */
+            width: 20%;
+            height: 100%;
+            /* background-color: #ccc; */
+            /* 排列为一行 */
+            float: left;
+            position: relative;
+            /* 为li添加该属性，保留子元素span的三维变换效果 */
+            transform-style: preserve-3d;
+            /* 添加过渡 */
+            transition: transform 0.5s;
+        }
+        ul > li > span{
+            width: 100%;
+            height: 100%;
+            /* 定位，让li下面每个span先重叠 */
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        ul > li > span:nth-of-type(1){
+            background: url("./images/q1.jpg");
+            /* 往z轴正方向偏移150px; */
+            transform: translateZ(150px);
+        }
+        ul > li >span:nth-of-type(2){
+            background: url("./images/q2.jpg");
+            transform: translateY(-150px) rotateX(90deg);
+        }
+        ul > li > span:nth-of-type(3){
+            background: url("./images/q3.jpg");
+            transform: translateZ(-150px) rotateX(180deg);
+        }
+        ul > li > span:nth-of-type(4){
+            background: url("./images/q4.jpg");
+            transform: translateY(150px) rotateX(-90deg);
+        }
+        /* 设置每一个li元素的子元素span的图片所显示的位置 */
+        ul > li:nth-of-type(2) > span{
+            background-position: -100% 0;
+        }
+        ul > li:nth-of-type(3) > span{
+            background-position: -200% 0;
+        }
+        ul > li:nth-of-type(4) > span{
+            background-position: -300% 0;
+        }
+        ul > li:nth-of-type(5) > span{
+            background-position: -400% 0;
+        }
+
+        .pre, .next{
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+            text-decoration: none;
+            font-size: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        .pre{
+            left: 0;
+        }
+        .next{
+            right: 0;
+        }
+        div > a:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="view">
+        <!-- ul来做整个结构控制 -->
+        <ul>
+            <!-- 每一个li都是一个结构块 -->
+            <li>
+                <!-- 每一个span设这个结构中的一个面 -->
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+        </ul>
+        <a class="pre">&lt;</a>
+        <a class="next">&gt;</a>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+        // 入口函数
+        $(function(){
+            // 定义一个图片的索引
+            var imgIndex = 0;
+            // 添加节流阀， true说明本次单机会有响应
+            var flag = true;
+
+            // 下一张
+            $(".next").on("click", function(){
+                if(flag){
+                    // 设置节流阀
+                    flag = false;
+                    imgIndex--;
+                    // 所谓下一张，就是将所有li元素围绕x旋转
+                    $("li").each(function(key, value){                    
+                        // 添加transform样式进行旋转
+                        $(this).css({
+                            "transform": "rotateX(" + imgIndex * 90 + "deg)", 
+                            "transition-delay": (key * 0.2) + "s"
+                        });
+                    });
+                    // 还原节流阀
+                    setTimeout(function(){flag = true;}, 1000);
+                }
+            });
+
+            // 上一张
+            $(".pre").on("click", function(){
+                if(flag){
+                    // 设置节流阀
+                    flag = false;
+                    imgIndex++;
+                    // 所谓下一张，就是将所有li元素围绕x旋转
+                    $("li").each(function(key, value){                    
+                        // 添加transform样式进行旋转
+                        $(this).css({
+                            "transform": "rotateX(" + imgIndex * 90 + "deg)", 
+                            "transition-delay": (key * 0.2) + "s"
+                        });
+                    });
+                    // 还原节流阀
+                    setTimeout(function(){flag = true;}, 1000);
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>

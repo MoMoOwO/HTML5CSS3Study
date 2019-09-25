@@ -1,0 +1,323 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.section{
+    /* 如果内容超出某一屏，隐藏 */
+    overflow: hidden;
+}
+
+/* 第一屏 */
+.first{
+    padding-top: 80px;
+}
+/* 插件会默认为所有内容添加一个父容器，意味着logo并不是first直接子元素 */
+.first .logo{
+    background: url('../images/logo.png');
+    width: 251px;
+    height: 186px;
+    /* logo居中 */
+    margin: 0 auto;
+}
+.first .text{
+    width: 100%;
+    /* text居中 */
+    text-align: center;
+    margin-top: 80px;
+}
+.first .text > img{
+    /* 文字图片左右间距 */
+    margin: 0 40px;
+    opacity: 0.2;
+    transition: margin 1s, opacity 1s;
+}
+/* 交集样式 */
+.first.current .text > img{
+    opacity: 1;
+    margin: 0 5px;
+}
+.first .intro{
+    background: url("../images/info_1.png");
+    height: 49px;
+    width: 772px;
+    /* 居中 */
+    margin: 40px auto;
+}
+
+/* 第二屏 */
+/* 插件默认添加了一个div */
+.second > div{
+    display: flex;
+    /* 设置主轴方向上的排列方式 */
+    justify-content: space-around;
+    /* 设置侧轴方向上的排列方式 */
+    align-items: center;
+}
+.second .shieldBox{
+    width: 440px;
+    /* 图片默认基线对齐，通过取消文本大小来取消基线对齐 */
+    font-size: 0;
+
+}
+.second .shieldBox > img{
+    /* 添加过渡效果 */
+    transition: transform 1s;
+}
+.second .shieldBox > img:nth-of-type(1){
+    transform: translate(100px, 100px) rotate(30deg);
+}
+.second .shieldBox > img:nth-of-type(2){
+    transform: translate(-100px, -100px) rotate(-30deg);
+}
+.second .shieldBox > img:nth-of-type(3){
+    transform: translate(200px, 200px) rotate(60deg);
+}
+.second .shieldBox > img:nth-of-type(4){
+    transform: translate(-200px, -200px) rotate(-60deg);
+}
+.second .shieldBox > img:nth-of-type(5){
+    transform: translate(150px, 150px) rotate(90deg);
+}
+.second .shieldBox > img:nth-of-type(6){
+    transform: translate(50px, -150px) rotate(-90deg);
+}
+.second .shieldBox > img:nth-of-type(7){
+    transform: translate(-50px, -150px) rotate(60deg);
+}
+.second .shieldBox > img:nth-of-type(8){
+    transform: translate(100px, -50px) rotate(-50deg);
+}
+.second .shieldBox > img:nth-of-type(9){
+    transform: translate(-110px, 100px) rotate(40deg);
+}
+/* 添加第二屏过渡效果 */
+.second.current .shieldBox > img{
+    /* 清除默认添加的transform */
+    transform: none;
+}
+.second .info{
+    background: url("../images/info_2.png");
+    width: 635px;
+    height: 309px;
+}
+
+/* 第三屏 */
+.third{
+    position: relative;
+}
+.third .info{
+    background: url("../images/info_3.png");
+    height: 278px;
+    width: 631px;
+    position: absolute;
+    /* 先将子元素左上角原点定位到父元素中间 */
+    /* 定位的参照是参照父容器的宽高 */
+    left: 50%;
+    top: 50%;
+
+    /* 再进行移动 */
+    /* transform:的translate是相对于元素本身的宽高 */
+    transform: translate(-100%, -50%)
+}
+.third .circle{
+    background: url("../images/circle.png");
+    height: 449px;
+    width: 453px;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(130%, -50%)
+}
+.third .circle > .rocket{
+    background: url("../images/rocket.png");
+    height: 204px;
+    width: 203px;
+    position: absolute;
+    left: -600px;
+    top: 700px;
+    transition: left 1s, top 1s;
+}
+/* 添加第三屏动画 */
+.third.current .circle > .rocket{
+    left: 125px;
+    top: 125px;
+}
+
+/* 第四屏 */
+.fourth{
+    position: relative;
+}
+.fourth .search{    
+    width: 529px;
+    height: 438px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-120%, -50%);
+    overflow: hidden;
+}
+.fourth .search > .searchBar{
+    background: url("../images/search.png");
+    width: 529px;
+    height: 66px;
+
+    /* 开始的时候搜索框不可见，默认偏移再x轴负方向 */
+    transform: translateX(-100%);
+}
+.fourth .search > .searchText{
+    background: url("../images/key.png");
+    /* 开始时，文本不可见，将宽度设置为0，后期到99分为五步 */
+    width: 0px;
+    height: 22px;
+    position: absolute;
+    left: 15px;
+    top: 20px;
+}
+.fourth .search > .searchResult{
+    background: url("../images/result.png");
+    width: 529px;
+    /* 开始时，搜索结果高度不可见，后期到372 */
+    height: 0px;
+    margin-top: -12px;
+}
+.fourth .info{
+    width: 612px;
+    height: 299px;
+    background: url("../images/info_4.png");
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(100%, -50%);
+}
+/* 第四屏过渡效果实现 */
+.fourth.current .search > .searchBar{
+    transform: translateX(0);
+    /* transition可以写在过度之前也可以写在过度之后 */
+    transition: transform 1s;
+}
+.fourth.current .search > .searchText{
+    width: 99px;
+    transition: width 1s 1s steps(5);
+}
+.fourth.current .search > .searchResult{
+    height: 372px;
+    transition: height 1s 2s;
+}
+
+/* 第五屏 */
+.fifth .info{
+    background: url("../images/info_5.png");
+    width: 1077px;
+    height: 134px;
+    margin: 40px auto;
+}
+.fifth .browser{
+    width: 1004px;
+    height: 700px;
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+.fifth .browser > .left{
+    width: 1px;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* 初始向上偏移自身的100%过渡到最后取消偏移 */
+    transform: translateY(-100%);
+}
+.fifth .browser > .right{
+    width: 1px;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(100%);
+}
+.fifth .browser > .top{
+    width: 1004px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(100%);
+}
+.fifth .browser > .bottom{
+    width: 1004px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+}
+.fifth .browser > .toolbar{
+    background: url("../images/toolbar.png");
+    width: 100%;
+    height: 79px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* 初始透明度为0过渡到1 */
+    opacity: 0;
+}
+.fifth .browser > .toolbar > .react{
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* 伸缩过渡，初始宽度为0到最后为918 */
+    width: 0px;
+    height: 30px;
+    position: absolute;
+    left: 72px;
+    top: 28px;
+}
+.fifth .browser > .extraBox{
+    width: 100%;
+    height: 29px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+.fifth .browser > .extraBox > .extra{
+    background: url("../images/extra.png");
+    width: 394px;
+    height: 29px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+}
+/* 添加过渡 */
+.fifth.current .browser > .toolbar{
+    opacity: 1;
+    transition: opacity 1s linear;
+}
+.fifth.current .browser > .toolbar > .react{
+    width: 918px;
+    transition: width 1s linear;
+}
+.fifth.current .browser > .extraBox > .extra{
+    opacity: 1;
+    transition: opacity 1s linear;
+}
+.fifth.current .browser > .left{
+    transform: none;
+    transition: transform 1s linear;
+}
+.fifth.current .browser > .right{
+    transform: none;
+    transition: transform 1s linear;
+}
+.fifth.current .browser > .top{
+    transform: none;
+    transition: transform 1s linear;
+}
+.fifth.current .browser > .bottom{
+    transform: none;
+    transition: transform 1s linear;
+}
+

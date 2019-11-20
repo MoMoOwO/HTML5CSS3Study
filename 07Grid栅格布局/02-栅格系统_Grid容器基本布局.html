@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        article{
+            border: solid silver 5px;
+            display: grid;  /* 一般使用块布局，也可以使用行布局inline-grid */
+            /*
+                grid-template-rows与grid-template-columns分别对行和列进行分割
+                参数：
+                1.多个像素值，按像素值将栅格容器按行按列进行划分，内部元素依次布局在每个栅格(单元格)中
+                2.多个百分比，按百分比将栅格容器按行按列进行划分，内部元素依次布局在每个栅格(单元格)中
+                3.使用repeat()函数进行重复性设置，第一个参数为重复的次数，第二个参数为重复划分的标准，可以为像素百分比等
+
+            */
+            /*
+            grid-template-rows: 100px 100px 100px;
+            grid-template-columns: 100px 100px 100px;
+
+            grid-template-rows: 50%  50%;
+            grid-template-columns: 25% 25% 25% 25%;
+
+            grid-template-rows: 50%  50%;
+            grid-template-columns: 25% 25% 25% 25%;
+            */
+        }
+
+        article#grid-1{
+            width: 300px;
+            height: 300px;
+            /* 按比例进行划分 */
+            grid-template-rows: repeat(3, 1fr);  /*  等分3行3列 */
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        article#grid-2{
+            width: 500px;
+            height: 200px;
+            grid-template-rows: 50% 50%;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+        }
+
+        article#grid-3{
+            width: 300px;
+            height: 300px;
+            grid-template-rows: repeat(2, 100px 50px);
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        article#grid-4{
+            width: 300px;
+            height: 300px;
+            /* 自动填充：在知道容器的宽高的情况下可以考虑自动填充，
+            将repeat()函数的第一个参数设置为auto-fill，第二个参数设置以多大尺寸进行填充 */
+            grid-template-rows: repeat(auto-fill, 100px);
+            grid-template-columns: repeat(auto-fill, 100px);
+        }
+
+        article#grid-5{
+            width: 500px;
+            height: 300px;
+            /* 等比例划分：使用等比例划分，即使容器的尺寸发生变化之后，容器内的元素还是等比例布局 */
+            grid-template-rows: 1fr 2fr 1fr;
+            grid-template-columns: 1fr 2fr 1fr;
+        }
+
+        article#grid-6{
+            width: 500px;
+            height: 130px;
+            /* 通过minmax()函数来控制尺寸波动范围, 类似于css中的min-width、max-width */
+            grid-template-rows: repeat(2, minmax(50px, 100px));
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        article#grid-7{
+            width: 300px;
+            height: 300px;
+            /* 控制单元格间距留白，可以使用padding、margin等常规手段来实现 */
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            /* 使用栅格系统提供的设置间距的属性 */ 
+            /* row-gap: 10px;
+            column-gap: 10px; */
+            /* 行列间距简写gap */
+            gap: 20px 10px;
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box; /* 背景裁切 */
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        article#grid-7 > div{
+            background-clip: none;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+
+    啦啦啦
+    <article id="grid-1">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </article>
+    <br><br>
+
+    <article id="grid-2">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+    </article>
+    <br><br>
+
+    <article id="grid-3">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+    </article>
+    <br><br>
+
+    <article id="grid-4">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </article>
+    <br><br>
+
+    <article id="grid-5">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </article>
+    <br><br>
+
+    <article id="grid-6">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+    </article>
+    <br><br>
+
+    <article id="grid-7">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </article>
+    <br><br>
+</html>

@@ -17,15 +17,15 @@
 
 6. 语义标签：[HTMl标签参考](https://www.w3school.com.cn/tags/index.asp)
 
-    | 标签名 | 作用 |
-    | :---: | :-: |
-    | nav | 表示导航 |
-    | header | 表示页眉 |
-    | footer | 表示页脚 |
-    | main | 表示主要内容 |
-    | article | 文章 |
-    | aside | 主题内容之外 |
-    | footer | 文档或者页的页脚 |
+        | 标签名 | 作用 |
+        | :---: | :-: |
+        | nav | 表示导航 |
+        | header | 表示页眉 |
+        | footer | 表示页脚 |
+        | main | 表示主要内容 |
+        | article | 文章 |
+        | aside | 主题内容之外 |
+        | footer | 文档或者页的页脚 |
 
     + 语义标签兼容性问题的两种解决方式：创建标签，将行级元素设置为块级元素；引入html5shiv.js第三方插件
 
@@ -232,13 +232,13 @@
 
     + 语法：
 
-        ``` css
+      ``` css
         text-shadow: none|<length>none|[<shadow>,]*<shadow>
         或
         text-shadow: none|<color>[,<color>]*
-        ```
+      ```
 
-    也就是：
+      也就是：
     text-shadow: [颜色(color)] x轴(X Offset) y轴(Y Offset) 模糊半径(Blur),[颜色(color) x轴(X Offset) y轴(Y Offset) 模糊半径(Blur)]...
     或者
     text-shadow: [x轴(X Offset) y轴(Y Offset) 模糊半径(blur) 颜色(color)],[x轴(X Offset) y轴(Y Offset) 模糊半径(blur) 颜色(color)]...
@@ -284,9 +284,9 @@
 
     + 语法
 
-        ``` css
+      ``` css
         box-shadow: h v blur spread color inset
-        ```
+      ```
 
     + 参数
 
@@ -306,11 +306,11 @@
     + linear-gradient线性渐变指沿着某条直线朝一个方向产生渐变效果
     语法：
 
-        ``` html
+      ``` html
         linear-gradient([<point>||<angle>,]?<stop>,<stop>[,<stop>]*)
-        ```
+      ```
 
-        参数说明：
+      参数说明：
 
         | 参数 | 说明 |
         | :--: | :--: |
@@ -321,11 +321,11 @@
     + radial_gradient径向渐变值从一个中心点开始沿着四周产生渐变效果
     语法：
 
-        ``` css
+      ``` css
         <radial-gradient> = radial-gradient([[<shape>||<size>][at <position>]?, | at <position>,]?<color-stop>[,<color-stop>]+)
-        ```
+      ```
 
-        参数说明：  
+      参数说明：
 
         | 参数 | 说明 |
         | :--: | :--: |
@@ -387,12 +387,12 @@
 
     + 语法
 
-        ``` css
+      ``` css
         transition: property duration timing-function delay;
-        ```
+      ```
 
     + 参数说明：
-    transition属性是一个简写属性，用于设置四个过渡属性：transition-property|transition-duration|transition-timing-function|transition-delay  
+    transition属性是一个简写属性，用于设置四个过渡属性：transition-property|transition-duration|transition-timing-function|transition-delay
 
         | 参数 | 说明 |
         | :--: | :--: |
@@ -401,7 +401,7 @@
         | transition-timing-function | 规定速度效果的速度曲线 |
         | transition-delay | 定义过渡效果同时开始 |
 
-    + 补充transition-timing-function:属性规定过渡效果的速度曲线  
+    + 补充transition-timing-function:属性规定过渡效果的速度曲线
 
         | 值 | 说明 |
         | :--: | :--: |
@@ -415,42 +415,42 @@
 
     + 使用建议：因为transition最早是由webkit内核浏览器提出来的，mozilla和opera都是最近版本才支持这个属性，而我们大众型的浏览器IE全家都不支持，另外由于各大现代浏览器FireFox、Safari、Chrome、Opera都还不支持W3C的标准写法，所以在应用transition时，我们有必要加上各自的前缀，最好在放上我们W3C的标准前缀的写法，只要浏览器支持我们的transition属性，那么这种效果就会自动加上去。
 
-        ``` css
+      ``` css
         -moz-transition: all 5s ease 1s;
         -webkit-transition: all 5s ease 1s;
         -o-transition: all 5s ease 1s;
         transition: all 5s ease 1s;
-        ```
+      ```
 
 5. transform 通过CSS3 transform变换，我们能够对元素进行移动、缩放、旋转、斜切等操作，执行完毕之后恢复到原状态。
 
     + 2D移动：translate()。使用translate可以把元素从原来的位置移动，移动参照元素左上角原点。tx是一个代表X轴(横坐标)移动的向量长度，当其值为正值时，元素向X轴右方向移动，反之既反；ty是一个代表Y轴(纵坐标)移动的向量长度，当其值为正值时，元素向Y轴下方向移动，反之既反；也可以单独设置translateX(tx),translateY(ty)，若参数是百分比，则参照元素本身。  
     语法：
 
-        ``` css
+      ``` css
         transform: translate(tx) | translate(tx, ty)
-        ```
+      ```
 
     + 2D缩放：scale()，缩放scale()函数让元素根据中心原点对对象进行缩放，默认的值为1,因此0.01到0.99之间的任何值，都使这个元素缩小；而任何大于或等于1.01的值，都使这个元素放大，缩放是参照元素的中心。  sx：用来指定横向坐标(X轴)方向的缩放量，sy：用来指定纵向坐标(Y轴)方向的缩放量。也可以使用scaleX(sx)、scaleY(sy)单独进行设置。
     语法：
 
-        ``` css
+      ``` css
         transform: scale(sx | sy) | scale(sx, sy);
-        ```
+      ```
 
     + 2D旋转：rotate()，旋转rotate()函数通过指定的角度参数对元素根据对象原点指定一个2D旋转。它主要在二维控件内进行操作，接受一个角度值，用来指定旋转的幅度，如果这个值为正值(单位deg)，元素相对原点中心顺时针旋转，若这个值为负值，则相对元素中心逆时针旋转。设置旋转轴心在元素中设置样式transform-origin: 参数：x,y或者关键字(left top right bottom)  
     语法：
 
-        ``` css
+      ``` css
         transform: rotate(angle);
-        ```
+      ```
 
     + 2D斜切：skew()。能够让元素倾斜显示，它可以将一个对象以其中心位置围绕着X轴和Y轴按照一定的角度倾斜，角度值，单位deg。这与rotate()函数旋转不同，rotate()函数只是旋转，而不会改变元素的形状。skew()函数不会旋转而是改变元素的形状。ax用来 指定元素水平方向(X轴)倾斜角度；ay用来指定元素垂直方向(Y轴)倾斜角度，如果未显式设置这个值，其默认为0。也可以使用skewX(ax)、skewY(ay)来进行单独设置。
     语法：
 
-        ``` css
+      ``` css
         transform: skew(ax) | skew(ax, ay);
-        ```
+      ```
 
     + 多个2D变化使用一个transform属性，用空格隔开。注意旋转时元素的坐标系会变化，所以一般先移动后旋转。
 
@@ -491,9 +491,9 @@
 
     + 字体图标，常见的是吧网页常用的一些小图标，借助工具帮助我们生成一个字体包，然后就可以想使用文字一样使用图标了。优点：将所有图标打包成字体库，减少请求；具有矢量性，可保证清晰度；使用灵活，便于维护。生成字体图标文件：[iconfont](https://www.iconfont.cn/)
 
-8. 多列布局，CSS3中心出现得多列布局(multi-column)是传统HTML网页块状布局模式得有力扩充。这种信誉发能够让Web开发人员轻松的让文本呈现多列显示。我们知道，当一行文字太长时，读者读起来就比较费劲，有可能读错行或读串行；人们的视点从文本的一端移到另一端、然后换到下一行的行首，如果眼球移动浮动过大，他们的注意力就会减退，很难读下去。所以为了最大效率的使用大屏幕显示器，页面设计中需要限制文本的宽度，让文本按多列呈现，就像报纸上的新闻排版一样。
+8. 多列布局，CSS3中心出现得多列布局(multi-column)是传统HTML网页块状布局模式得有力扩充。这种新语法能够让Web开发人员轻松的让文本呈现多列显示。我们知道，当一行文字太长时，读者读起来就比较费劲，有可能读错行或读串行；人们的视点从文本的一端移到另一端、然后换到下一行的行首，如果眼球移动浮动过大，他们的注意力就会减退，很难读下去。所以为了最大效率的使用大屏幕显示器，页面设计中需要限制文本的宽度，让文本按多列呈现，就像报纸上的新闻排版一样。
 
-    + 常用属性：
+    + 常用属性：  
         | 属性名 | 作用 |
         | :--: | :--: |
         | column-count | 设置列的具体个数 |
@@ -509,9 +509,9 @@
     justify-content：设置或检测弹性盒子元素在主轴(横轴)方向上的对齐方式  
     对齐语法：
 
-        ``` css
+      ``` css
         justify-content: flex-start | flex-end | center | space-between | space-around
-        ```
+      ```
 
         | 属性值 | 效果 |
         | :--: | :--: |
@@ -522,21 +522,21 @@
         | space-around | 将多余的空间平均分布在每一个子元素两边，类似于marigin: 0 auto;造成盒子间的间距是两边盒子外围间距的两倍 |
 
     + flex-flow属性，是flex-wrap和flex-direction两个属性的综合  
-    flex-wrap:控制子元素是否换行显示，默认不换行
+        flex-wrap:控制子元素是否换行显示，默认不换行
         | 属性值 | 效果 |
         | :--: | :--: |
         | nowrap | 不换行，宽度不够则子元素收缩 |
         | wrap | 换行，宽度不够子元素换行 |
         | wrap-reverse | 反转，原来从上到下换行反转为从下到上换行 |  
 
-    flex-direction：设置子元素的排列方向，就是用来设置主轴方向，默认主轴方向是水平的
+        flex-direction：设置子元素的排列方向，就是用来设置主轴方向，默认主轴方向是水平的
         | 属性值 | 效果 |
         | :--: | :--: |
         | row | 主轴水平方向，从左到右；侧轴垂直方向，从上到下 |
         | row-reverse | 主轴水平方向，从右到左；侧轴垂直方向，从上到下 |
         | column | 主轴垂直方向，从上到下；侧轴水平方向，从左到右 |
         | column-reverse | 主轴垂直方向，从下到上；侧轴水平方向，从左到右 |
-
+ 
     + flex属性，flex属性是flex-grow、flex-shrink和flex-basis的缩写，默认值为0 1 auto，后两个属性可选。  
     flex-grow：定义扩张比例，扩展子元素的宽度,设置当前元素应该占据剩余空间的比例值；比例值的计算:当前子元素的flex-grow / 所有兄弟元素的flex-grow的和；flex-grow默认值为0，说明子元素并不去占据父元素剩余空间。  
     flex-shrink：定义收缩比例，通过设置比例值来计算收缩的控件；比例值的计算：当前子元素flex-shrink / 所有兄弟元素的flex-shrink的和；flex-grow默认值为1，说明所有子元素等比例缩放。
@@ -552,5 +552,3 @@
         | flex-end | 设置伸缩项在侧轴方向上底部对齐 |
         | stretch | 拉伸，让伸缩项(没有设置侧轴方向上的长度时)在侧轴方向上拉伸填满 |
         | baseline | 文本基线对齐 |
-
-10. 栅格系统、栅格布局：

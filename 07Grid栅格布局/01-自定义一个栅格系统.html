@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .grid-box{
+            height: 500px;
+            border: solid black 2px;
+            background-color: gray;
+        }
+        /* 四列的栅格系统 */
+        .col-1{
+            width: 25%;
+            box-sizing: border-box;
+            float: left;
+        }
+        .col-2{
+            width: 50%;
+            box-sizing: border-box;
+            float: left;
+        }
+        .col-3{
+            width: 75%;
+            box-sizing: border-box;
+            float: left;
+        }
+        .col-4{
+            width: 100%;
+            box-sizing: border-box;
+            float: left;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 栅格系统：一种常用的网页布局方式，具有非常良好的响应式性能 -->
+    <!-- 优势：很简单的调整内容块的栅格大小，即可达到响应设备的目的 -->
+    <!-- 
+        制作栅格系统的步骤：
+        1.利用百分比宽度制作不同的元素
+        2.使用盒模型巩固栅格系统
+        3.利用漂浮是元素处于一行
+    -->
+
+    <div class="grid-box col-4">
+        导航栏
+    </div>
+    <div class="grid-box col-3">
+        主内容区
+    </div>
+    <div class="grid-box col-1">
+        右导航栏
+    </div>
+
+</body>
+</html>

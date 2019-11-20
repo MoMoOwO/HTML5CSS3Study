@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        article{
+            width: 300px;
+            height: 300px;
+            border: solid 5px silver;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box;
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 25px;
+        }
+
+        /* 按栅格线编号放置元素，每一行，每一列的栅格线都有编号，行列栅格线的编号都是从1开始。
+        通过设置grid-row-start和grid-row-end属性设置开始和结束的栅格线可以实现元素跨列；
+        通过设置grid-column-start和grid-column-end属性设置开始和结束的栅格线可以实现元素跨行。
+        这种设置得出来的元素空间只能为矩形 */
+        div:first-child{
+            grid-row-start: 2;
+            grid-row-end: 3;
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+    </article>
+    <br><br>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        article{
+            width: 300px;
+            height: 300px;
+            border: solid silver 5px;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+        div{
+            background-color: blueviolet;
+            background-clip: content-box; /* 背景裁切 */
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        div:first-child{
+            /*
+                在grid-column-end、grid-row-end通过span属性值，来设置元素跨多少列或跨多少行
+            */
+            grid-row-start: 2;
+            grid-row-end: span 2;
+            grid-column-start: 2;
+            grid-column-end: span 2;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+    </article>
+</body>
+</html>

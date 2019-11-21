@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        article{
+            width: 100vw;   /* 撑满移动端宽高 */
+            height: 100vh;
+            display: grid;
+            /*
+                3行，上下各60px中间自适应；两列，第一列60px，第二列自适应。
+            */
+            grid-template-rows: 60px 1fr 60px;
+            grid-template-columns: 60px 1fr;
+            /*
+                使用grid-template-areas属性来对栅格区域进行命名，一行一行进行命名，
+                参数：每一行的命名为字符串单元格的命名使用空格分开，不同行命名分别在不同字符串中进行设置，
+                在对单元格(栅格)区域进行命名后，会自动为栅格线进行命名，如“header-start、header-end”，
+                除了使用栅格区域名称来定位元素外，我们同样也可以使用自动生成的栅格线命名来定位元素。
+            */
+            grid-template-areas: "header header"
+            "nav main"
+            "footer footer";
+        }
+
+        header, nav, main, footer{
+            background-color: blueviolet;
+            background-clip: content-box;
+            padding: 10px;
+        }
+        header{
+            
+            grid-area: header;
+        }
+        nav{
+            grid-area: nav;
+        }
+        main{
+            /* grid-area: main; */
+            grid-area: header-end/main-start/footer-start/main-end;
+        }
+        footer{
+            grid-area: footer;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        footer > div{
+            background: #ddd;
+            background-clip: content-box;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <header></header>
+        <nav></nav>
+        <main></main>
+        <footer>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </footer>
+    </article>
+</body>
+</html>

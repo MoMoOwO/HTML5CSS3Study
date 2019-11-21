@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        article{
+            width: 300px;
+            height: 300px;
+            border: solid silver 5px;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+        div{
+            background-color: blueviolet;
+            background-clip: content-box; /* 背景裁切 */
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        div:first-child{
+            /*
+                通过grid-row、grid-column两个属性可以直接指定元素的起始与结束位置，中间使用“/”进行分割，
+                其中第二个参数可以时结束位置，也可以是偏移量
+            */
+            grid-row: 1 / span 3;
+            grid-column: 1 / span 1;
+        }
+        div:nth-child(2){
+            grid-row: 1 / span 2;
+            grid-column: 2 / span 2;
+        }
+        div:last-child{
+            grid-row: 3 / 4;
+            grid-column: 2 / 4;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </article>
+</body>
+</html>

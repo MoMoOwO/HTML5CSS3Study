@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            margin-top: 10px;
+        }
+        article{
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            border: solid 1px silver;
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            /*
+                栅格内元素同样也存在的布局的控制：
+                justify-items、align-items两个属性用来设置整体栅格内元素的水平和垂直对齐方式
+                参数有：start、end、center、stretch，默认为stretch拉伸撑满整个单元格。
+            */
+            justify-items: center;
+            align-items: center;
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 25px;
+        }
+
+        div:first-child{
+            /*
+                若要对某个单元格进行栅格内对齐方式的控制，则需要justify-self、align-self两个属性进行控制
+            */
+            justify-self: start;
+            align-self: end;
+        }
+
+        div:nth-child(4){
+            justify-self: end;
+            align-self: start;
+        }
+
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </article>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        article{
+            width: 300px;
+            height: 300px;
+            border: solid 5px silver;
+            display: grid;
+            grid-template-rows: repeat(3, [r] 1fr);
+            grid-template-columns: repeat(3, [c] 1fr);
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box;
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 25px;
+        }
+
+        div:first-child{
+            /*
+                可以使用grid-area属性来按区域定位元素位置，参数为：起始行列栅格线编号和结束行列栅格线编号，使用“/”进行分割
+                即：上栅格线编号/左栅格线编号/下栅格线编号/右栅格线编号；可以理解为是按栅格线编号布局的简写方式；
+                同样在对栅格线进行命名后可以在栅格线编号先加上名称
+            */
+            /* grid-area: 1/2/2/4; */
+            grid-area: r 1/c 2/r 2/c 4;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+    </article>
+</body>
+</html>

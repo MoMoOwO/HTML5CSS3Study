@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            margin-top: 10px;
+        }
+        article{
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            border: solid 1px silver;
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            /*
+                可以使用place-content属性来设置栅格整体垂直和水平的对齐方式
+                参数：垂直对齐方式的参数 水平对齐方式的参数；若只给一个参数，则水平垂直都使用这种对齐方式
+            */
+            /* place-content: end start; */
+
+            /*
+                同样也存在类似的属性同时设置整体栅格内元素的对齐方式，place-items
+            */
+            place-items: start end;
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box;
+            width: 50px;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 25px;
+        }
+
+        div:first-child{
+            /*
+                组合单独设置特定单元格内元素的对齐方式
+            */
+            place-self: center center;
+        }
+
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </article>
+</body>
+</html>

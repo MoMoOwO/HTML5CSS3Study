@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            margin-top: 50px;
+        }
+        .container{
+            width: 1020px;
+            margin: 0 auto;
+            border: silver 1px solid;
+        }
+        .row{
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 10px;
+        }
+        .col-1{
+            grid-column-end: span 1;
+            /* grid-column-end: span 1; */
+        }
+        .col-2{
+            /* grid-column-end: span 2; */
+            grid-column: span 2;
+        }
+        .col-3{
+            grid-column-end: span 3;
+        }
+        .col-4{
+            grid-column-end: span 4;
+        }
+        .col-5{
+            grid-column-end: span 5;
+        }
+        .col-6{
+            grid-column-end: span 6;
+        }
+        .col-7{
+            grid-column-end: span 7;
+        }
+        .col-8{
+            grid-column-end: span 8;
+        }
+        [class^="col-"]{
+            background-color: blueviolet;
+            background-clip: content-box;
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <article class="container">
+        <div class="row">
+            <div class="col-2">1</div>
+            <div class="col-4">2</div>
+            <div class="col-6">3</div>
+        </div>
+    </article>
+</body>
+</html>

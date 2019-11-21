@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            margin-top: 10px;
+        }
+        article{
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            border: solid 1px silver;
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            /*
+                栅格整体对齐方式：元素撑不满容器一行的时候可以使用justify-content属性来设置单元格整体水平对齐方式
+                justify-content:
+                参数：start：元素开始与容器开始对齐
+                end：元素结束与容器结束对齐
+                center：所有元素整体处于容器水平中间位置
+                space-around：元素平均分配容器行空间
+                space-between：元素是与容器两端对齐
+                space-evenly：元素完全平均分配容器水平空间
+
+                同样也有设置元素相对于容器垂直空间的对齐方式的属性：align-content参数与justify-content类似
+
+                这两个属性与flex中的这两个属性类似
+
+            */
+            justify-content: space-evenly;
+            align-content: center;
+        }
+
+        div{
+            background-color: blueviolet;
+            background-clip: content-box;
+            height: 50px;
+            padding: 10px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </article>
+</body>
+</html>

@@ -1,0 +1,13 @@
+@width: 200px;
+
+.meng {
+    @width: 100px;
+
+    .long {
+        @width: 50px;
+        width: @width;
+        @width: 20px;
+    }
+
+    width: @width;
+}

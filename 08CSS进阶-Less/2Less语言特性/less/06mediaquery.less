@@ -1,0 +1,15 @@
+@singleQuery: ~"max-width: 768px";
+
+.colorBox {
+    width: 700px;
+    height: 700px;
+    background-color: red;
+}
+
+@media screen and (@singleQuery) {
+    .colorBox {
+        width: 500px;
+        height: 500px;
+        background-color: blue;
+    }
+}

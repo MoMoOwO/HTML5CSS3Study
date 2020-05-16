@@ -734,19 +734,83 @@
 
     再如，下面的例子，因为 less 中变量没有顺序而言，这样也是可以的
 
-    ``` less
-    <!-- 03.scope.less -->
-    .short {
-      width: @w;
-      @o: 9%;
-    }
-    @w: @o;
-    @o: 100%;
-    <!-- 编译后的 css 代码 -->
-    .short {
-      width: 9%;
-    }
-    ```
+      ``` less
+      <!-- 03.scope.less -->
+      .short {
+          width: @w;
+          @o: 9%;
+      }
+      @w: @o;
+      @o: 100%;
+      <!-- 编译后的 css 代码 -->
+      .short {
+          width: 9%;
+      }
+      ```
+
+    + 字符串插值：变量可以用像 `@{name}` 这样的结构，以类似 Ruby 和 PHP 的方式嵌入到字符串中，如：
+
+      ``` less
+      <!-- 04strinter.less -->
+      @imgUrl: "http://image.acmx.xyz";
+      .bgBox {
+          background-image: url("@{imgUrl}/msj%2Flijie.jpg")
+      }
+      <!-- 编译后的 css 代码 -->
+      .bgBox {
+          background-image: url("http://image.acmx.xyz/msj%2Flijie.jpg")
+      }
+      ```
+
+    + 选择器插值：如果需要在选择器中使用 Less 变量，只需要铜鼓哦使用和字符串插值一样的 `@{selector}` 即可，如：
+
+      ``` less
+      <!-- 05selectorinter.less -->
+      @myName: redBox;
+      .@{myName}{
+          width: 500px;
+          height: 500px;
+          background-color: red;
+      }
+      <!-- 编译后的 css 代码 -->
+      .redBox {
+          width: 500px;
+          height: 500px;
+          background-color: red;
+      }
+      ```
+
+    + media query 作为变量：如果你希望在 media query 中使用 Less 变量，你可以直接使用普通的变量方式。因为 `~` 后面的值不是被编译的，所以可以用作 media query 的参数，如下例：
+
+      ``` less
+      <!-- 06mediaquery.less -->
+      @singleQuery: ~"max-width: 768px";
+      .colorBox {
+          width: 700px;
+          height: 700px;
+          background-color: red;
+      }
+      @media screen and (@singleQuery) {
+          .colorBox {
+              width: 500px;
+              height: 500px;
+              background-color: blue;
+          }
+      }
+      <!-- 编译后的 css 代码 -->
+      .colorBox {
+          width: 700px;
+          height: 700px;
+          background-color: red;
+      }
+      @media screen and (max-width: 768px) {
+          .colorBox {
+              width: 500px;
+              height: 500px;
+              background-color: blue;
+          }
+      }
+      ```
 
 ### Less 函数详解
 

@@ -812,6 +812,61 @@
       }
       ```
 
+    + 引用变量值的变量：用一个变量值的变量，在定义变量值时使用其他的变量来赋值，如下：
+
+      ``` less
+      <!-- 07varref.less -->
+      @size: 200px;
+      @width: size;
+      @height: size;
+      .box {
+          width: @width;
+          height: @height;
+      }
+      <!-- 编译后的 css 代码 -->
+      .box {
+          width: 200px;
+          height: 200px;
+      }
+      ```
+
+    (3) 混合 Mixins：在 Less 中，混合可以将一个定义好的 class A 轻松的引入到另一个 class B 中，从而简单实现 class B 继承 class A 中的所有属性。我们还可以带参数地调用，就像使用函数一样。
+
+    + 继承类名：在 Less 中，可以定义一些通用的属性集为一个 class，然后在另一个 class 中去调用这些属性。如果我们现在需要在任何 class 中引入那些通用的属性集，那么我们只需要在任何 class 中调用就可以了。任何 CSS class、id 属性集都可以以通样的方式引入。如下：
+
+      ``` less
+      <!-- 08extclass.less -->
+      .width {
+          width: 500px;
+      }
+      #height {
+          height: 500px;
+      }
+      .box {
+          .width;
+          .innerbox {
+              #height;
+              .width;
+          }
+          height: 700px;
+      }
+      <!-- 编译后的 css 代码 -->
+      .width{
+          width: 500px;
+      }
+      #height {
+          height: 500px;
+      }
+      .box {
+          width: 500px;
+          height: 700px;
+      }
+      .box .innerbox {
+        width: 500px;
+        height: 500px;
+      }
+      ```
+
 ### Less 函数详解
 
 ### Less 经典案例

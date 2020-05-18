@@ -1,0 +1,13 @@
+.width(@width: 500px) {
+    width: @width;
+}
+
+#height(@height: 500px) {
+    height: @height;
+}
+
+.box {
+    .width();
+    #height(700px);
+    background-color: red;
+}

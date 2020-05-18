@@ -1,0 +1,24 @@
+.width(@width) {
+    width: @width;
+}
+
+#height(@height) {
+    height: @height;
+}
+
+.bgc(@color) {
+    background-color: @color;
+}
+
+.box {
+    .width(500px);
+
+    .innerBox {
+        #height(250px);
+        .width(50%);
+        .bgc(blue);
+    }
+
+    #height(500px);
+    .bgc(red);
+}

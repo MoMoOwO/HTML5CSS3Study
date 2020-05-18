@@ -867,6 +867,77 @@
       }
       ```
 
+    + 带参数混合：在 Less 中，你还可以像函数一样定义一个带参数的数形结合，然后在其他选择器中像调用方法一样调用它，如下实例：
+
+      ``` less
+      <!-- 09argsmix.less -->
+      .width(@width) {
+          width: @width;
+      }
+      #height(@height) {
+          height: @height;
+      }
+      .box {
+          .width(500px);
+          .innerBox {
+              #height(300px);
+              .width(50%);
+          }
+          #height(500px);
+      }
+      <!-- 编译后的 css 代码 -->
+      .box {
+          width: 500px;
+          height: 500px;
+      }
+      .box .innerBox {
+          width: 500px;
+          height: 500px;
+      }
+      ```
+
+    + 隐藏属性继承：你也可以定义不带参数属性集集合，如果你想隐藏这个属性集合，不让他暴漏到 CSS 中去，但是你还想在其他的属性集合中引用，你会发现这个方法非常的好用，示例如下：
+
+      ``` less
+      <!-- 10hideargs.less -->
+      .width() {
+          width: 500px;
+      }
+      #height() {
+          height: 500px;
+      }
+      .box {
+          .width();
+          #height();
+      }
+      <!-- 编译后的 css 代码 -->
+      .box {
+          width: 500px;
+          height: 500px;
+      }
+      ```
+
+    + 默认值混合：还可以像这样给参数设置默认值，有了默认值，我们可以不用设置属性值也能被调用，如下：
+
+      ``` less
+      <!-- 11defaultarg.less -->
+      .width(@width: 500px) {
+          width: @width;
+      }
+      #height(@height: 500px) {
+          height: @height;
+      }
+      .box {
+          .width();
+          #height(700px);
+      }
+      <!-- 编译后的 css 代码 -->
+      .box {
+          width: 500px;
+          height: 700px;
+      }
+      ```
+
 ### Less 函数详解
 
 ### Less 经典案例

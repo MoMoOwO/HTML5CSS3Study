@@ -938,6 +938,108 @@
       }
       ```
 
+    + 多参数混合：
+      + 多个参数可以使用分号或者逗号分隔，这里推荐使用分号分隔，因为逗号有两重含义：它既可以表示混合的参数，也可以表示一个参数中一组值的分割符。
+      + 使用分号作为参数分隔符意味着可以将逗号分隔的一组值作为一个变量处理。换句话说，如果编译器在混合的定义或者是调用中找到至少一个分号，就会假设参数是使用分号分隔的，所有的逗号都属于参数中的一组值的分隔符。
+      + 2 个参数，每个参数都含有通过逗号分隔的一组值的情况：`.name(1, 2, 3; something, else)`。
+      + 3 个参数，每个参数只含一个数字的情况：`.name(1, 2, 3)`。
+      + 使用一个象征性的分号可以创建一个只含一个参数，但参数包含一组值的混合：`.name(1, 2, 3;)`。
+      + 逗号分隔的一组值参数的默认值：`.name(@param1: red, blue;)`。使用相同的名字和同样数量的参数定义多个混合是合法的。在被调用时，Less 会应用到所有可以应用的混合上，示例如下：
+
+        ``` less
+        <!-- 12multparams.less -->
+        .mixmin(@color) {
+            background-color: @color;
+        }
+        .mixmin(@color; @width: 20px) {
+            background-color: @color;
+            width: @width;
+        }
+        .mixmin(@color; @width; @height: 20px) {
+            background-color: @color;
+            width: @width;
+            height: @height;
+        }
+        .div1 {
+            .mixmin(red);
+        }
+        .div2 {
+            .mixmin(blue, 30px);
+        }
+        .div3 {
+            .mixmin(green, 30px, 50px);
+        }
+        <!-- 编译后的 css 代码 -->
+        .div1 {
+            background-color: red;
+            width: 20px;
+        }
+        .div2 {
+            background-color: blue;
+            width: 30px;
+            height: 20px;
+        }
+        .div2 {
+            background-color: green;
+            width: 30px;
+            height: 50px;
+        }
+        ```
+
+    + arguments 变量：提到 arguments，想必对 JavaScript 了解的伙伴大概有所眼熟，这个在 JavaScript 中代表素有参数。而在 Less 中代表的意思是一样的，只不过用法有所不同，如果你不想单独处理每一个参数的话就可以使用 `@arguments`，如下示例：
+
+      ``` less
+      <!-- 13arguments.less -->
+      .transition(@moveStyle: all; @delayTime: 4s; @moveType: ease-in; @moveTime: 2s) {
+          -webkit-transition: @arguments;
+          -moz-transition: @arguments;
+          -o-transition: @arguments;
+          -ms-transition: @arguments;
+          transition: @arguments;
+      }
+      div {
+          .transition;
+      }
+      span {
+          .transition(width);
+      }
+      h1 {
+          .transition(width, 8s);
+      }
+      h3 {
+          .transition(width, 8s, ease-out, 1s);
+      }
+      <!-- 编译后的 css 代码 -->
+      div {
+          -webkit-transition: all 4s ease-in 2s;
+          -moz-transition: all 4s ease-in 2s;
+          -o-transition: all 4s ease-in 2s;
+          -ms-transition: all 4s ease-in 2s;
+          transition: all 4s ease-in 2s;
+      }
+      span {
+          -webkit-transition: width 4s ease-in 2s;
+          -moz-transition: width 4s ease-in 2s;
+          -o-transition: width 4s ease-in 2s;
+          -ms-transition: width 4s ease-in 2s;
+          transition: width 4s ease-in 2s;
+      }
+      h1 {
+          -webkit-transition: width 8s ease-in 2s;
+          -moz-transition: width 8s ease-in 2s;
+          -o-transition: width 8s ease-in 2s;
+          -ms-transition: width 8s ease-in 2s;
+          transition: width 8s ease-in 2s;
+      }
+      h3 {
+          -webkit-transition: width 8s ease-out 1s;
+          -moz-transition: width 8s ease-out 1s;
+          -o-transition: width 8s ease-out 1s;
+          -ms-transition: width 8s ease-out 1s;
+          transition: width 8s ease-out 1s;
+      }
+      ```
+
 ### Less 函数详解
 
 ### Less 经典案例

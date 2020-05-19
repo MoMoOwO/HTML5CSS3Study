@@ -1,0 +1,23 @@
+.transition(@moveStyle: all; @delayTime: 4s; @moveType: ease-in; @moveTime: 2s) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    -ms-transition: @arguments;
+    transition: @arguments;
+}
+
+div {
+    .transition;
+}
+
+span {
+    .transition(width);
+}
+
+h1 {
+    .transition(width, 8s);
+}
+
+h3 {
+    .transition(width, 8s, ease-out, 1s);
+}

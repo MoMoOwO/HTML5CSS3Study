@@ -1,0 +1,26 @@
+.mixmin(@color) {
+    background-color: @color;
+}
+
+.mixmin(@color; @width: 20px) {
+    background-color: @color;
+    width: @width;
+}
+
+.mixmin(@color; @width; @height: 20px) {
+    background-color: @color;
+    width: @width;
+    height: @height;
+}
+
+.div1 {
+    .mixmin(red);
+}
+
+.div2 {
+    .mixmin(blue, 30px);
+}
+
+.div3 {
+    .mixmin(green, 30px, 50px);
+}

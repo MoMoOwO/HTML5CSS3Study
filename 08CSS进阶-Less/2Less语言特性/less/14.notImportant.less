@@ -1,0 +1,34 @@
+.size(@w: 20px; @h: 50px) {
+    width: @w;
+    height: @h;
+}
+
+.box1 {
+    .size;
+    background-color: red;
+}
+
+.box2 {
+    .size(40px);
+    background-color: blue;
+}
+
+.box3 {
+    .size(40px, 100px);
+    background-color: green;
+}
+
+.box4 {
+    .size !important;
+    background-color: yellow;
+}
+
+.box5 {
+    .size(40px) !important;
+    background-color: pink;
+}
+
+.box6 {
+    .size(40px, 100px) !important;
+    background-color: orange;
+}

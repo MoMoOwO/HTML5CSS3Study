@@ -1,0 +1,35 @@
+// 接受 0-n 个参数
+.mixin1(...) {
+    padding: @arguments;
+}
+
+// 接受 0-n 个参数
+.mixin2(@a: 1; ...) {
+    margin: @arguments;
+}
+
+// 接受 1-n 个参数
+.mixin3 (@a; ...) {
+    margin: @arguments;
+}
+
+// 接受 2-n 个参数
+.mixin4 (@a; @b; ...) {
+    margin: @arguments;
+}
+
+.div1 {
+    .mixin1(20px 30px 40px 50px);
+}
+
+.div2 {
+    .mixin2(5, 20px 30px 40px 50px);
+}
+
+.div3 {
+    .mixin3(10px);
+}
+
+.div4 {
+    .mixin4(10px, 20px)
+}

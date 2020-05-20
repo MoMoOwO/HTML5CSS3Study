@@ -698,12 +698,12 @@
     + 变量语法：使用方法就是在 `@` 后添加变量名称然后与变量值用冒号 `:` 链接，在使用变量的时候也是以 `@变量名` 的方式使用，如下
 
       ``` less
-      <!-- 01.var.less -->
+      // 01.var.less
       @width: 100px;
       .w {
           width: @width;
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .w {
           width: 100px;
       }
@@ -712,7 +712,7 @@
     + 变量作用域：如果对同一个变量定义两次的话，在当前作用域中最后一次定义的将被使用。这与 CSS 的机制类似，最后一次定义的值会成为这个属性的值。若定义在嵌套之中，那么这个变量就只能服务于这个嵌套之内的属性了。变量也是没有顺序可言的，只要页面里有，都会按顺序覆盖，按顺序加载。如下案例：
 
       ``` less
-      <!-- 02.scope.less -->
+      // 02.scope.less
       @width: 200px;
       .meng {
           @width: 100px;
@@ -723,7 +723,7 @@
           }
           width: @width;
       }
-      <!-- 编译后的 css 为 -->
+      // 编译后的 css 为
       .meng {
           width: 100px;
       }
@@ -735,14 +735,14 @@
     再如，下面的例子，因为 less 中变量没有顺序而言，这样也是可以的
 
       ``` less
-      <!-- 03.scope.less -->
+      // 03.scope.less
       .short {
           width: @w;
           @o: 9%;
       }
       @w: @o;
       @o: 100%;
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .short {
           width: 9%;
       }
@@ -751,12 +751,12 @@
     + 字符串插值：变量可以用像 `@{name}` 这样的结构，以类似 Ruby 和 PHP 的方式嵌入到字符串中，如：
 
       ``` less
-      <!-- 04strinter.less -->
+      // 04strinter.less
       @imgUrl: "http://image.acmx.xyz";
       .bgBox {
           background-image: url("@{imgUrl}/msj%2Flijie.jpg")
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .bgBox {
           background-image: url("http://image.acmx.xyz/msj%2Flijie.jpg")
       }
@@ -765,14 +765,14 @@
     + 选择器插值：如果需要在选择器中使用 Less 变量，只需要铜鼓哦使用和字符串插值一样的 `@{selector}` 即可，如：
 
       ``` less
-      <!-- 05selectorinter.less -->
+      // 05selectorinter.less
       @myName: redBox;
       .@{myName}{
           width: 500px;
           height: 500px;
           background-color: red;
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .redBox {
           width: 500px;
           height: 500px;
@@ -783,7 +783,7 @@
     + media query 作为变量：如果你希望在 media query 中使用 Less 变量，你可以直接使用普通的变量方式。因为 `~` 后面的值不是被编译的，所以可以用作 media query 的参数，如下例：
 
       ``` less
-      <!-- 06mediaquery.less -->
+      // 06mediaquery.less
       @singleQuery: ~"max-width: 768px";
       .colorBox {
           width: 700px;
@@ -797,7 +797,7 @@
               background-color: blue;
           }
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .colorBox {
           width: 700px;
           height: 700px;
@@ -815,15 +815,14 @@
     + 引用变量值的变量：用一个变量值的变量，在定义变量值时使用其他的变量来赋值，如下：
 
       ``` less
-      <!-- 07varref.less -->
-      @size: 200px;
+      // 07varref.less
       @width: size;
       @height: size;
       .box {
           width: @width;
           height: @height;
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .box {
           width: 200px;
           height: 200px;
@@ -835,7 +834,7 @@
     + 继承类名：在 Less 中，可以定义一些通用的属性集为一个 class，然后在另一个 class 中去调用这些属性。如果我们现在需要在任何 class 中引入那些通用的属性集，那么我们只需要在任何 class 中调用就可以了。任何 CSS class、id 属性集都可以以通样的方式引入。如下：
 
       ``` less
-      <!-- 08extclass.less -->
+      // 08extclass.less
       .width {
           width: 500px;
       }
@@ -844,13 +843,13 @@
       }
       .box {
           .width;
-          .innerbox {
+          .innerBox {
               #height;
               .width;
           }
           height: 700px;
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .width{
           width: 500px;
       }
@@ -861,7 +860,7 @@
           width: 500px;
           height: 700px;
       }
-      .box .innerbox {
+      .box .innerBox {
         width: 500px;
         height: 500px;
       }
@@ -870,7 +869,7 @@
     + 带参数混合：在 Less 中，你还可以像函数一样定义一个带参数的数形结合，然后在其他选择器中像调用方法一样调用它，如下实例：
 
       ``` less
-      <!-- 09argsmix.less -->
+      // 09argsmix.less
       .width(@width) {
           width: @width;
       }
@@ -885,7 +884,7 @@
           }
           #height(500px);
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .box {
           width: 500px;
           height: 500px;
@@ -899,7 +898,7 @@
     + 隐藏属性继承：你也可以定义不带参数属性集集合，如果你想隐藏这个属性集合，不让他暴漏到 CSS 中去，但是你还想在其他的属性集合中引用，你会发现这个方法非常的好用，示例如下：
 
       ``` less
-      <!-- 10hideargs.less -->
+      // 10hideargs.less
       .width() {
           width: 500px;
       }
@@ -910,7 +909,7 @@
           .width();
           #height();
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .box {
           width: 500px;
           height: 500px;
@@ -920,7 +919,7 @@
     + 默认值混合：还可以像这样给参数设置默认值，有了默认值，我们可以不用设置属性值也能被调用，如下：
 
       ``` less
-      <!-- 11defaultarg.less -->
+      // 11defaultarg.less
       .width(@width: 500px) {
           width: @width;
       }
@@ -931,7 +930,7 @@
           .width();
           #height(700px);
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       .box {
           width: 500px;
           height: 700px;
@@ -947,29 +946,29 @@
       + 逗号分隔的一组值参数的默认值：`.name(@param1: red, blue;)`。使用相同的名字和同样数量的参数定义多个混合是合法的。在被调用时，Less 会应用到所有可以应用的混合上，示例如下：
 
         ``` less
-        <!-- 12multparams.less -->
-        .mixmin(@color) {
+        // 12multparams.less
+        .mixin(@color) {
             background-color: @color;
         }
-        .mixmin(@color; @width: 20px) {
+        .mixin(@color; @width: 20px) {
             background-color: @color;
             width: @width;
         }
-        .mixmin(@color; @width; @height: 20px) {
+        .mixin(@color; @width; @height: 20px) {
             background-color: @color;
             width: @width;
             height: @height;
         }
         .div1 {
-            .mixmin(red);
+            .mixin(red);
         }
         .div2 {
-            .mixmin(blue, 30px);
+            .mixin(blue, 30px);
         }
         .div3 {
-            .mixmin(green, 30px, 50px);
+            .mixin(green, 30px, 50px);
         }
-        <!-- 编译后的 css 代码 -->
+        // 编译后的 css 代码
         .div1 {
             background-color: red;
             width: 20px;
@@ -989,7 +988,7 @@
     + arguments 变量：提到 arguments，想必对 JavaScript 了解的伙伴大概有所眼熟，这个在 JavaScript 中代表素有参数。而在 Less 中代表的意思是一样的，只不过用法有所不同，如果你不想单独处理每一个参数的话就可以使用 `@arguments`，如下示例：
 
       ``` less
-      <!-- 13arguments.less -->
+      // 13arguments.less
       .transition(@moveStyle: all; @delayTime: 4s; @moveType: ease-in; @moveTime: 2s) {
           -webkit-transition: @arguments;
           -moz-transition: @arguments;
@@ -1009,7 +1008,7 @@
       h3 {
           .transition(width, 8s, ease-out, 1s);
       }
-      <!-- 编译后的 css 代码 -->
+      // 编译后的 css 代码
       div {
           -webkit-transition: all 4s ease-in 2s;
           -moz-transition: all 4s ease-in 2s;
@@ -1037,6 +1036,118 @@
           -o-transition: width 8s ease-out 1s;
           -ms-transition: width 8s ease-out 1s;
           transition: width 8s ease-out 1s;
+      }
+      ```
+
+    + `!important` 关键字：在 CSS 编写的时候经常会碰到在属性值后面添加 `!important` 的时候，而再 Less 中为了能够方便，就设置了 `!important` 关键字混合方法，调用的时候再混合后面加上 `!important` 关键字表示将混合带来的所有属性标记为 `!important`。如下实例：
+
+      ``` less
+      // 14.notImportant.less
+      .size(@w: 20px; @h: 50px) {
+          width: @w;
+          height: @h;
+      }
+      .box1 {
+          .size;
+          background-color: red;
+      }
+      .box2 {
+          .size(40px);
+          background-color: blue;
+      }
+      .box3 {
+          .size(40px, 100px);
+          background-color: green;
+      }
+      .box4 {
+          .size !important;
+          background-color: yellow;
+      }
+      .box5 {
+          .size(40px) !important;
+          background-color: pink;
+      }
+      .box6 {
+          .size(40px, 100px) !important;
+          background-color: orange;
+      }
+      // 编译后的 css 代码
+      .box1 {
+          width: 20px;
+          height: 50px;
+          background-color: red;
+      }
+      .box2 {
+          width: 40px;
+          height: 50px;
+          background-color: blue;
+      }
+      .box3 {
+          width: 40px !important;
+          height: 100px !important;
+          background-color: green;
+      }
+      .box4 {
+          width: 20px !important;
+          height: 50px !important;
+          background-color: yellow;
+      }
+      .box5 {
+          width: 40px !important;
+          height: 50px !important;
+          background-color: pink;
+      }
+      .box6 {
+          width: 40px;
+          height: 100px;
+          background-color: orange;
+      }
+      ```
+
+    + 高级参数用法：如果需要在 mixin 中不限制参数的数量，可以在变量名后添加 `...`，表示这里可以使用 N 个参数。示例如下：
+
+      ``` less
+      // 15harg.less
+      // 接受 0-n 个参数
+      .mixin1(...) {
+          padding: @arguments;
+      }
+      // 接受 0-n 个参数
+      .mixin2(@a: 1; ...) {
+          margin: @arguments;
+      }
+      // 接受 1-n 个参数
+      .mixin3 (@a; ...) {
+          margin: @arguments;
+      }
+      // 接受 2-n 个参数
+      .mixin4 (@a; @b; ...) {
+          margin: @arguments;
+      }
+      .div1 {
+          .mixin1(20px 30px 40px 50px);
+      }
+      .div2 {
+          .mixin2(5, 20px 30px 40px 50px);
+      }
+      .div3 {
+          .mixin3(10px);
+      }
+      .div4 {
+          .mixin4(10px, 20px)
+      }
+      // 编译后的 css 代码
+      .div1 {
+          padding: 20px 30px 40px 50px;
+      }
+      .div2 {
+          margin: 5 20px 30px 40px 50px;
+      }
+      .div3 {
+          margin: 10px;
+      }
+      .div4 {
+          margin: 10px 20px;
       }
       ```
 

@@ -1,0 +1,22 @@
+.mixin(@a) {
+    // 使用的一个参数的 .mixin
+    color: @a;
+}
+
+.mixin(@a, @b) {
+    // 使用的两个参数的 .mixin
+    color: fade(@a, @b);
+}
+
+.box1 {
+    .mixin(red);
+}
+
+.box2 {
+    .mixin(blue, 10%);
+}
+
+/*
+调用 .mixin 时，如果使用了一个参乎上，输出第一个 .mixin，使用了两个参数，则输出第二个。
+fade(@color, 10%) 的意思是设定透明度为 10%。
+*/

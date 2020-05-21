@@ -1151,6 +1151,76 @@
       }
       ```
 
+    + 模式匹配与 Guard 表达式：Less 提供了通过参数值控制 mixin 行为的功能。如果要根据 `@switch` 的值控制 `.mixin` 行为，只需要按照下面的方法定义：
+
+      ``` less
+      .mixin(dark, @color) {
+          color: darken(@color, 10%);
+      }
+      .mixin (light, @color) {
+          color: lighten(@color, 10%);
+      }
+      .mixin(@A, @color) {
+          background-color: @color;
+      }
+      @switch1: light;
+
+      .box1 {
+          .mixin(@switch1, #ccc);
+      }
+      @switch2: dark;
+      .box2 {
+          .mixin(@switch2, #ccc);
+      }
+      /*
+      分析：
+      传给 .mixin 的颜色执行 lighten 函数，如果 @switch 的值是 dark，那么则会执行 darken 函数输出颜色。
+      darken(@color, 10%) 函数的意思是亮度降低 10%；lighten(@color, 10%) 函数的意思是亮度增加 10%。
+      以下是整个过程如何发生的：
+      第一个 .mixin 没有匹配，因为不满足 dark 条件；
+      第二个 .mixin 可以被匹配，因为它满足了 light 条件；
+      第三个 .mixin 也可以配匹配，因为他接受任何参数。
+      只有满足匹配要求的混合才会被使用。混合中的变量可以匹配任何值，非变量形式的值只能与传入的值完全相等时才可以匹配成功。
+      */
+      // 解析后的 css 代码
+      .box1 {
+        color: #e6e6e6;
+        background-color: #ccc;
+      }
+      .box2 {
+        color: #b3b3b3;
+        background-color: #ccc;
+      }
+      ```
+
+    我们也可以根据参数的数量进行匹配，示例如下：
+
+      ``` less
+      .mixin(@a) {
+          color: @a;
+      }
+      .mixin(@a, @b) {
+          color: fade(@a, @b);
+      }
+      .box1 {
+          .mixin(red);
+      }
+      .box2 {
+          .mixin(blue, 10%);
+      }
+      /*
+      调用 .mixin 时，如果使用了一个参乎上，输出第一个 .mixin，使用了两个参数，则输出第二个。
+      fade(@color, 10%) 的意思是设定透明度为 10%。
+      */
+      // 编译后的 css 代码
+      .box1 {
+        color: red;
+      }
+      .box2 {
+        color: rgba(0, 0, 255, 0.1);
+      }
+      ```
+
 ### Less 函数详解
 
 ### Less 经典案例

@@ -1,0 +1,25 @@
+@IE: true;
+@w: 10px;
+
+.IE(@bTrue) when(@bTrue) {
+    *display: block;
+}
+
+.IE1(@bTrue) when(@bTrue) {
+    margin: 0;
+}
+
+.IE2(@bTrue) when(@bTrue >=0) {
+    padding: 0;
+}
+
+.IE3(@bTrue) when(@bTrue > 0) {
+    height: 100px;
+}
+
+.box {
+    .IE(@IE);
+    .IE1(@IE);
+    .IE2(@w);
+    .IE3(@w);
+}

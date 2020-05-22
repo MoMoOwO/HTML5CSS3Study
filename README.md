@@ -1184,16 +1184,16 @@
       */
       // 解析后的 css 代码
       .box1 {
-        color: #e6e6e6;
-        background-color: #ccc;
+          color: #e6e6e6;
+          background-color: #ccc;
       }
       .box2 {
-        color: #b3b3b3;
-        background-color: #ccc;
+          color: #b3b3b3;
+          background-color: #ccc;
       }
       ```
 
-    我们也可以根据参数的数量进行匹配，示例如下：
+      我们也可以根据参数的数量进行匹配，示例如下：
 
       ``` less
       .mixin(@a) {
@@ -1214,12 +1214,76 @@
       */
       // 编译后的 css 代码
       .box1 {
-        color: red;
+          color: red;
       }
       .box2 {
-        color: rgba(0, 0, 255, 0.1);
+          color: rgba(0, 0, 255, 0.1);
       }
       ```
+
+    + 条件混合（guarded mixins）：与上面匹配值活陪陪参数数量的情况不同，Guards 被用来匹配表达式（expressions）。如果你很熟悉变成函数的用法，那么很可能你已经掌握它的用法了。为了尽可能地符合 CSS 的语言结构，Less 选择使用 guard 混合（guarded mixins，类似于 `@media` 的工作方式）执行条件判断，而不是加入 `if-else` 声明。
+        + 通过 Less 自带的函数判断
+
+          ``` less
+          // 18guardfun.less
+          .mixin(@a) when(lightness(@a) >=50%) {
+              background-color: red;
+          }
+          .mixin(@a) when(lightness(@a) < 50%) {
+              background-color: blue;
+          }
+          .mixin(@a) {
+              color: @a;
+          }
+          .box1 {
+              .mixin(#ccc);
+          }
+          .box2 {
+              .mixin(#777);
+          }
+          // 编译后的 css 代码
+          .box1 {
+              background-color: red;
+              color: #ccc;
+          }
+          .box2 {
+              background-color: blue;
+              color: #777;
+          }
+          ```
+
+        + 运算符判断：Guards 支持的运算符包括：>、>=、=、=<、<。说明一下，true 关键字是唯一判断为真的值，也就是这两个混合是相等的。示例如下：
+
+          ``` less
+          // 19guardexp.less
+          @IE: true;
+          @w: 10px;
+          .IE(@bTrue) when(@bTrue) {
+              *display: block;
+          }
+          .IE1(@bTrue) when(@bTrue) {
+              margin: 0;
+          }
+          .IE2(@bTrue) when(@bTrue >=0) {
+              padding: 0;
+          }
+          .IE3(@bTrue) when(@bTrue > 0) {
+              height: 100px;
+          }
+          .box {
+              .IE(@IE);
+              .IE1(@IE);
+              .IE2(@w);
+              .IE3(@w);
+          }
+          // 编译后的 css 代码
+          .box {
+            *display: block;
+            margin: 0;
+            padding: 0;
+            height: 100px;
+          }
+          ```
 
 ### Less 函数详解
 

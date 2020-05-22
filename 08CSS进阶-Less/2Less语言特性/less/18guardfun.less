@@ -1,0 +1,19 @@
+.mixin(@a) when(lightness(@a) >=50%) {
+    background-color: red;
+}
+
+.mixin(@a) when(lightness(@a) < 50%) {
+    background-color: blue;
+}
+
+.mixin(@a) {
+    color: @a;
+}
+
+.box1 {
+    .mixin(#ccc);
+}
+
+.box2 {
+    .mixin(#777);
+}

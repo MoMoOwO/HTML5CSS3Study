@@ -1285,6 +1285,60 @@
           }
           ```
 
+        + 多个条件：多个 Guards 可以通过逗号表示分割，如果其中任意一个结果为 true，则匹配成功。这个相当于脚本中的或运算的意思，如下实例
+
+            ``` less
+            // 20guardmulitcond.less
+            @IE: true;
+            @w: 10;
+            .IE(@bTrue, @width) when(@bTrue), (@width < 15) {
+                *display: block;
+            }
+            .IE1(@bTrue, @width) when(@bTrue =true), (@width > 0) {
+                margin: 0;
+            }
+            .IE2(@bTrue, @width) when(@bTrue=false), (@width < 0) {
+                padding: 0;
+            }
+            .IE3(@bTrue, @width) when(@bTrue=false), (@width >=0) {
+                height: 100px;
+            }
+            .box {
+                .IE(@IE, @w);
+                .IE1(@IE, @w);
+                .IE2(@IE, @w);
+                .IE3(@IE, @w);
+            }
+            // 编译后的 css 代码
+            .box {
+                *display: block;
+                margin: 0;
+                height: 100px;
+            }
+            ```
+
+            参数之间比较：值得注意的是不同的参数之间也可以比较，而参与比较的也可以是一个参数都没有判断，示例如下：
+
+            ``` less
+            // 21propscomp.less
+            @h: 20;
+            @w: 10;
+            .mixin(@h, @w)when(@h < @w) {
+                width: @w;
+            }
+            .mixin1(@h, @w)when(@h>@w) {
+                height: @h;
+            }
+            .box {
+                .mixin(@h, @w);
+                .mixin1(@h, @w);
+            }
+            // 编译后的 css 代码
+            .box {
+                height: 20
+            }
+            ```
+
 ### Less 函数详解
 
 ### Less 经典案例

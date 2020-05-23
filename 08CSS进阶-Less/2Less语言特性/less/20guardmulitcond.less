@@ -1,0 +1,29 @@
+@IE: true;
+@w: 10;
+
+.IE(@bTrue, @width) when(@bTrue),
+(@width < 15) {
+    *display: block;
+}
+
+.IE1(@bTrue, @width) when(@bTrue =true),
+(@width > 0) {
+    margin: 0;
+}
+
+.IE2(@bTrue, @width) when(@bTrue=false),
+(@width < 0) {
+    padding: 0;
+}
+
+.IE3(@bTrue, @width) when(@bTrue=false),
+(@width >=0) {
+    height: 100px;
+}
+
+.box {
+    .IE(@IE, @w);
+    .IE1(@IE, @w);
+    .IE2(@IE, @w);
+    .IE3(@IE, @w);
+}

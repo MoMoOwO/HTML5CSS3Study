@@ -1,0 +1,15 @@
+@h: 20;
+@w: 10;
+
+.mixin(@h, @w)when(@h < @w) {
+    width: @w;
+}
+
+.mixin1(@h, @w)when(@h>@w) {
+    height: @h;
+}
+
+.box {
+    .mixin(@h, @w);
+    .mixin1(@h, @w);
+}

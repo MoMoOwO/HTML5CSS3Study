@@ -1287,57 +1287,131 @@
 
         + 多个条件：多个 Guards 可以通过逗号表示分割，如果其中任意一个结果为 true，则匹配成功。这个相当于脚本中的或运算的意思，如下实例
 
-            ``` less
-            // 20guardmulitcond.less
-            @IE: true;
-            @w: 10;
-            .IE(@bTrue, @width) when(@bTrue), (@width < 15) {
-                *display: block;
-            }
-            .IE1(@bTrue, @width) when(@bTrue =true), (@width > 0) {
-                margin: 0;
-            }
-            .IE2(@bTrue, @width) when(@bTrue=false), (@width < 0) {
-                padding: 0;
-            }
-            .IE3(@bTrue, @width) when(@bTrue=false), (@width >=0) {
-                height: 100px;
-            }
-            .box {
-                .IE(@IE, @w);
-                .IE1(@IE, @w);
-                .IE2(@IE, @w);
-                .IE3(@IE, @w);
-            }
-            // 编译后的 css 代码
-            .box {
-                *display: block;
-                margin: 0;
-                height: 100px;
-            }
-            ```
+          ``` less
+          // 20guardmulitcond.less
+          @IE: true;
+          @w: 10;
+          .IE(@bTrue, @width) when(@bTrue), (@width < 15) {
+              *display: block;
+          }
+          .IE1(@bTrue, @width) when(@bTrue =true), (@width > 0) {
+              margin: 0;
+          }
+          .IE2(@bTrue, @width) when(@bTrue=false), (@width < 0) {
+              padding: 0;
+          }
+          .IE3(@bTrue, @width) when(@bTrue=false), (@width >=0) {
+              height: 100px;
+          }
+          .box {
+              .IE(@IE, @w);
+              .IE1(@IE, @w);
+              .IE2(@IE, @w);
+              .IE3(@IE, @w);
+          }
+          // 编译后的 css 代码
+          .box {
+              *display: block;
+              margin: 0;
+              height: 100px;
+          }
+          ```
 
-            参数之间比较：值得注意的是不同的参数之间也可以比较，而参与比较的也可以是一个参数都没有判断，示例如下：
+          参数之间比较：值得注意的是不同的参数之间也可以比较，而参与比较的也可以是一个参数都没有判断，示例如下：
 
-            ``` less
-            // 21propscomp.less
-            @h: 20;
-            @w: 10;
-            .mixin(@h, @w)when(@h < @w) {
-                width: @w;
-            }
-            .mixin1(@h, @w)when(@h>@w) {
-                height: @h;
-            }
-            .box {
-                .mixin(@h, @w);
-                .mixin1(@h, @w);
-            }
-            // 编译后的 css 代码
-            .box {
-                height: 20
-            }
-            ```
+          ``` less
+          // 21propscomp.less
+          @h: 20;
+          @w: 10;
+          .mixin(@h, @w)when(@h < @w) {
+              width: @w;
+          }
+          .mixin1(@h, @w)when(@h>@w) {
+              height: @h;
+          }
+          .box {
+              .mixin(@h, @w);
+              .mixin1(@h, @w);
+          }
+          // 编译后的 css 代码
+          .box {
+              height: 20
+          }
+          ```
+
+        + guard 中的 and
+
+          ``` less
+          // 22and.less
+          @h: 20;
+          @w: 10;
+          @bTrue: true;
+          .mixin(@h, @w)when(@h>@w) and (@bTrue) {
+              background-color: red;
+          }
+          .box {
+              height: 100px;
+              width: 100px;
+              .mixin(@h, @w);
+          }
+          // 编译后的 css 代码
+          .box {
+              height: 100px;
+              width: 100px;
+              background-color: red;
+          }
+          ```
+
+        + guard 中的 not
+
+          ``` less
+          // 23not.less
+          @num: 20;
+          .mixin(@h) when not (@h>0) {
+              background-color: blue;
+          }
+          .box {
+              height: 100px;
+              width: 100px;
+              .mixin(@num);
+          }
+          // 编译后的 css 代码
+          .box {
+              height: 100px;
+              width: 100px;
+          }
+          ```
+
+    + 嵌套语法：Less 是一种动态语言，属于 CSS 预处理语言的一种。Less 和其他预处理语言一样也支持嵌套的写法。下面我们通过具体示例来了解 Less 中的嵌套书写方式。
+
+      ``` less
+      // 24nest.less
+      .box {
+          background-color: #ddd;
+          h4 {
+              color: red;
+          }
+          #mySpan {
+              width: 100px;
+              .linkA {
+                  color: blue;
+              }
+          }
+      }
+      // 编译后的 css 代码
+      .box {
+          background-color: #ddd;
+      }
+      .box h4 {
+            color: red;
+      }
+      .box #mySpan {
+            width: 100px;
+      }
+      .box #mySpan .linkA {
+            color: blue;
+      }
+      ```
 
 ### Less 函数详解
 

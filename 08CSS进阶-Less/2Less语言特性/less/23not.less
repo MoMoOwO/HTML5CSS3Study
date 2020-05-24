@@ -1,0 +1,11 @@
+@num: 20;
+
+.mixin(@h) when not (@h>0) {
+    background-color: blue;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    .mixin(@num);
+}

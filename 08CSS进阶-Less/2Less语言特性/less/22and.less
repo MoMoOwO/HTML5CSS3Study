@@ -1,0 +1,13 @@
+@h: 20;
+@w: 10;
+@bTrue: true;
+
+.mixin(@h, @w)when(@h>@w) and (@bTrue) {
+    background-color: red;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    .mixin(@h, @w);
+}

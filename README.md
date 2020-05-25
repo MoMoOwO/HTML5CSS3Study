@@ -1413,6 +1413,144 @@
       }
       ```
 
+    + `&` 的用法：`&` 符号的使用——如果你想写串联选择器，而不是写后代选择器，就可以用到 `&` 了。这点对伪类尤其有用，如 `:hover` 和 `:focus`。
+
+      ``` less
+      // 25use&.less
+      .box {
+          color: red;
+          .myContent {
+              font: bold 12px/20px "宋体";
+          }
+          a {
+              color: #000;
+              &:hover {
+                  text-decoration: none;
+              }
+              &:focus {
+                  color: #999;
+              }
+          }
+          .myText {
+              background: yellow;
+              &:hover {
+                  background: #777;
+              }
+          }
+      }
+      // 编译后的 css 代码
+      .box {
+          color: red;
+      }
+      .box .myContent {
+          font: bold 12px/20px "宋体";
+      }
+      .box a {
+          color: #000;
+      }
+      .box a:hover {
+          text-decoration: none;
+      }
+      .box a:focus {
+          color: #999;
+      }
+      .box .myText {
+          background: yellow;
+      }
+      .box .myText:hover {
+         background: #777;
+      }
+      ```
+
+    + `&` 的高级用法：用在选择器中的 `&` 还可以反转嵌套的顺序并且可以应用到多个类名上。
+
+      ``` less
+      // 26hluse&.less
+      .box1, .box2 {
+          div & {
+              color: black;
+          }
+          & + & {
+              color: red;
+          }
+          & ~ & {
+              color: yellow;
+          }
+      }
+      // 编译后的 css 代码
+      div .box1, div .box2 {
+          color: black;
+      }
+      .box1 + .box1,
+      .box1 + .box2,
+      .box2 + .box1,
+      .box2 + .box2 {
+          color: red;
+      }
+      .box1 ~ .box1,
+      .box1 ~ .box2,
+      .box2 ~ .box1,
+      .box2 ~ .box2 {
+          color: yellow;
+      }
+      ```
+
+    + Less 详解之命名空间：提到明明口昂见，大家有一些语言基础的一定会比较熟悉。Less 中也有命名空间的概念。所谓的命名空间，是为了更好组织 CSS 或者单纯是为了更好地封装，将一些变量或者混合模块打包起来，一些属性集之后可以重复使用。
+
+      ``` less
+      // 27namespace.less
+      @h: 100px;
+      .box {
+          .box_button() {
+              display: block;
+              background-color: #ccc;
+              border: 1px solid black;
+              &:hover {
+                  color: red;
+              }
+          }
+          .box_box1() {
+              width: 100px;
+              height: @h;
+              background-color: green;
+          }
+          .box_box2() {
+              @h: 200px;
+              width: 200px;
+              height: @h;
+              background-color: blue;
+          }
+      }
+      .box1 {
+          .box>.box_box1;
+      }
+      .box2 {
+          .box>.box_box2;
+      }
+      .myButton {
+          .box>.box_button;
+      }
+      // 编译后的 css 代码
+      .box1 {
+          width: 100px;
+          height: 100px;
+          background-color: green;
+      }
+      .box2 {
+          width: 200px;
+          height: 200px;
+          background-color: blue;
+      }
+      .myButton {
+          display: block;
+          background-color: #ccc;
+          border: 1px solid black;
+      }
+      .myButton:hover {
+          color: red;
+      }
+      ```
+
 ### Less 函数详解
 
 ### Less 经典案例

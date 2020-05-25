@@ -1,0 +1,38 @@
+@h: 100px;
+
+.box {
+    .box_button() {
+        display: block;
+        background-color: #ccc;
+        border: 1px solid black;
+
+        &:hover {
+            color: red;
+        }
+    }
+
+    .box_box1() {
+        width: 100px;
+        height: @h;
+        background-color: green;
+    }
+
+    .box_box2() {
+        @h: 200px;
+        width: 200px;
+        height: @h;
+        background-color: blue;
+    }
+}
+
+.box1 {
+    .box>.box_box1;
+}
+
+.box2 {
+    .box>.box_box2;
+}
+
+.myButton {
+    .box>.box_button;
+}

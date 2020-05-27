@@ -1553,4 +1553,103 @@
 
 ### Less 函数详解
 
+1. String 函数系列
+
+    (1) `escape(@string)` 编码：
+
+    + 使用 URL-encoding 的方式编码字符串。如果参数不是字符串的话，函数行为是不可预知的。目前传入颜色值的话会返回 undefined，其他的值会原样返回。
+    + 不会被编码的：`, / ? @ & + ' ~ ! $`
+    + 最常见的被编码的字符串：`# ^ ( ) { } | : > < ; [ ] =`
+    + 参数：需要转移的字符串；返回值：字符串（string）。
+    + 实例：
+
+      ``` less
+      // 01escape.less
+      .box {
+          content: escape('a=1');
+      }
+      // 编译后的 css 代码
+      .box {
+          content: a%3D1;
+      }
+      ```
+
+    (2) `e(@string)` 转义，如“~”
+
+    + 用于对 CSS 的转义，与 `~"value"` 类似。他接受一个字符串作为参数，并原样返回内容（不含引号）。它可用于输出一些不合法的 CSS 语法，或者是使用 Less 不能识别的属性。也接受经 `~""` 转义的值或者数字作为参数。
+    + 参数：需要转移的字符串；返回值：字符串的内容，不含引号。
+    + 实例：
+
+      ``` less
+      // 02e.less
+      .box {
+          filter: e('ms:alwaysHasItsOwnSyntax.For.Stuff()');
+      }
+      // 编译后的 css 代码
+      .box {
+          filter: ms:alwaysHasItsOwnSyntax.For.Stuff();
+      }
+      ```
+
+    (3) `%` 格式化参数
+
+    + 作用：函数 `%(string, arguments...)` 格式化一个字符串
+    + 第一个参数是带占位符的字符串，所有占位符包括 - `%s`、`%S`、`%d`、`%D`、`%a`、`%A`；剩下的参数时替换占位符的表达式，如果你需要输出百分号，用双百分号 `%%` 转义，如果需要把特殊字符转义成 utf-8 转义码，需要使用大写字母占位符，该占位符会转义所有的特殊字符，除了 `( ) ' ~ !`。空格会被转译成 `%20`，小写字母占位符会保留特殊字符的原样。
+    + 转义字符
+      + `%d %D %a %A`：能被任何类型参数替换（颜色值、数字、转义值、表达式...），如果你在字符串中结合使用，整个字符串参数都会替换进去，包括它的引号，然后引号会被替换到字符串参数的原有位置，也许会被转义或者还是不变的，取决于占位符是大写字母还是小写字母。
+      + `%s %S`：能被除了颜色值以外任何类型参数替换，如果你在字符串中结合使用，只会替换成字符串参数的值，而字符串参数引号都被忽略。
+    + 实例：
+
+      ``` less
+      // 03precent.less
+      .box {
+          // 使用 a/d 格式化
+          width: %('repetitions:%a file:%d', 1 + 2, 'directory/file.less');
+          // 使用 a/d 格式化
+          width: %('repetitions:%a file:%d', '1 + 2', 'directory/file.less');
+          // 使用 A/D 格式化
+          width: %('repetitions:%A file:%D', 1 + 2, 'directory/file.less');
+          // 使用 s 格式化
+          width: %('repetitions:%s file:%s', 1 + 2, 'directory/file.less');
+          // 使用 s 格式化
+          width: %('repetitions:%s file:%S', '1 + 2', 'directory/file.less');
+          // 使用 S 格式化
+          width: %('repetitions:%S file:%S', 1 + 2, 'directory/file.less');
+      }
+
+      // 编译后的 css 代码
+      .box {
+          width: 'repetitions:3 file:'directory/file.less'';
+          width: 'repetitions:'1 + 2' file:'directory/file.less'';
+          width: 'repetitions:3 file:'directory%2Ffile.less'';
+          width: 'repetitions:3 file:directory/file.less';
+          width: 'repetitions:1 + 2 file:directory%2Ffile.less';
+          width: 'repetitions:3 file:directory%2Ffile.less';
+      }
+      ```
+
+    (4) `replace(string, pattern, replacement, flags)` 替换
+
+    + 作用：用另一个字符串替换文本
+    + 参数：string - 搜索和替换用的字符串，pattern - 一个字符串或者能搜索的正则表达式，replacement - 匹配模式成功的替换字符串，flags - （可选参数）正则表达式匹配标识（全匹配还是匹配一个等..）；返回值：替换过后的字符串
+    + 实例：
+
+      ``` less
+      // 04replace.less
+      .box {
+          width: replace('Hello, Mars?', 'Mars\?', 'World!');
+          width: replace('One + One = 2', 'One', '1', 'gi');
+          width: replace('This is a string.', '(string)\.$', 'new $1.');
+          width: replace(~'bar-1', '1', '2');
+      }
+
+      // 编译后的 css 代码
+      .box {
+          width: 'Hello, World!';
+          width: '1 + 1 = 2';
+          width: 'This is a new string.';
+          width: bar-2;
+      }
+      ```
+
 ### Less 经典案例

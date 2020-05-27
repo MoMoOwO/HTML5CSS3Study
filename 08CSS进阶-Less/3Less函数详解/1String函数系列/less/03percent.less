@@ -1,0 +1,14 @@
+.box {
+	// 使用 a/d 格式化
+	width: %('repetitions:%a file:%d', 1 + 2, 'directory/file.less');
+	// 使用 a/d 格式化
+	width: %('repetitions:%a file:%d', '1 + 2', 'directory/file.less');
+	// 使用 A/D 格式化
+	width: %('repetitions:%A file:%D', 1 + 2, 'directory/file.less');
+	// 使用 s 格式化
+	width: %('repetitions:%s file:%s', 1 + 2, 'directory/file.less');
+	// 使用 s 格式化
+	width: %('repetitions:%s file:%S', '1 + 2', 'directory/file.less');
+	// 使用 S 格式化
+	width: %('repetitions:%S file:%S', 1 + 2, 'directory/file.less');
+}

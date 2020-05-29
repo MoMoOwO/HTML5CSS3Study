@@ -1652,4 +1652,69 @@
       }
       ```
 
+2. List 函数系列
+
+    (1) 长度（length）
+
+    + 作用：获取集合中的值的数目。
+    + 参数：list - 以逗号或空格隔开的值的计合。返回值：集合的值的个数。
+    + 实例：
+
+      ``` less
+      // 1length.less
+      @list1: 'A' 'B' 'C';
+      @list2: 'AA', 'BB', 'CC', 'DD';
+      .box {
+        width: length(@list1);
+        height: length(@list2);
+      }
+      // 编译后的 css 代码
+      .box {
+        width: 3;
+        height: 4;
+      }
+      ```
+
+    (2) 提取（extract）
+
+    + 作用：返回集合中指定索引的值。
+    + 参数：list - 逗号或者空格隔开的值集合。index - 用于返回集合中指定索引位置的整型数字。返回值：集合指定索引位置的值。
+    + 实例：
+
+      ``` less
+      // 2extract.less
+      @list: 123px 'B' 100px 123;
+      .box {
+        width: extract(@list, 1);
+        height: extract(@list, 3);
+        background-color: red;
+      }
+      // 编译后的 css 代码
+      .box {
+        width: 123px;
+        height: 100px;
+        background-color: red;
+      }
+      ```
+
+3. Math 函数系列
+
+| 函数名            | 作用                   | 参数                                                                           | 返回值                     | 实例                                                                                                          |
+| :---------------- | :--------------------- | :----------------------------------------------------------------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| `ceil()`          | 向上取整               | number - 浮点数                                                                | integer 整数               | `ceil(2.4)` 输出：3                                                                                           |
+| `floor()`         | 向下取整               | number - 浮点数                                                                | integer 整数               | `floor(2.6)` 输出：2                                                                                          |
+| `percentage()`    | 将浮点数转换为百分比   | number - 浮点数                                                                | number                     | `ceil(0.5)` 输出：50%                                                                                         |
+| `round()`         | 四舍五入               | number - 浮点数，decimaPlaces - 可选参数，四舍五入取整的小数点位置，默认值为 0 | number                     | `round(1.67)` 输出：2，`round(1.67, 1)`，输出：1.7                                                            |
+| `sqrt()`          | 计算数字平方根         | number                                                                         | number                     | `sqrt(25cm)` 输出：5cm，`sqrt(18.6%)`，输出：4.312771730569565%                                               |
+| `abs()`           | 数字的绝对值           | number                                                                         | number                     | `abs(25cm)` 输出：25cm，`abs(-18.6%)`，输出：18.6%                                                            |
+| `sin()`           | sin 函数值             | number                                                                         | number                     | `sin(1)` 输出：0.8414709848078965，`sin(1deg)` 输出：0.01745240643728351，`sin(1grad)`：0.015707317311820675  |
+| `asin()`          | asin 函数值            | numbe，[-1, 1]                                                                 | number，[-π/2, π/2]        | `asin(-0.8414709848078965)` 输出：-1rad，`asin(0)` 输出：0rag，`asin(2)` 输出：NaNrad                         |
+| `cos()`           | cos 函数值             | number                                                                         | number                     | `cos(1)` 输出：0.5403023058681398，`cos(1deg)` 输出：0.9998476951563913，`cos(1grad)`：0.9998766324816606     |
+| `acos()`          | acos 函数值            | number，[-1, 1]                                                                | number，[0, π]             | `acos(0.5403023058681398)` 输出：1rad，`acos(1)` 输出：0rag，`acos(2)` 输出：NaNrad                           |
+| `tan()`           | tan 函数值             | number                                                                         | number                     | `tan(1)` 输出：1.5574077246549023，`tan(1deg)` 输出：0.017455064928217585，`tan(1grad)`：0.015709255323664916 |
+| `atan()`          | atan 函数值            | number                                                                         | number，[-π/2, π/2]        | `atan(-1.5574077246549023)` 输出：-1rad，`atan(0)` 输出：0rag，`round(atan(22), 6)` 输出：1.525373rad         |
+| `pi()`            | 返回 π 的值            | none                                                                           | number                     | `pi()` 输出：3.141592653589793                                                                                |
+| `pow(num1, num2)` | 返回 num1 的 num2 次方 | none                                                                           | number - 基数，number - 幂 | `pow(0cm, 0cm) pow(25, -2) pow(25, 0.5) pow(-25, 0.5) pow(-25%, -0.5)` 输出：1cm 0.0016 5 NaN NaN%            |
+| `mod(num1, num2)` | num1对num2取余         | none                                                                           | number                     | `pi()` 输出：3.141592653589793                                                                                |
+
 ### Less 经典案例

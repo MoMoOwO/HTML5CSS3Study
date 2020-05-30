@@ -1699,22 +1699,103 @@
 
 3. Math 函数系列
 
-| 函数名            | 作用                   | 参数                                                                           | 返回值                     | 实例                                                                                                          |
-| :---------------- | :--------------------- | :----------------------------------------------------------------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| `ceil()`          | 向上取整               | number - 浮点数                                                                | integer 整数               | `ceil(2.4)` 输出：3                                                                                           |
-| `floor()`         | 向下取整               | number - 浮点数                                                                | integer 整数               | `floor(2.6)` 输出：2                                                                                          |
-| `percentage()`    | 将浮点数转换为百分比   | number - 浮点数                                                                | number                     | `ceil(0.5)` 输出：50%                                                                                         |
-| `round()`         | 四舍五入               | number - 浮点数，decimaPlaces - 可选参数，四舍五入取整的小数点位置，默认值为 0 | number                     | `round(1.67)` 输出：2，`round(1.67, 1)`，输出：1.7                                                            |
-| `sqrt()`          | 计算数字平方根         | number                                                                         | number                     | `sqrt(25cm)` 输出：5cm，`sqrt(18.6%)`，输出：4.312771730569565%                                               |
-| `abs()`           | 数字的绝对值           | number                                                                         | number                     | `abs(25cm)` 输出：25cm，`abs(-18.6%)`，输出：18.6%                                                            |
-| `sin()`           | sin 函数值             | number                                                                         | number                     | `sin(1)` 输出：0.8414709848078965，`sin(1deg)` 输出：0.01745240643728351，`sin(1grad)`：0.015707317311820675  |
-| `asin()`          | asin 函数值            | numbe，[-1, 1]                                                                 | number，[-π/2, π/2]        | `asin(-0.8414709848078965)` 输出：-1rad，`asin(0)` 输出：0rag，`asin(2)` 输出：NaNrad                         |
-| `cos()`           | cos 函数值             | number                                                                         | number                     | `cos(1)` 输出：0.5403023058681398，`cos(1deg)` 输出：0.9998476951563913，`cos(1grad)`：0.9998766324816606     |
-| `acos()`          | acos 函数值            | number，[-1, 1]                                                                | number，[0, π]             | `acos(0.5403023058681398)` 输出：1rad，`acos(1)` 输出：0rag，`acos(2)` 输出：NaNrad                           |
-| `tan()`           | tan 函数值             | number                                                                         | number                     | `tan(1)` 输出：1.5574077246549023，`tan(1deg)` 输出：0.017455064928217585，`tan(1grad)`：0.015709255323664916 |
-| `atan()`          | atan 函数值            | number                                                                         | number，[-π/2, π/2]        | `atan(-1.5574077246549023)` 输出：-1rad，`atan(0)` 输出：0rag，`round(atan(22), 6)` 输出：1.525373rad         |
-| `pi()`            | 返回 π 的值            | none                                                                           | number                     | `pi()` 输出：3.141592653589793                                                                                |
-| `pow(num1, num2)` | 返回 num1 的 num2 次方 | none                                                                           | number - 基数，number - 幂 | `pow(0cm, 0cm) pow(25, -2) pow(25, 0.5) pow(-25, 0.5) pow(-25%, -0.5)` 输出：1cm 0.0016 5 NaN NaN%            |
-| `mod(num1, num2)` | num1对num2取余         | none                                                                           | number                     | `pi()` 输出：3.141592653589793                                                                                |
+    | 函数名            | 作用                   | 参数                                                                           | 返回值              | 实例                                                                                                          |
+    | :---------------- | :--------------------- | :----------------------------------------------------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------ |
+    | `ceil()`          | 向上取整               | number - 浮点数                                                                | integer 整数        | `ceil(2.4)` 输出：3                                                                                           |
+    | `floor()`         | 向下取整               | number - 浮点数                                                                | integer 整数        | `floor(2.6)` 输出：2                                                                                          |
+    | `percentage()`    | 将浮点数转换为百分比   | number - 浮点数                                                                | number              | `ceil(0.5)` 输出：50%                                                                                         |
+    | `round()`         | 四舍五入               | number - 浮点数，decimaPlaces - 可选参数，四舍五入取整的小数点位置，默认值为 0 | number              | `round(1.67)` 输出：2，`round(1.67, 1)`，输出：1.7                                                            |
+    | `sqrt()`          | 计算数字平方根         | number                                                                         | number              | `sqrt(25cm)` 输出：5cm，`sqrt(18.6%)`，输出：4.312771730569565%                                               |
+    | `abs()`           | 数字的绝对值           | number                                                                         | number              | `abs(25cm)` 输出：25cm，`abs(-18.6%)`，输出：18.6%                                                            |
+    | `sin()`           | sin 函数值             | number                                                                         | number              | `sin(1)` 输出：0.8414709848078965，`sin(1deg)` 输出：0.01745240643728351，`sin(1grad)`：0.015707317311820675  |
+    | `asin()`          | asin 函数值            | numbe，[-1, 1]                                                                 | number，[-π/2, π/2] | `asin(-0.8414709848078965)` 输出：-1rad，`asin(0)` 输出：0rag，`asin(2)` 输出：NaNrad                         |
+    | `cos()`           | cos 函数值             | number                                                                         | number              | `cos(1)` 输出：0.5403023058681398，`cos(1deg)` 输出：0.9998476951563913，`cos(1grad)`：0.9998766324816606     |
+    | `acos()`          | acos 函数值            | number，[-1, 1]                                                                | number，[0, π]      | `acos(0.5403023058681398)` 输出：1rad，`acos(1)` 输出：0rag，`acos(2)` 输出：NaNrad                           |
+    | `tan()`           | tan 函数值             | number                                                                         | number              | `tan(1)` 输出：1.5574077246549023，`tan(1deg)` 输出：0.017455064928217585，`tan(1grad)`：0.015709255323664916 |
+    | `atan()`          | atan 函数值            | number                                                                         | number，[-π/2, π/2] | `atan(-1.5574077246549023)` 输出：-1rad，`atan(0)` 输出：0rag，`round(atan(22), 6)` 输出：1.525373rad         |
+    | `pi()`            | 返回 π 的值            | none                                                                           | number              | `pi()` 输出：3.141592653589793                                                                                |
+    | `pow(num1, num2)` | 返回 num1 的 num2 次方 | number - 基数，number - 幂                                                     | number              | `pow(0cm, 0cm) pow(25, -2) pow(25, 0.5) pow(-25, 0.5) pow(-25%, -0.5)` 输出：1cm 0.0016 5 NaN NaN%            |
+    | `mod(num1, num2)` | num1 对num2 取余       | number1，number2                                                               | number              | `mod(0cm, 0px) mod(11cm, 6px) mod(-26%, -5)` 输出：NaNcm 5cm -1%                                              |
+
+4. Type 函数系列
+
+    (1) isnumber
+
+    + 作用：如果一个值是一个数字，返回 `true`，否则返回 `false`
+    + 参数：value - 发i判断的值或变量；返回值：若是数字返回 `true`，否则返回 `false`
+    + 实例
+
+      ``` less
+      // 1isnumber.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: isnumber(#ccc);
+          width2: isnumber(blue);
+          width3: isnumber('string');
+          width4: isnumber(1234);
+          width5: isnumber(56px);
+          width6: isnumber(7.8%);
+          width7: isnumber(keyword);
+          width8: isnumber(blue);
+          width9: isnumber(url(www.baa.com));
+          width10: isnumber(@a);
+          width11: isnumber(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: true;
+          width5: true;
+          width6: true;
+          width7: false;
+          width8: false;
+          width9: false;
+          width10: true;
+          width11: false;
+      }
+      ```
+
+    (2) isstring
+
+    + 作用：如果一个值是一个字符串，返回 `true`，否则返回 `false`
+    + 参数：value - 待判断的值或变量；返回值：如果是字符串返回 `true`，否则返回 `false`
+    + 实例
+
+      ``` less
+      // 2isstring.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: isstring(#ccc);
+          width2: isstring(blue);
+          width3: isstring('string');
+          width4: isstring(1234);
+          width5: isstring(56px);
+          width6: isstring(7.8%);
+          width7: isstring(keyword);
+          width8: isstring(blue);
+          width9: isstring(url(www.baa.com));
+          width10: isstring(@a);
+          width11: isstring(@b);
+      }
+
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: true;
+          width4: false;
+          width5: false;
+          width6: false;
+          width7: false;
+          width8: false;
+          width9: false;
+          width10: false;
+          width11: true;
+      }
+      ```
 
 ### Less 经典案例

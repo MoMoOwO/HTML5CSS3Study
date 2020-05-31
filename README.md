@@ -1721,7 +1721,7 @@
 
     (1) isnumber
 
-    + 作用：如果一个值是一个数字，返回 `true`，否则返回 `false`
+    + 作用：判断值或者变量值是否为数值
     + 参数：value - 发i判断的值或变量；返回值：若是数字返回 `true`，否则返回 `false`
     + 实例
 
@@ -1760,7 +1760,7 @@
 
     (2) isstring
 
-    + 作用：如果一个值是一个字符串，返回 `true`，否则返回 `false`
+    + 作用：判断值或者变量值是否为字符串
     + 参数：value - 待判断的值或变量；返回值：如果是字符串返回 `true`，否则返回 `false`
     + 实例
 
@@ -1795,6 +1795,274 @@
           width9: false;
           width10: false;
           width11: true;
+      }
+      ```
+
+    (3) iscolor
+
+    + 作用：判断值或者变量值是否为一个颜色值
+    + 参数：value - 待判断得值或变量，返回值：若是颜色返回 `true` 否则返回 `false`
+    + 实例
+
+      ``` less
+      // 3.iscolor.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: iscolor(#ccc);
+          width2: iscolor(blue);
+          width3: iscolor('string');
+          width4: iscolor(1234);
+          width5: iscolor(56px);
+          width6: iscolor(7.8%);
+          width7: iscolor(keyword);
+          width8: iscolor(blue);
+          width9: iscolor(url(www.baa.com));
+          width10: iscolor(@a);
+          width11: iscolor(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: true;
+          width2: true;
+          width3: false;
+          width4: false;
+          width5: false;
+          width6: false;
+          width7: false;
+          width8: true;
+          width9: false;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (4) iskeyword
+
+    + 作用：判断值或者变量值是否为一个关键字
+    + 参数：value - 带判断的值或变量，返回值：是关键字则返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 4iskeyword.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: iskeyword(#ccc);
+          width2: iskeyword(blue);
+          width3: iskeyword('string');
+          width4: iskeyword(1234);
+          width5: iskeyword(56px);
+          width6: iskeyword(7.8%);
+          width7: iskeyword(keyword);
+          width8: iskeyword(blue);
+          width9: iskeyword(url(www.baa.com));
+          width10: iskeyword(@a);
+          width11: iskeyword(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: false;
+          width5: false;
+          width6: false;
+          width7: true;
+          width8: false;
+          width9: false;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (5) isurl
+
+    + 作用：判断值或者变量值是否为一个 url 地址
+    + 参数：value - 待判断得值或变量，返回值：若是 url 返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 5isurl.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: isurl(#ccc);
+          width2: isurl(blue);
+          width3: isurl('string');
+          width4: isurl(1234);
+          width5: isurl(56px);
+          width6: isurl(7.8%);
+          width7: isurl(keyword);
+          width8: isurl(blue);
+          width9: isurl(url(www.baa.com));
+          width10: isurl(@a);
+          width11: isurl(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: false;
+          width5: false;
+          width6: false;
+          width7: false;
+          width8: false;
+          width9: true;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (6) ispxel
+
+    + 作用：判断一个值或变量值是否是带像素长度单位得数字
+    + 参数：value - 待判断的值或变量，返回值：若是带 `px` 单位得数字返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 6ispixel.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: ispixel(#ccc);
+          width2: ispixel(blue);
+          width3: ispixel('string');
+          width4: ispixel(1234);
+          width5: ispixel(56px);
+          width6: ispixel(7.8%);
+          width7: ispixel(keyword);
+          width8: ispixel(blue);
+          width9: ispixel(url(www.baa.com));
+          width10: ispixel(@a);
+          width11: ispixel(@b);
+      }
+
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: false;
+          width5: true;
+          width6: false;
+          width7: false;
+          width8: false;
+          width9: false;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (7) isem
+
+    + 作用：判断一个值或变量值是否是带 `em` 结尾的数字
+    + 参数：value - 待判断的值或变量，返回值：若是带 `em` 结尾的数字则返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 7isem.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: isem(#ccc);
+          width2: isem(blue);
+          width3: isem('string');
+          width4: isem(1234);
+          width5: isem(56px);
+          width6: isem(7.8%);
+          width7: isem(keyword);
+          width8: isem(75em);
+          width9: isem(url(www.baa.com));
+          width10: isem(@a);
+          width11: isem(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: false;
+          width5: false;
+          width6: false;
+          width7: false;
+          width8: true;
+          width9: false;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (8) isem
+
+    + 作用：判断一个值或变量值是否是百分数
+    + 参数：value - 待判断的值或变量，返回值：若是百分数则返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 7ispercentage.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: ispercentage(#ccc);
+          width2: ispercentage(blue);
+          width3: ispercentage('string');
+          width4: ispercentage(1234);
+          width5: ispercentage(56px);
+          width6: ispercentage(7.8%);
+          width7: ispercentage(keyword);
+          width8: ispercentage(75em);
+          width9: ispercentage(url(www.baa.com));
+          width10: ispercentage(@a);
+          width11: ispercentage(@b);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: false;
+          width2: false;
+          width3: false;
+          width4: false;
+          width5: false;
+          width6: true;
+          width7: false;
+          width8: false;
+          width9: false;
+          width10: false;
+          width11: false;
+      }
+      ```
+
+    (9) isunit
+
+    + 作用：判断一个值或变量值是否是带有指定单位
+    + 参数：value - 待判断的值或变量，返回值：带有指定单位则返回 `true`，否则返回 `false`
+    + 实例：
+
+      ``` less
+      // 7isunit.less
+      @a: 123;
+      @b: '222';
+      .box {
+          width1: isunit(35px, px);
+          width2: isunit(10%, px);
+          width3: isunit(10%, "%");
+          width4: isunit(24em, rem);
+          width5: isunit(24em, em);
+          width6: isunit(123px, em);
+          width7: isunit(123, em);
+          width8: isunit(#ccc, pt);
+      }
+      // 编译后的 css 代码
+      .box {
+          width1: true;
+          width2: false;
+          width3: true;
+          width4: false;
+          width5: true;
+          width6: false;
+          width7: false;
+          width8: false;
       }
       ```
 

@@ -1,0 +1,31 @@
+.mixin(1) {
+	width: 10px;
+}
+.mixin(2) {
+	height: 20px;
+}
+.mixin(@x) when (default()) {
+	width: @x;
+}
+
+.mixin1(@value) when (ispixel(@value)) {
+	width: @value;
+}
+.mixin1(@value) when not(default()) {
+	padding: @value / 5;
+}
+
+.box1 {
+	.mixin(30px);
+	.mixin(2);
+}
+.box2 {
+	.mixin(1);
+}
+
+.box3 {
+	.mixin1(100%);
+}
+.box4 {
+	.mixin1(100px);
+}

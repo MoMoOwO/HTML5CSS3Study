@@ -1716,6 +1716,8 @@
     | `pi()`            | 返回 π 的值            | none                                                                           | number              | `pi()` 输出：3.141592653589793                                                                                |
     | `pow(num1, num2)` | 返回 num1 的 num2 次方 | number - 基数，number - 幂                                                     | number              | `pow(0cm, 0cm) pow(25, -2) pow(25, 0.5) pow(-25, 0.5) pow(-25%, -0.5)` 输出：1cm 0.0016 5 NaN NaN%            |
     | `mod(num1, num2)` | num1 对num2 取余       | number1，number2                                                               | number              | `mod(0cm, 0px) mod(11cm, 6px) mod(-26%, -5)` 输出：NaNcm 5cm -1%                                              |
+    | `min()`           | 返回最小值             | value1,...,value2 一个或多个待比较的值                                         | 最小值              | `min(5, 10)` 输出：5，`min(3px, 42px, 1px, 16px)` 输出：1px                                                   |
+    | `max()`           | 返回最大值             | value1,...,value2 一个或多个待比较的值                                         | 最大值              | `max(5, 10)` 输出：10，`max(3%, 42%, 1%, 16%)` 输出：42%                                                      |
 
 4. Type 函数系列
 
@@ -2063,6 +2065,141 @@
           width6: false;
           width7: false;
           width8: false;
+      }
+      ```
+
+5. 其他杂项函数系列
+
+    (1) color
+
+    + 作用：解析颜色，将代表颜色的字符串转换为颜色值。
+    + 参数：string - 代表颜色值得字符串，返回值：color 值。
+    + 实例：
+
+      ``` less
+      // 1color.less
+      .box {
+          width: 100px;
+          height: 100px;
+          background-color: color('red');
+      }
+      // 编译后的 css 代码
+      .box {
+          width: 100px;
+          height: 100px;
+          background-color: #ff0000;
+      }
+      ```
+
+    (2) convert
+
+    + 作用：将数字从一种类型转换到另一种类型。
+    + 第一个参数为带单位的数值，第二个参数为单位。如果两个参数的单位是兼容的，则数字得单位被转换；如果两个参数的单位不兼容，则原样返回第一个参数。
+    + 无需转换改变单位的可以参照 `unit`，兼容的单位组（可以转换的单位）：长度 - m、cm、mm、in、pt、pc，时间 - s、ms，角度 - rad、deg、grad、turn。
+    + 参数：number - 带单位的浮点数，identifier、string 或 escaped value - 单位，返回值：number
+    + 实例：
+
+      ``` less
+      // 2convert.less
+      .box {
+          width: convert(9s, 'ms');
+          height: convert(7cm, 'mm');
+          color: convert(8, 'deg');
+      }
+      // 编译后的 css 文件
+      .box {
+          width: 9000ms;
+          height: 70mm;
+          color: 8;
+      }
+      ```
+
+    (3) data-uri
+
+    + 作用：将一个资源内嵌到样式文件，如果开启 ieCompat 选项，而且资源文件的体积过大，或者是在浏览器中使用，则会使用 `url()` 进行后退。如果没有指定 MIME，则 Node.js 会使用 MIME 包来决定正确的 MIMIE。
+    + 参数：mimetype - 可选参数，MIME类型字符串，url - 需要内嵌的文件得 URL。
+    + 实例：
+
+      ``` less
+      // 3data-uri.less
+      .box1 {
+          width: 768px;
+          height: 1024px;
+          background-image: data-uri('../img/img.jpg');
+      }
+      .box2 {
+          width: 768px;
+          height: 1024px;
+          background-image: data-uri('images/jpeg;base64', '../img/img.jpg');
+      }
+      // 编译后的 css 代码
+      .box1 {
+          width: 768px;
+          height: 1024px;
+          background-image: url('http://127.0.0.1:8080/3Less%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/5%E5%85%B6%E4%BB%96%E6%9D%82%E9%A1%B9%E5%87%BD%E6%95%B0%E7%B3%BB%E5%88%97/img/img.jpg');
+      }
+      .box2 {
+          width: 768px;
+          height: 1024px;
+          background-image: url('http://127.0.0.1:8080/3Less%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/5%E5%85%B6%E4%BB%96%E6%9D%82%E9%A1%B9%E5%87%BD%E6%95%B0%E7%B3%BB%E5%88%97/img/img.jpg');
+      }
+      ```
+
+    (4) default
+
+    + 作用：只能边界条件中使用，没有匹配到其他自定义函数（mixin）的时候返回 `true`，否则返回 `false`.
+    + 实例：
+
+      ``` less
+      // 4 default.less
+      .mixin(1) {
+          width: 10px;
+      }
+      .mixin(2) {
+          height: 20px;
+      }
+      .mixin(@x) when (default()) {
+          width: @x;
+      }
+      .box1 {
+          .mixin(30px);
+          .mixin(2);
+      }
+      .box2 {
+          .mixin(1);
+      }
+      // 编译后的 css 代码
+      .box1 {
+          width: 30px;
+          height: 20px;
+      }
+      .box2 {
+          width: 10px;
+      }
+      ```
+
+    + default 的返回值还可以和边界操作一起使用，例如 `.mixin() when not(default()){}` 将会在至少一个除自身外的自定义函数（mixin）满足条件时配调用。
+    + 实例：
+
+      ``` less
+      // 4default.less
+      .mixin1(@value) when (ispixel(@value)) {
+          width: @value;
+      }
+      .mixin1(@value) when not(default()) {
+          padding: @value / 5;
+      }
+
+      .box3 {
+          .mixin1(100%);
+      }
+      .box4 {
+          .mixin1(100px);
+      }
+      // 编译后的 css 代码
+      .box4 {
+          width(100px);
+          padding: 20px;
       }
       ```
 

@@ -2203,4 +2203,134 @@
       }
       ```
 
+    + 在同一个边界条件或者不同的混合条件中，`default()` 可以被调用多次：
+    + 实例：
+
+      ``` less
+      // 4default.less
+      .box5 {
+          .m(@x) when not (default()), (default()) {
+              always: 1;
+          }
+          .m(@x) when not (default()) and (default()) {
+              never: 1;
+          }
+          .m(1);
+      }
+      // 编译后的 css 代码
+      .box5{
+          always: 1;
+      }
+      ```
+
+    + 然而，使用 `default()` 时如果检测到多个混合条件有潜在性冲突，Less 会抛出一个异常
+    + 实例：
+
+      ``` less
+      // 4default.less
+      .box6 {
+          .mi(@x) when (default()) {
+              a: @x;
+          }
+          .mi(@x) when not(default()) {
+              b: @x;
+          }
+          .mi(1); // Error
+      }
+      ```
+
+    + 更多 `default()` 高级用法：
+
+      ``` less
+      // 4default.less
+      .x {
+          .m(red) {
+              case-1: darkred;
+          }
+          .m(blue) {
+              case-2: darkblue;
+          }
+          .m(@x) when (iscolor(@x)) and (default()) {
+              default-color: @x;
+          }
+          .m('foo') {
+              case-1: I am 'foo';
+          }
+          .m('bar') {
+              case-2: I am 'bar';
+          }
+          .m(@x) when (isstring(@x)) and (default()) {
+              default-string: and I am the default;
+          }
+
+          &-blue {
+              .m(blue);
+          }
+          &-green {
+              .m(green);
+          }
+          &-foo {
+              .m('foo');
+          }
+          &-baz {
+              .m('baz');
+          }
+      }
+      // 编译后的 css 代码
+      .x-blue {
+          case-2: #00008b;
+      }
+      .x-green {
+          default-color: #008000;
+      }
+      .x-foo {
+          case-1: I am 'foo';
+      }
+      .x-baz {
+          default-string: and I am the default;
+      }
+      ```
+
+    + `default()` 函数只能作为 Less 构建函数在边界条件中使用。如果在混合条件之外使用，`default()`函数只会被解释成普通的 CSS 属性值
+    + 实例：
+
+      ``` less
+      // 4default.less
+      .box7 {
+          foo: default();
+          bar: default(42);
+      }
+      // 编译后的 css 代码
+      .box7 {
+          foo: default();
+          bar: default(42);
+      }
+      ```
+
+    (5) unit
+
+    + 作用：移除或者改变属性值的单位。
+    + 参数：dimension - 数字，带或不带单位。unit - 可选参数，将要替换成的代为，如果省略则移除原单位。
+    + 转换成指定单位参考 convert
+    + 实例：
+
+      ``` less
+      // 5unit.less
+      .box {
+          width: unit(13, px);
+          height: unit(25px);
+      }
+      // 编译后的 css 代码
+      .box {
+          width: 13px;
+          height: 25;
+      }
+      ```
+
+6. Color 函数系列
+
+    | 函数名 | 作用 |
+    | :----- | :--- |
+    |        |      |
+
 ### Less 经典案例

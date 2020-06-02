@@ -29,3 +29,62 @@
 .box4 {
 	.mixin1(100px);
 }
+
+.box5 {
+	.m(@x) when not (default()), (default()) {
+		always: 1;
+	}
+	.m(@x) when not (default()) and (default()) {
+		never: 1;
+	}
+	.m(1);
+}
+
+/* .box6 {
+	.mi(@x) when (default()) {
+		a: @x;
+	}
+	.mi(@x) when not(default()) {
+		b: @x;
+	}
+	.mi(1); // Error
+} */
+
+.x {
+	.m(red) {
+		case-1: darkred;
+	}
+	.m(blue) {
+		case-2: darkblue;
+	}
+	.m(@x) when (iscolor(@x)) and (default()) {
+		default-color: @x;
+	}
+	.m('foo') {
+		case-1: I am 'foo';
+	}
+	.m('bar') {
+		case-2: I am 'bar';
+	}
+	.m(@x) when (isstring(@x)) and (default()) {
+		default-string: and I am the default;
+	}
+
+	&-blue {
+		.m(blue);
+	}
+	&-green {
+		.m(green);
+	}
+	&-foo {
+		.m('foo');
+	}
+	&-baz {
+		.m('baz');
+	}
+}
+
+.box7 {
+	foo: default();
+	bar: default(42);
+}

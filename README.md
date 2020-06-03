@@ -2329,8 +2329,68 @@
 
 6. Color 函数系列
 
-    | 函数名 | 作用 |
-    | :----- | :--- |
-    |        |      |
+    | 函数名                                        | 作用                                                                                                                                                |
+    | :-------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `rgb(@r, @g, @b)`                             | 转换为 RGB 颜色值                                                                                                                                   |
+    | `rgba(@r, @g, @b, @a)`                        | 转换为 RGBA 颜色值                                                                                                                                  |
+    | `argb(@color)`                                | 创建 #AARRGGBB 格式的颜色值                                                                                                                         |
+    | `hsl(@hue, @saturation, @lightness)`          | 创建 HSL 颜色值                                                                                                                                     |
+    | `hsla(@hue, @saturation, @lightness, @alpha)` | 创建 HSLA 颜色值                                                                                                                                    |
+    | `hsv(@hue, @saturation, @value)`              | 创建 HSV 颜色值                                                                                                                                     |
+    | `hsva(@hue, @saturation, @value, @alpha)`     | 创建 HSVA 颜色值                                                                                                                                    |
+    | `hue(@color)`                                 | 从颜色值中提取 hue 值（色相）                                                                                                                       |
+    | `saturation(@color)`                          | 从颜色值中提取 saturation 值（饱和度）                                                                                                              |
+    | `lightness(@color)`                           | 从颜色值中提取 lightness 值（亮度）                                                                                                                 |
+    | `hsvhue(@color)`                              | 从颜色中提取 hue 值，以 HSV 色彩空间表示（色相）                                                                                                    |
+    | `hsvsaturation(@color)`                       | 从颜色中提取 saturation 值，以 HSV 色彩空间表示（饱和度）                                                                                           |
+    | `hsvvalue(@color)`                            | 从颜色中提取 value 值，以 HSV 色彩空间表示（色调）                                                                                                  |
+    | `red(@color)`                                 | 从颜色值中提取 red 值（红色）                                                                                                                       |
+    | `green(@color)`                               | 从颜色值中提取 green 值（绿色）                                                                                                                     |
+    | `blue(@color)`                                | 从颜色值中提取 blue 值（蓝色）                                                                                                                      |
+    | `alpha(@color)`                               | 从颜色值中提取 alpha 值（透明度）                                                                                                                   |
+    | `luma(@color)`                                | 从颜色值中提取 luma 值（亮度的百分比表示法）                                                                                                        |
+    | `saturate(@color, 10%)`                       | 饱和度增加 10%                                                                                                                                      |
+    | `desaturate(@color, 10%)`                     | 饱和度降低 10%                                                                                                                                      |
+    | `lighten(@color, 10%)`                        | 亮度增加 10%                                                                                                                                        |
+    | `darken(@color, 10%)`                         | 亮度降低 10%                                                                                                                                        |
+    | `fadein(@color, 10%)`                         | 透明度增加 10%                                                                                                                                      |
+    | `fadeout(@color, 10%)`                        | 透明度降低 10%                                                                                                                                      |
+    | `fade(@color, 50%)`                           | 设定透明度为 50%                                                                                                                                    |
+    | `spin(@color, 10)`                            | 色相值增加 10                                                                                                                                       |
+    | `mix(@color1, @color2, [@weight: 50%])`       | 混合两种颜色                                                                                                                                        |
+    | `greyscale(@color)`                           | 完全移除饱和度，输出灰色                                                                                                                            |
+    | `contrast`                                    | `(@color1, [@darkcolor: black], [@lightcolor: white], [@threshold: 43%])` 如果 `@color1` 的 luma 值 > 43% 输出 `@darkcolor`，否则输出 `@lightcolor` |
+
+7. 函数与运算
+
+    (1) 运算提供了加、减、乘、除操作，我们可以做属性值和颜色的运算，这样就可以实现属性值之间的复杂关系。Less 中的函数映射了 JavaScript 代码，如果你愿意的话可以操作属性值。
+
+    (2) 运算使用的实例：
+
+      ``` less
+      // opt.less
+      @the-border: 1px;
+      @base-color: #111;
+      @red: #842210;
+      #header {
+          color: @base-color * 3;
+          border-left: @the-border;
+          border-right: @the-border * 2;
+      }
+      #footer {
+          color: @base-color + #003300;
+          border-color: desaturate(@red, 10%);
+      }
+      // 编译后的 css 代码
+      #header {
+          color: #333333;
+          border-left: 1px;
+          border-right: 2px;
+      }
+      #footer {
+          color: #114411;
+          border-color: #7d2717;
+      }
+      ```
 
 ### Less 经典案例

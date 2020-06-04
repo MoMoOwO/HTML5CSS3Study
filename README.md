@@ -2394,3 +2394,110 @@
       ```
 
 ### Less 经典案例
+
+1. 值得参考的 10 个 Less-css 实例：
+
+    (1) 简单的圆角半径
+
+    + 圆角：CSS3 一个非常基本的新属性可以快速的生成圆角效果。要使用 CSS3 的圆角效果我们必须针对不同的浏览器定义各自的前缀，而如果使用了 Less 就可以用不用那么麻烦了。
+    + 第一个 Less 代码是最简单的 Less 代码之一，我们需要设置圆角半径，而且我们希望使用一个变量来调整这个半径的大小。
+    + 下面代码使用 mixin 技术，通过定义 `.border-radius` 并接收一个 `radius` 参数，该参数默认值是 5px，你可以在多个地方重复使用该 mixin 方法：
+    + 实例代码：
+
+      ``` less
+      // 1borderradius.less
+      .border-radius(@radius: 5px) {
+          -webkit-border-radius: @radius;
+          -moz-border-radius: @radius;
+          border-radius: @radius;
+      }
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          .border-radius(10px);
+      }
+      // 编译后的 css 代码
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+      }
+      ```
+
+    + 效果展示：
+    ![效果](https://i.loli.net/2020/06/04/NE2o5ixKrPteaz3.jpg)
+
+    (2) 四角的半径定制
+
+    + 如果你希望用户可以自由定制四个角的半径，那么我们需要对上面的代码做一些改进，使用 4 个变量分别代表四个边角的半径的大小。
+    + 实例代码：
+
+      ``` less
+      // 2radiuscustom.less
+      .border-radius-custom(@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
+          -webkit-border-radius: @topleft @topright @bottomleft @bottomright;
+          -moz-border-radius: @topleft @topright @bottomleft @bottomright;
+          border-radius: @topleft @topright @bottomleft @bottomright;
+      }
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          .border-radius-custom(10px, 10px, 0px, 0px);
+      }
+      // 编译后的 css 代码
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          -webkit-border-radius: 10px 10px 0px 0px;
+          -moz-border-radius: 10px 10px 0px 0px;
+          border-radius: 10px 10px 0px 0px;
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/04/LH73K2XEvNFPMZO.jpg)
+
+    (3) 方块阴影
+
+    + 另一个 CSS3 常用道德属性是 `box-shadow`，该属性也有不同浏览器的前缀要求，而使用 Less 的话也可以使用 mixin 来完成。
+    + 示例代码：
+
+      ``` less
+      // 3boxshoadow.less
+      .box-shadow(@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+          -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+          -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+          box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+      }
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          .box-shadow(5px, 5px, 6px, 0.3);
+      }
+      // 编译后的 css 代码
+      .box {
+          width: 100px;
+          height: 30px;
+          background-color: red;
+          -webkit-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+          -moz-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+          box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/04/CjbIzOsqSY2QhZ1.jpg)
+
+    (4) 元素过渡效果
+
+    + CSS3 的过度使用起来更加麻烦，你必须最大化的支持各种浏览器，因此你需要定义 5 个前缀，而通过 Less 的 mixin 更加方便。
+    + 示例代码：
+
+    + 最终效果：

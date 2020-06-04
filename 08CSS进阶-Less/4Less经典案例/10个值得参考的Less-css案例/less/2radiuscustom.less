@@ -1,0 +1,12 @@
+.border-radius-custom(@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
+	-webkit-border-radius: @topleft @topright @bottomleft @bottomright;
+	-moz-border-radius: @topleft @topright @bottomleft @bottomright;
+	border-radius: @topleft @topright @bottomleft @bottomright;
+}
+
+.box {
+	width: 100px;
+	height: 30px;
+	background-color: red;
+	.border-radius-custom(10px, 10px, 0px, 0px);
+}

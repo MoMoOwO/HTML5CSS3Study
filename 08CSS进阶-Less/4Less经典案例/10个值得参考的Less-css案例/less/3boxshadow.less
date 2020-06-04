@@ -1,0 +1,12 @@
+.box-shadow(@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+	-webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.box {
+	width: 100px;
+	height: 30px;
+	background-color: red;
+	.box-shadow(5px, 5px, 6px, 0.3);
+}

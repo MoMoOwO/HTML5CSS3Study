@@ -1,0 +1,16 @@
+.transform(@rotate: 90deg, @scale: 1, @skew: 1deg, @translate: 10px) {
+	-webkit-transform: rotate(@rotate) scale(@scale) skew(@skew)
+		translate(@translate);
+	-moz-transform: rotate(@rotate) scale(@scale) skew(@skew)
+		translate(@translate);
+	-o-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	-ms-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+}
+
+.box {
+	background-image: url('../img/img.jpg');
+	height: 1024px;
+	width: 768px;
+	.transform(5deg, 0.5, 1deg, 0px);
+}

@@ -2500,4 +2500,170 @@
     + CSS3 的过度使用起来更加麻烦，你必须最大化的支持各种浏览器，因此你需要定义 5 个前缀，而通过 Less 的 mixin 更加方便。
     + 示例代码：
 
+      ``` less
+      // 4transition.less
+      .transition(@prop: all, @time: 1s, @ease: linear) {
+          -webkit-transition: @prop @time @ease;
+          -moz-transition: @prop @time @ease;
+          -o-transition: @prop @time @ease;
+          -ms-transition: @prop @time @ease;
+          transition: @prop @time @ease;
+      }
+
+      .box {
+          background-image: url('../img/img.jpg');
+          height: 1024px;
+          width: 768px;
+          .transition(all, 0.5s, ease-in);
+      }
+      .box:hover {
+          opacity: 0.5;
+      }
+      // 编译后的 css 代码
+      .box {
+          background-image: url('http://127.0.0.1:8080/4Less%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B/10%E4%B8%AA%E5%80%BC%E5%BE%97%E5%8F%82%E8%80%83%E7%9A%84Less-css%E6%A1%88%E4%BE%8B/img/img.jpg');
+          height: 1024px;
+          width: 768px;
+          -webkit-transition: all 0.5s ease-in;
+          -moz-transition: all 0.5s ease-in;
+          -o-transition: all 0.5s ease-in;
+          -ms-transition: all 0.5s ease-in;
+          transition: all 0.5s ease-in;
+      }
+      .box:hover {
+          opacity: 0.5;
+      }
+      ```
+
     + 最终效果：
+    ![效果](https://s1.ax1x.com/2020/06/05/tssJld.gif)
+
+    (5) 转换/旋转
+
+    + 同样使用 Less 中的 mixin 也可以很容易实现 CSS3 中元素的角度旋转、缩放和倾斜等效果。
+    + 实例代码：
+
+      ``` less
+      // 5transform.less
+      .transform(@rotate: 90deg, @scale: 1, @skew: 1deg, @translate: 10px) {
+          -webkit-transform: rotate(@rotate) scale(@scale) skew(@skew)
+            translate(@translate);
+          -moz-transform: rotate(@rotate) scale(@scale) skew(@skew)
+            translate(@translate);
+          -o-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+          -ms-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+          transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+      }
+      .box {
+          background-image: url('../img/img.jpg');
+          height: 1024px;
+          width: 768px;
+          .transform(5deg, 0.5, 1deg, 0px);
+      }
+      // 编译后的 css 代码
+      .box {
+          background-image: url('http://127.0.0.1:8080/4Less%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B/10%E4%B8%AA%E5%80%BC%E5%BE%97%E5%8F%82%E8%80%83%E7%9A%84Less-css%E6%A1%88%E4%BE%8B/img/img.jpg');
+          height: 1024px;
+          width: 768px;
+          -webkit-transform: rotate(5deg) scale(0.5) skew(1deg) translate(0px);
+          -moz-transform: rotate(5deg) scale(0.5) skew(1deg) translate(0px);
+          -o-transform: rotate(5deg) scale(0.5) skew(1deg) translate(0px);
+          -ms-transform: rotate(5deg) scale(0.5) skew(1deg) translate(0px);
+          transform: rotate(5deg) scale(0.5) skew(1deg) translate(0px);
+      }
+      ```
+
+    + 最终效果
+    ![效果](https://i.loli.net/2020/06/05/CJEmd2UDMfVLzkI.jpg)
+
+    (6) 线性渐变
+
+    + 渐变是 CSS3 最复杂的属性之一，有上百万不同的设置组合，但我们常用的无非几种。我们还是从最简单的开始，实现两个不同的颜色之间的渐变，你可以定义开始颜色和最终颜色，这里我们使用最新的渐变语法。
+    + 实例代码：
+
+      ``` less
+      // 5linergradient.less
+      .liner-gradient(@origin:to left, @start: #ffffff, @stop: #000000) {
+          background-color: @start;
+          background-image: -webkit-linear-gradient(@origin, @start, @stop);
+          background-image: -moz-linear-gradient(@origin, @start, @stop);
+          background-image: -o-linear-gradient(@origin, @start, @stop);
+          background-image: -ms-liner-gradient(@origin, @start, @stop);
+          background-image: linear-gradient(@origin, @start, @stop);
+      }
+      .box {
+          height: 30px;
+          width: 100px;
+          .liner-gradient(to right, #663333, #333333);
+      }
+      // 编译后的 css 代码
+      .box {
+          height: 30px;
+          width: 100px;
+          background-color: #663333;
+          background-image: -webkit-linear-gradient(to right, #663333, #333333);
+          background-image: -moz-linear-gradient(to right, #663333, #333333);
+          background-image: -o-linear-gradient(to right, #663333, #333333);
+          background-image: -ms-liner-gradient(to right, #663333, #333333);
+          background-image: linear-gradient(to right, #663333, #333333);
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/05/PnodAEteSXWrug5.jpg)
+
+    (7) 快速渐变
+
+    + 创建渐变最讨厌的事情之一就是找出你的颜色。有时你只是想快速在现有颜色上做一些渐变效果。这里我们使用从透明开始到全黑的渐变效果，你需要设置的就是最初颜色以及透明度 `alpha` 值。
+    + 示例代码：
+
+      ``` less
+      // 7quickgradient.less
+      .quick-gradient(@origin:to left, @alpha: 0.2) {
+          background-image: -webkit-linear-gradient(
+            @origin,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, @alpha)
+          );
+          background-image: -moz-linear-gradient(
+            @origin,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, @alpha)
+          );
+          background-image: -o-linear-gradient(
+            @origin,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, @alpha)
+          );
+          background-image: -ms-liner-gradient(
+            @origin,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, @alpha)
+          );
+          background-image: linear-gradient(
+            @origin,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, @alpha)
+          );
+      }
+      .box {
+          height: 30px;
+          width: 100px;
+          background-color: red;
+          .quick-gradient(to top, 0.2);
+      }
+      // 编译后的 css 代码
+      .box {
+          height: 30px;
+          width: 100px;
+          background-color: red;
+          background-image: -webkit-linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+          background-image: -moz-linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+          background-image: -o-linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+          background-image: -ms-liner-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+          background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/05/oPDxjfTwql8IVeu.jpg)

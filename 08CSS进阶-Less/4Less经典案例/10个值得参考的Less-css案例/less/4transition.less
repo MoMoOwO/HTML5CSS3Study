@@ -5,3 +5,13 @@
 	-ms-transition: @prop @time @ease;
 	transition: @prop @time @ease;
 }
+
+.box {
+	background-image: url('../img/img.jpg');
+	height: 1024px;
+	width: 768px;
+	.transition(all, 0.5s, ease-in);
+}
+.box:hover {
+	opacity: 0.5;
+}

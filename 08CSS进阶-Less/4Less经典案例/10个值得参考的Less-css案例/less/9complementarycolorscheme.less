@@ -1,0 +1,31 @@
+@base: #663333;
+@complement1: spin(@base, 180);
+@complement2: darken(spin(@base, 180), 5%);
+@lighten1: lighten(@base, 15%);
+@lighten2: lighten(@base, 30%);
+
+.one {
+	background-color: @base;
+	width: 100px;
+	height: 30px;
+}
+.two {
+	background-color: @complement1;
+	width: 100px;
+	height: 30px;
+}
+.three {
+	background-color: @complement2;
+	width: 100px;
+	height: 30px;
+}
+.four {
+	background-color: @lighten1;
+	width: 100px;
+	height: 30px;
+}
+.five {
+	background-color: @lighten2;
+	width: 100px;
+	height: 30px;
+}

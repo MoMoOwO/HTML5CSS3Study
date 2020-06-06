@@ -2667,3 +2667,180 @@
 
     + 最终效果：
     ![效果](https://i.loli.net/2020/06/05/oPDxjfTwql8IVeu.jpg)
+
+    (8) 镜像效果
+
+    + CSS3 中的镜像效果都是不骗支持的，你需要做的就是设置长度和不透明度这两个参数，通过 Less 的 mixin 更容易实现。
+    + 实例代码：
+
+      ``` less
+      // 8reflection.less
+      .reflection(@length: 50%, @opactiy: 0.2) {
+          -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opactiy)));
+          -moz-box-reflect: below 0px -moz-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255, 255, 255, @opactiy)));
+          box-reflect: below 0px
+            gradient(
+              liner,
+              left top,
+              left bottom,
+              from(transparent),
+              color-stop(@length, transparent),
+              to(rgba(255, 255, 255, @opactiy))
+            );
+      }
+      .box {
+          height: 200px;
+          width: 200px;
+          background-image: url('../img/pink.jpg');
+          .reflection(20%, 0.2);
+      }
+      // 编译后的 css 代码
+      .box {
+          height: 200px;
+          width: 200px;
+          background-image: url('http://127.0.0.1:8080/4Less%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B/10%E4%B8%AA%E5%80%BC%E5%BE%97%E5%8F%82%E8%80%83%E7%9A%84Less-css%E6%A1%88%E4%BE%8B/img/pink.jpg');
+          -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(20%, transparent), to(rgba(255, 255, 255, 0.2)));
+          -moz-box-reflect: below 0px -moz-gradient(linear, left top, left bottom, from(transparent), color-stop(20%, transparent), to(rgba(255, 255, 255, 0.2)));
+          box-reflect: below 0px gradient(liner, left top, left bottom, from(transparent), color-stop(20%, transparent), to(rgba(255, 255, 255, 0.2)));
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/06/JBrXPqzgeVbWm1Q.jpg)
+
+    (9) 互补色方案
+
+    + 互补色方案（Complementary Color Scheme）：Less 和 Sass 最独特的功能就是颜色计算函数，你可以轻松使用 Less 来创建各种调色板，下面是两个简单的例子。
+    + 这里我们使用一个基本色，然后通过彩色旋转以及加亮和变暗方法扩展到 5 个不同色板。为了生成互补色，我们使用 `spin` 将颜色旋转 180 度。
+    + 实例代码：
+
+      ``` less
+      // 9colorscheme.less
+      @base: #663333;
+      @complement1: spin(@base, 180);
+      @complement2: darken(spin(@base, 180), 5%);
+      @lighten1: lighten(@base, 15%);
+      @lighten2: lighten(@base, 30%);
+      .one {
+          background-color: @base;
+          width: 100px;
+          height: 30px;
+      }
+      .two {
+          background-color: @complement1;
+          width: 100px;
+          height: 30px;
+      }
+      .three {
+          background-color: @complement2;
+          width: 100px;
+          height: 30px;
+      }
+      .four {
+          background-color: @lighten1;
+          width: 100px;
+          height: 30px;
+      }
+      .five {
+          background-color: @lighten2;
+          width: 100px;
+          height: 30px;
+      }
+      // 编译后的 css 代码
+      .one {
+          background-color: #663333;
+          width: 100px;
+          height: 30px;
+      }
+      .two {
+          background-color: #336666;
+          width: 100px;
+          height: 30px;
+      }
+      .three {
+          background-color: #2b5555;
+          width: 100px;
+          height: 30px;
+      }
+      .four {
+          background-color: #994d4d;
+          width: 100px;
+          height: 30px;
+      }
+      .five {
+          background-color: #bb7777;
+          width: 100px;
+          height: 30px;
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/06/E2H9QTm3oWAjVIu.jpg)
+
+    (10) 颜色微调
+
+    + 颜色微调（Subtle Color Scheme）：互补色很有用，但在网页设计中另外更有用的是颜色微调。
+    + 示例代码：
+
+      ``` less
+      // 10subtlecolorscheme.less
+      @base: #663333;
+      @lighter1: lighten(spin(@base, 5), 10%);
+      @lighter2: lighten(spin(@base, 10), 20%);
+      @darker1: darken(spin(@base, -5), 10%);
+      @darker2: darken(spin(@base, -5), 20%);
+      .one {
+          background-color: @base;
+          width: 100px;
+          height: 30px;
+      }
+      .two {
+          background-color: @lighter1;
+          width: 100px;
+          height: 30px;
+      }
+      .three {
+          background-color: @lighter2;
+          width: 100px;
+          height: 30px;
+      }
+      .four {
+          background-color: @darker1;
+          width: 100px;
+          height: 30px;
+      }
+      .five {
+          background-color: @darker2;
+          width: 100px;
+          height: 30px;
+      }
+      // 编译后的 css 代码
+      .one {
+          background-color: #663333;
+          width: 100px;
+          height: 30px;
+      }
+      .two {
+          background-color: #884a44;
+          width: 100px;
+          height: 30px;
+      }
+      .three {
+          background-color: #aa6355;
+          width: 100px;
+          height: 30px;
+      }
+      .four {
+          background-color: #442225;
+          width: 100px;
+          height: 30px;
+      }
+      .five {
+          background-color: #221112;
+          width: 100px;
+          height: 30px;
+      }
+      ```
+
+    + 最终效果：
+    ![效果](https://i.loli.net/2020/06/06/2EgOiuDevIZklQr.jpg)

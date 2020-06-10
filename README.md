@@ -2844,3 +2844,89 @@
 
     + 最终效果：
     ![效果](https://i.loli.net/2020/06/06/2EgOiuDevIZklQr.jpg)
+
+2. Less 综合案例
+
+    (1) 任务：要求页面实现最终如下 CSS 代码：
+
+    ``` css
+    .PtzControl-1-out {
+        background-position: 0 0px;
+    }
+    .PtzControl-1-over {
+        background-position: 0 -80px;
+    }
+    .PtzControl-2-out {
+        background-position: 0 -160px;
+    }
+    .PtzControl-2-over {
+        background-position: 0 -240px;
+    }
+    .PtzControl-3-out {
+        background-position: 0 -320px;
+    }
+    .PtzControl-3-over {
+        background-position: 0 -400px;
+    }
+    .PtzControl-4-out {
+        background-position: 0 -480px;
+    }
+    .PtzControl-4-over {
+        background-position: 0 -560px;
+    }
+    .PtzControl-5-out {
+        background-position: 0 -640px;
+    }
+    .PtzControl-5-over {
+        background-position: 0 -720px;
+    }
+    .PtzControl-6-out {
+        background-position: 0 -800px;
+    }
+    .PtzControl-6-over {
+        background-position: 0 -880px;
+    }
+    .PtzControl-7-out {
+        background-position: 0 -960px;
+    }
+    .PtzControl-7-over {
+        background-position: 0 -1040px;
+    }
+    .PtzControl-8-out {
+        background-position: 0 -1120px;
+    }
+    .PtzControl-8-over {
+        background-position: 0 -1200px;
+    }
+    .PtzControl-9-out {
+        background-position: 0 -1280px;
+    }
+    .PtzControl-9-over {
+        background-position: 0 -1360px;
+    }
+    ```
+
+    (2) 分析：
+
+    + 属性名，奇数行为 `PtzControl-*-out`，偶数行为 `PtzControl-*-over`
+    + 共 18 行，迭代 9 次
+    + 属性值：`background-position: A B` ，A 一直为 0，B 以 80 递减。
+
+    (3) 实现：
+
+    ``` less
+    @cons: -80px;
+    .myLoop(@counter, @i: 0) when(@i < @counter){
+        @c: @i + 1;
+        .PtzControl-@{c}-out{
+            background-position: 0 @cons * (@i * 2);
+        }
+        .PtzControl-@{c}-over {
+            background-position: 0 @cons * (@i * 2 + 1);
+        }
+        .myLoop(@counter, @i + 1);
+    }
+    .myLoop(9);
+    ```
+
+    (4) 小结：案例重点主要有以下两点：循环如何表达；字符串的一部分是标量时，如何组装字符串。

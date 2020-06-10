@@ -1,0 +1,13 @@
+@cons: -80px;
+.myLoop(@counter, @i: 0) when(@i < @counter){
+  @c: @i + 1;
+  .PtzControl-@{c}-out{
+    background-position: 0 @cons * (@i * 2);
+  }
+  .PtzControl-@{c}-over {
+    background-position: 0 @cons * (@i * 2 + 1);
+  }
+  .myLoop(@counter, @i + 1);
+}
+
+.myLoop(9);

@@ -2956,3 +2956,70 @@
 1. 什么是 Koala？Koala 是一款桌面程序，支持 Less、Sass、Coffeescript 即使编译，帮助 web 开发者更高效的使用 less、sass、coffeescript 开发。[官网](http://koala-app.com/)
 
 2. 为什么要使用 Koala？越来越多的同学开始使用 Less 等预处理器的方式来编写 CSS 跟 JavaScript，比较流行的有 Less、Sass、Coffeescript。Less 等待吗无法直接在浏览器中执行，最终还是需要编译成 CSS 或 JS。他们的语法很棒，但是他们的编译方式却不够灵活。官方基本上都是只提供命令行的方式进行文件编译，Less 还可以在页面中嵌入一个 less.ja 进行在线编译，但这种方法实在是不靠谱。所以大家都喜欢使用图形界面工具来进行编译工作，高效快捷。在 Koala 开发之前已经有一些工具了，比如 winLess、simpleless 等，功能都比较单一，且只支持 Less。还有一些同学折腾编辑器 sublime text 等，但目前还没有一个很完美的方案。还好现在有了 Koala。
+
+3. Koala 特性
+
+    (1) 多语言支持：支持 Less、Sass、Coffeescript 和 compass framework。
+
+    (2) 事实编译：监听文件，当文件改变时自动执行编译，这一切都在后台运行，无需人工操作。
+
+    (3) 编译选项：支持自定义编译选项。
+
+    (4) 代码压缩：Less
+
+4. 使用方法
+
+    (1) 基本功能介绍
+
+    + 安装完成后打开 Koala，吧文件夹拖入界面或者在左侧加好处选择文件夹，此时在界面左边有文件夹路径产生。
+    ![启动](https://i.loli.net/2020/06/12/5piu3aKAnzJeQvl.jpg)
+    + 同时有 Less 文件将显示再界面中间，右键文件选择输出 CSS 文件的路径。
+    ![打开](https://i.loli.net/2020/06/12/VgQu3HhbDneiJEU.jpg)
+    + 左键点击 Less 文件再右侧则有功能选项栏弹出，下面将介绍功能。
+    ![左键](https://i.loli.net/2020/06/12/CzPANLvmilOpjI1.jpg)
+
+    (2) 自动编译（实时编译）：当启动自动编译时，使用编辑器按下 Ctrl+S保存时，CSS 文档会自动更新。如果没有打开这个功能，那么需要使用者再自行点击“执行编译”才更新 CSS 文档。当左键单击一个 Less 文档时则右侧会弹出配置选项。
+    ![自动编译](https://i.loli.net/2020/06/12/RDjpeuLaN4kl2qI.jpg)
+
+    (3) 编译选项
+
+    + 行注释（line comments）：这个功能会在 css 文件里对应的 Less 编译出来的 CSS 带马上发提供一个注释。注释的额呢绒分别来说明来自 Less 的第几行开始，同时标明来自那个 Less 文件。
+
+      ``` less
+      // color.less
+      @color: #4d926f;
+      .box {
+        color: @color;
+      }
+      // 编译后的 css 代码
+      /* line 2, F:\HTML5+CSS3Study\08CSS进阶-Less\4Less经典案例\Less-css综合案例\less\color.less */
+      .box {
+        color: #4d926f;
+      }
+      ```
+
+    + 输出方式（代码压缩）：正常（normal）：顾名思义，就是不压缩；压缩（compress）：顾名思义就是压缩。
+
+      ``` less
+      // out.less
+      @size: 100px;
+      .box1 {
+        height: @size;
+        width: @size;
+      }
+      .box2 {
+        height: @size;
+        width: @size;
+      }
+      // normal 编译后的 css 文件
+      .box1 {
+        height: 100px;
+        width: 100px;
+      }
+      .box2 {
+        height: 100px;
+        width: 100px;
+      }
+      // compress 编译后的 css 文件
+      .box1{height:100px;width:100px}.box2{height:100px;width:100px}
+      ```

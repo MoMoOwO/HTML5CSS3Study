@@ -3023,3 +3023,31 @@
       // compress 编译后的 css 文件
       .box1{height:100px;width:100px}.box2{height:100px;width:100px}
       ```
+
+## Sass 全面解析
+
+### Sass 入门
+
+1. 简介：
+
+   (1) 作为前端开发人员，你肯定对 CSS 很熟悉，但是你知道 CSS 可以自定义吗？大家都知道 js 中可以自定义变量，CSS 仅仅是一个标记语言，不是编程语言，因此不可以自定义变量，不可以引用等等。面对这些问题，我们现在来引进 Sass，简单地说，它是 CSS 的升级版，它可以自定义变量，可以有 if 语句，还可以嵌套等等。
+
+   (2) Sass 的英文全称是 Syntactically Awesome Stylesheets，最早由 Hampton Catlin 开发和设计。一种帮助你简化 CSS工作流程的方式，帮助你更容易的维护和开发 CSS 内容。
+
+   (3) [官网](https://www.sass.hk/)
+
+2. 安装：
+
+    (1) Sass 是 Ruby 语言写的，但是两者的语法没有关系。不懂 Ruby照样使用。只是必须先安装 Ruby，然后再安装 Sass。
+
+    (2) Windows 下安装 Ruby
+
+    + 去 [Ruby 官网](https://rubyinstaller.org/downloads/)下载 Ruby with DevKit 的安装包，直接选择下载最新版本。
+    + 运行安装包。
+    + 安装完成后，打开命令行，运行命令 `ruby -v`，检查是否安装成功。
+
+    (3) 安装 Sass
+
+    + 打开终端或命令提示符。
+    + 运行命令 `gem install sass`，Ruby 使用 Gems 来管理他的各种包的代码。
+    + 安装 sass 命令可能会报错，原因是因为 GFW 的原因或者说网络服务器不稳定，解决方法是使用淘宝镜像

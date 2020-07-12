@@ -3050,4 +3050,34 @@
 
     + 打开终端或命令提示符。
     + 运行命令 `gem install sass`，Ruby 使用 Gems 来管理他的各种包的代码。
-    + 安装 sass 命令可能会报错，原因是因为 GFW 的原因或者说网络服务器不稳定，解决方法是使用淘宝镜像
+    + 安装 sass 命令可能会报错，原因是因为 GFW 的原因或者说网络服务器不稳定，解决方法是使用淘宝镜像。
+    + 验证 Sass 是否成功安装，运行命令 `sass -v`
+
+3. 快速上手
+
+    (1) 新建 input.scss 文件，内容如下
+
+    ``` Scss
+    $blue: blue; // color
+    .blueBox{
+        background-color: $blue;
+    }
+    ```
+
+    (2) 命令行或终端输入如下命令进行编译：`sass input.scss output.css`，得到编译后的 css 文件。
+
+    (3) 创建 html 文档，引入编译得到的 css 文件测试。
+
+4. 使用 Sass
+
+    (1) Sass 有三种使用方式：命令行工具、独立的 Ruby 模块，以及包含 Ruby on Rails 和 Merb 作为支持 Rack 的框架的插件，所有这些方式的第一步都是安装 Sass：`gem install sass`
+
+    (2) 如果你使用的是 Windows，就需要先安装 Ruby。
+
+    (3) 如果要在命令行中运行 Sass，只需要输入 `sass input.scss output.css`
+
+    (4) 你还可以命令 Sass 监视文件的改动并更新 CSS：`sass --watch input.scss:output.css`，注：Ctrl + C 可以终止监视。
+
+    (5) 如果你得目录里面有很多 Sass 文件，你还可以使用 Sass 监视整个目录：`sass --watch inpu.scss:output.css`
+
+    (6) 命令 `sass --help` 查看帮助文档

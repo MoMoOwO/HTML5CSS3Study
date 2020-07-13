@@ -3081,3 +3081,62 @@
     (5) 如果你得目录里面有很多 Sass 文件，你还可以使用 Sass 监视整个目录：`sass --watch inpu.scss:output.css`
 
     (6) 命令 `sass --help` 查看帮助文档
+
+### Sass 语法
+
+1. Sass 文件后缀名：Sass 有两种后缀名文件：一种后缀名为 .sass，即不适用大括号和分号的 sass 文件；另一种就是我们刚刚使用过的 .scss 文件，这种和我们平时写的 css 文件格式差不多，使用大括号和分号。接下来的 Sass 学习，使用 .scss 结尾的文件。也建议使用 .scss 结尾的文件，以避免 sass 后缀名的严格格式要求报错。
+
+2. 使用变量
+
+   (1) Sass 让人们受益的一个重要特性就是它为 css 引入了变量。你可以把反复使用的 css 属性值定义成变量，然后通过变量名来引用他们，而无需重复书写这一属性值。或者，对于仅使用过一次的属性值，你可以赋予其一个易懂的变量名，让人一眼就知道这个属性值的用途。
+
+   (2) Sass 使用 `$` 符号来标识变量（老版本的 Sass 使用 `!` 来表示变量。改成 `$` 多半原因因为 `!highlight-color` 看起来太丑了）。比如 `$highlinht-color` 和 `$sidebar-width`。为什么选择 `$` 符号呢？因为它区别度高更具美感，且在 CSS 中并无他用，不会导致与现存或未来的 css 语法冲突。
+
+    (3) 变量的声明
+
+    + Sass 变量的声明和 CSS 属性的声明很像：`$highlight-color: #F90;`
+    + 这意味着变量 `$highlight-color` 现在的值是 `#F90`。任何可以用作 CSS 属性值的赋值都可以用作 Sass 的变量值，甚至是以逗号分隔的多个属性值，如 `$basic-border: 1px solid black;`，或以逗号分割的多个属性值，如 `$plain-font: "Myriad Pro", Myriad, "Helvetica Neue", Helvetica, "Liberation Sans", Arial, "sans-serif", "sans-serif";`。这是变量还没有生效，除非你引用这个变量，我们很快就会了解如何引用变量了。
+    + 与 CSS 属性不同，变量可以在 CSS 规则快定义之外存在。当变量定义在 CSS 规则快内，那么该变量只能在此规则块内使用。如果它们出现在任何形式的 `{...}` 块中（如 `@media` 或者 `@font-face` 块），情况也是如此；在下面这段代码中， `$nav-color` 这个变量定义在了规则快外边，所以在这个样式表中都可以像 `nav` 规则那样引用它。`$width` 这个变量定义在了 nav 的 `{}` 规则快内，所以它只能在 `nav` 规则块内使用。这一位置是你可以在样式表的其他地方定义和使用 `$width` 变量，不会对这里造成影响。
+
+      ``` scss
+      $nav-color: #F90;
+      nav {
+          $width: 100px;
+          width: $width;
+          color: $nav-color;
+      }
+      // 编译后
+      nav {
+          width: 100px;
+          color: #F90;
+      }
+      ```
+
+    (4) 变量引用：
+
+    + 凡是 CSS 属性的标准值（比如说 `1px` 或者 `bold`）可存在的地方，变量就可以使用。CSS 生成时，变量会被他们的值所替代。之后，如果你需要一个不同的值，只需要改变这个变量的值，则所有引用此变量的地方生成的值都会随之改变。如下面的实例中的 `$hightligh-color` 变量，它被直接赋值给 `border` 属性，放这段代码被编译输出 CSS 时，`$highlight-color` 会被 `#F90` 这一颜色值所替代。产生的效果就是给 `.selected` 这个类一条 1 像素宽、实心且颜色值为 #F90 的边框。
+
+      ``` scss
+      $highlight-color: #F90;
+      .selected {
+          border: 1px solid $highlight-color;
+      }
+      // 编译后
+      .selected {
+          border: 1px solid #F90;
+      }
+      ```
+
+    + 在生命变量时，变量值也可以引用其他变量。当你通过粒度区分，为不同的值取不同名字时，这相当有用。下例在独立的颜色值粒度上定义了一个变量，且在另一个更复杂的边框之力度上也定义了一个变量。看上去示例中的 `$highligh-color` 变量，他被直接赋值给 border 属性，当这段代码被编译输出 CSS 时，`$hightligh-color` 会被 #F90 这个以颜色值所代替。产生的效果就是给 `.selsected` 这个类设置一条 1 像素宽，实心且颜色值为 #F90 的边框。
+
+      ``` scss
+      $hightlight-color: #F90;
+      $highlight-border: 1px solid $highlight-color;
+      .selected{
+        border: $highlight-border;
+      }
+      // 编译后
+      .selected {
+        border: 1px solid #F90;
+      }
+      ```

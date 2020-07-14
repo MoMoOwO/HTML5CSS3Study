@@ -1,0 +1,12 @@
+.box {
+  height: 500px;
+  width: 500px;
+  background-color: yellow;
+  border: 1px solid #F90; }
+
+.red-box {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #F90; }
+
+/*# sourceMappingURL=variable.css.map */

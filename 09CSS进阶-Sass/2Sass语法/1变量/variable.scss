@@ -1,0 +1,25 @@
+// 在外部声明的变量
+$bg-color: yellow;
+$highlight-color: #F90;
+// 变量可以使用另一个变量来赋值
+$basic-border: 1px solid $highlight-color;
+$basic-width: 200px;
+
+.box {
+  // 在块内声明的变量
+  $width-size: 500px;
+  height: 500px;
+  // 使用变量，变量生效
+  width: $width-size;
+  background-color: $bg-color;
+  // 变量可以在任何 css 属性值的的地方使用，只要变量值符合要求
+  border: 1px solid $highlight-color;
+}
+
+.red-box {
+  // 变量名中划线和下划线可以混合使用，即 $basic_width 与 $basic-width 为同一个变量
+  width: $basic_width;
+  height: 200px;
+  border: $basic-border;
+  background-color: red;
+}

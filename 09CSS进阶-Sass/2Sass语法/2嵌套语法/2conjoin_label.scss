@@ -1,0 +1,14 @@
+/* article a {
+	color: blue;
+	:hover {
+		color: red;
+	}
+}
+ */
+
+article a {
+	color: blue;
+	&:hover {
+		color: red;
+	}
+}

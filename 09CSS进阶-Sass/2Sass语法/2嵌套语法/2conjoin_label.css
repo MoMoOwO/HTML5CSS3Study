@@ -1,0 +1,13 @@
+/* article a {
+	color: blue;
+	:hover {
+		color: red;
+	}
+}
+ */
+article a {
+  color: blue; }
+  article a:hover {
+    color: red; }
+
+/*# sourceMappingURL=2conjoin_label.css.map */

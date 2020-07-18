@@ -15,7 +15,7 @@ yarn-error.log*
 *.exe
 .vs
 .sass-cache
-.map
+*.map
 bin
 obj
 package-lock.json

@@ -1,0 +1,6 @@
+#content aside {
+	color: red;
+	body.ie & {
+		color: green;
+	}
+}

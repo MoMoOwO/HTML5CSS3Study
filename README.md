@@ -3127,11 +3127,7 @@
       }
       ```
 
-<<<<<<< HEAD
     + 在声明变量时，变量值也可以引用其他变量。当你通过粒度区分，为不同的值取不同名字时，这相当有用。下例在独立的颜色值粒度上定义了一个变量，且在另一个更复杂的边框之力度上也定义了一个变量。看上去示例中的 `$highligh-color` 变量，他被直接赋值给 border 属性，当这段代码被编译输出 CSS 时，`$hightligh-color` 会被 #F90 这个以颜色值所代替。产生的效果就是给 `.selsected` 这个类设置一条 1 像素宽，实心且颜色值为 #F90 的边框。这里，`$highlight-border` 变量的生命中使用了 `$highlight-color` 这个变量。产生的效果就跟你直接为 `border` 属性设置一个 `1px solid #F90;` 的值的效果是一样的。
-=======
-    + 在生命变量时，变量值也可以引用其他变量。当你通过粒度区分，为不同的值取不同名字时，这相当有用。下例在独立的颜色值粒度上定义了一个变量，且在另一个更复杂的边框之力度上也定义了一个变量。看上去示例中的 `$highligh-color` 变量，他被直接赋值给 border 属性，当这段代码被编译输出 CSS 时，`$hightligh-color` 会被 #F90 这个以颜色值所代替。产生的效果就是给 `.selsected` 这个类设置一条 1 像素宽，实心且颜色值为 #F90 的边框。
->>>>>>> 05be5a79cea49a71f1e41dc574e1c3672839860d
 
       ``` scss
       $hightlight-color: #F90;
@@ -3144,7 +3140,6 @@
         border: 1px solid #F90;
       }
       ```
-<<<<<<< HEAD
 
     (5) 变量名
 
@@ -3163,5 +3158,95 @@
       ```
 
     + 尽管变量自身提供了很多有用的地方，但是 Sass 基于变量提供的跟更为强大的工具才是我们关注的焦点。只有当变量与 Sass 的其他特性一起使用时，才能发挥其全部潜能。
-=======
->>>>>>> 05be5a79cea49a71f1e41dc574e1c3672839860d
+
+3. 嵌套 CSS 规则
+
+    (1) CSS 中重复写选择器是非常恼人的。如果要写一大串指向页面中同一块的样式时，往往需要一遍又一遍地写同一个 ID，如下代码所示。
+
+    ``` css
+    #content article h1 { color: #333; }
+    #content article p { margion-bottom: 1.4em; }
+    #contne aside { background-color: #EEE; }
+    ```
+
+    像这种情况 Sass 可以让你只写一遍，且使样式可读性更高。在 Sass 中，你可以向套娃那样在规则块中嵌套规则块。Sass 在输出	CSS 时会帮你把这些嵌套规则处理好，避免你的重复书写。
+
+    ``` scss
+    // 1nested_intro.scss
+    #content{
+      article{
+        h1 { color: #333; }
+        p { margin-bottom: 1.4em; }
+      }
+      aside {
+        background-color: #EEE;
+      }
+    }
+    // 编译后的 CSS 代码
+    #content article h1 { color: #333; }
+    #content article p { margion-bottom: 1.4em; }
+    #contne aside { background-color: #EEE; }
+    ```
+
+    多数情况下这种简单的嵌套都没问题，但是有些场景下不行，比如你想要在嵌套的选择器里面立刻应用一个类似于 `:hover` 的伪类。为了解这种以及其他情况，Sass 提供了一个特殊结构 `&`。
+
+    (2) 父选择器的标识符，连体符号 `&`
+
+    + 一般情况下，Sass 在解开一个嵌套规则时就会把父选择器（`#content`）通过一个空格连接到子选择器（`article` 和 `aside`）的前边 形成（`#content article` 和 `#content aside`）这种在 CSS 里面被称为后台选择器，因为他选择 ID 为 `content` 的元素内所有命中标签选择器 `article` 和 `aside` 的元素。但在有些情况下你却不会希望 Sass 使用这种后台选择器的方式生成这种连接。
+    + 最常见的一种情况是当你为链接之类的元素写 `:hover` 这种伪类时，你并不希望一后代选择器的方式连接。比如说，下面这种情况 Sass 就无法正常工作：
+
+      ``` scss
+      // 不能正常达到目的
+      article a {
+        color: blue;
+        :hover {
+          color: red;
+        }
+      }
+      // 编译后
+      article a {
+        color: blue;
+      }
+      article a :hover {
+        color: red;
+      }
+      ```
+
+    + 在上面这段代码中 `color: red` 这条规则将会被应用到选择器 `article a :hover`，`article` 元素内连接的所有子元素在被 `hover` 时都会变成红色，这是不正确的。你想把这条规则应用到超链接滋生，而后代选择器的方式无法帮你实现。 解决之道为使用一个特殊的 Sass 选择器，即父选择器。在使用嵌套规则时，父选择器对于嵌套规则如何解开提供更好的控制。他就是一个简单的 `&` 符号，且可以放在任何一个选择器可出现的地方。
+
+      ``` scss
+      // 2conjoin_label.scss
+      article a {
+        color: blue;
+        &:hover {
+          color: red;
+        }
+      }
+      // 编译后
+      article a {
+        color: blue;
+      }
+      article a:hover {
+        color: red;
+      }
+      ```
+
+    + 在为父选择器添加 `:hover` 等伪类时，这种方式非常有用。同时父选择器标识符还有另一种用法，你可以在父选择器之前添加选择器。举例来说，当用户在使用 IE 浏览器时，你会通过 JavaScript 在 `<body>` 标题前上添加一个 `ie` 的类名，为这种情况编写特殊的样式，如下：
+
+      ``` scss
+      #content aside{
+        color: red;
+        body.ie & { color: green; }
+      }
+      // 编译后
+      #content aside { color: red; }
+      body.ie #content aside { color: green; }
+      ```
+
+      Sass 在选择器嵌套上非常的智能，即使带有父选择器的情况。当 Sass 遇到群组选择器（由多个逗号分割开的选择器形成）也能完美地处理这种嵌套。
+
+    (3) 群组选择器的嵌套
+
+    (4) 子组合选择器和同层组合选择器
+
+    (5) 嵌套属性

@@ -14,6 +14,8 @@ yarn-error.log*
 *.sln
 *.exe
 .vs
+.sass-cache
+.map
 bin
 obj
 package-lock.json

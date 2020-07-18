@@ -1,0 +1,6 @@
+#content aside {
+  color: red; }
+  body.ie #content aside {
+    color: green; }
+
+/*# sourceMappingURL=3ie.css.map */

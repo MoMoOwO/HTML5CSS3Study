@@ -3291,8 +3291,64 @@
       ```
 
     + 处理这种群组选择器规则嵌套上的强大能力，正是 Sass 在减少重复敲写方面的贡献之一。尤其当嵌套级别达到两层甚至三层以上时，与普通的 CSS 编写方式相比只写一边群组选择器大大减少了工作量。
-    + 有利有弊，你需要特别注意群组选择器的规则嵌套生成的 CSS。虽然 Sass 让你的样式表看上去很小，但实际生成的 CSS 雀蜂长达，这会降低网站的速度。
+    + 有利有弊，你需要特别注意群组选择器的规则嵌套生成的 CSS。虽然 Sass 让你的样式表看上去很小，但实际生成的 CSS 非常庞大，这会降低网站的速度。
 
     (4) 子组合选择器和同层组合选择器：`>`、`+`、`~`
+
+    + 上面着三个组合选择器必须和其他选择器配合使用，以制定浏览器进选择某种特定上下文中的元素，如
+
+      ``` css
+      article section {
+        margin: 5px;
+      }
+      article > section {
+        border: 1px solid #ccc;
+      }
+      ```
+
+    + 子组合选择器 `>` 选择一个元素的直接子元素。上例中，第一个选择器会选择 `article` 下的所有命中 `section` 选择器的元素。第二个选择器只会选择 `article` 下紧跟着的子元素中命中的 `section` 选择器的元素。
+    + 在下例中，你可以用同层相邻组合选择器 `+` 选择 `header` 元素后紧跟的 `p` 元素。
+
+      ``` css
+      header + p {
+        font-size: 1.1em;
+      }
+      ```
+
+    + 你也可以用同层全体组合选择器 `~`，选择所有跟在 `article` 后面的同层 `article` 元素，不管它们之间隔了多少其他元素。
+
+      ``` css
+      article ~ article {
+        border-top: 1px dashed #ccc;
+      }
+      ```
+
+    + 这些组合选择器可以毫不费力地应用到 Sass 的规则嵌套中。可以把它们发在外城选择器后面，或者里层选择器前边，如：
+
+      ``` scss
+      article {
+        ~ article {
+          border-top: 1px dashed #ccc;
+        }
+        > section {
+          background: #eee;
+        }
+        dl > {
+          dt { color: #333; }
+          dd { color: #555; }
+        }
+        nav + & {
+          margin-top: 0;
+        }
+      }
+      // Sass 会如你所愿的将这些嵌套规则解开组合在一起
+      article ~ article { border-top: 1px dashed #ccc; }
+      article > section { background: #eee; }
+      article dl > dt { color: #333; }
+      article dl > dd { color: #555; }
+      nav + article { margin-top: 0; }
+      ```
+
+    + 在 Sass 中，不仅 CSS 规则可以嵌套，对属性进行嵌套也可以减少很多重复性的工作。
 
     (5) 嵌套属性

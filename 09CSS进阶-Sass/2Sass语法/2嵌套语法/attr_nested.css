@@ -1,0 +1,11 @@
+nav {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc; }
+
+.box {
+  border: 1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px; }
+
+/*# sourceMappingURL=attr_nested.css.map */

@@ -3415,6 +3415,37 @@
 
     (2) 默认变量值
 
+    + 一般情况下，你反复声明一个变量，只有最后一处声明有效且他会覆盖前边的值。
+
+      ``` scss
+      $link-color: blue;
+      $link-color: red;
+      a {
+        color: $link-color;
+      }
+      ```
+
+    + 在上边的例子中，超链接的 `color` 会被设置为 `red`。这可能并不是你想要的结果，加入你写了一个可被他人通过 `@import` 导入的 Sass 库文件，你可能希望导入者可以定制修改 Sass 库文件中的某些值。使用 Sass 的 `!default` 关键词可以实现这个目的。它很像 CSS 属性中的 `!important` 关键字的对里卖弄，不同的是 `!default` 用于变量，含义是：如果这个变量被声明复制了，那就用它声明的值，否则就用这个默认值。
+
+      ``` scss
+      // _2defalut_var.scss
+      $fancybox-width: 500px;
+      // 2default_demo.scss
+      @import '2default_var';
+      $fancybox-width: 400px !default;
+      .fancybox {
+        height: 500px;
+        width: $fancybox-width;
+      }
+      // 编译后 css 文件
+      .fancybox {
+        height: 500px;
+        width: 500px;
+      }
+      ```
+
+    + 在上例中，如果跟用户在导入你的 Sass 局部文件之前声明了一个 `$fancybox-width` 变量，那么你的据部分文件中对 `$fancybox-width` 赋值 `500px` 就徐笑了。如果用户没有做 `!default` 的修饰，那么 `$fancybox-width` 的值将为 `400px`。
+
     (3) 嵌套导入
 
     (4) 原生的 CSS 导入

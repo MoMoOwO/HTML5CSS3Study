@@ -1,0 +1,6 @@
+@import '2default_var';
+$fancybox-width: 400px !default;
+.fancybox {
+	height: 500px;
+	width: $fancybox-width;
+}

@@ -3419,6 +3419,67 @@
 
     (2) 默认变量值
 
+    + 一般情况下，你反复声明一个变量，只有最后一处声明有效且他会覆盖前边的值。
+
+      ``` scss
+      $link-color: blue;
+      $link-color: red;
+      a {
+        color: $link-color;
+      }
+      ```
+
+    + 在上边的例子中，超链接的 `color` 会被设置为 `red`。这可能并不是你想要的结果，加入你写了一个可被他人通过 `@import` 导入的 Sass 库文件，你可能希望导入者可以定制修改 Sass 库文件中的某些值。使用 Sass 的 `!default` 关键词可以实现这个目的。它很像 CSS 属性中的 `!important` 关键字的对里卖弄，不同的是 `!default` 用于变量，含义是：如果这个变量被声明复制了，那就用它声明的值，否则就用这个默认值。
+
+      ``` scss
+      // _2defalut_var.scss
+      $fancybox-width: 500px;
+      // 2default_demo.scss
+      @import '2default_var';
+      $fancybox-width: 400px !default;
+      .fancybox {
+        height: 500px;
+        width: $fancybox-width;
+      }
+      // 编译后 css 文件
+      .fancybox {
+        height: 500px;
+        width: 500px;
+      }
+      ```
+
+    + 在上例中，如果跟用户在导入你的 Sass 局部文件之前声明了一个 `$fancybox-width` 变量，那么你的据部分文件中对 `$fancybox-width` 赋值 `500px` 就徐笑了。如果用户没有做 `!default` 的修饰，那么 `$fancybox-width` 的值将为 `400px`。
+
     (3) 嵌套导入
 
+    + 跟原生的 CSS 不同，Sass 允许 `@import` 命令写在 CSS 规则内。这种导入方式下，生成对应的 CSS 文件时，局部文件被直接插入到 CSS 规则内导入它的地方，如下例：
+
+      ``` scss
+      // _blue-theme.scss
+      aside {
+        background: blue;
+        color: white;
+      }
+      // 导入到 CSS 规则内，如下
+      .blue-theme {
+        @import 'blue-theme';
+      }
+      // 生成的结果根直接在 .blue-theme 选择器内写 _blue-theme.scss 文件的内容完全一样
+      .blue-theme aside {
+        background: blue;
+        color: white;
+      }
+      ```
+
+    + 被导入的局部文件中定义的所有变量和混合器，也会在这个规则范围内生效。这些变量和混合器不会全局有效，这样我们就可以通过嵌套导入只对站点内某一特定区域运用某种颜色主题或其他通过变量配置的样式。
+
     (4) 原生的 CSS 导入
+
+    + 由于 Sass 兼容原生的 CSS，所以它也支持原生的 CSS `@import`。尽管通常在 Sass 中使用 `@import` 时，Sass 会尝试找到对应的 Sass 文件并导入进来，但在下列三种情况下生成原生的 CSS `@import`，尽管这会造成浏览器解析 CSS 时的额外下载。
+      + 被导入文件的名字以 `.css` 结尾；
+      + 被导入文件名字是一个 URL 地值（如：http://www.sass.hk/css/css.css），由此可用谷歌字体 API 提供的相应服务；
+      + 被导入文件的名字时 CSS 的 `url()` 值。
+    + 这就是说，你不能用 Sass 的 `@import` 直接导入一个原始的 CSS 文件，因为 Sass 会以为你想用 CSS 原生的 `@import`。但是，因为 Sass 的语法完全兼容 CSS，所以你可以把原始的 CSS 文件改名为 `.scss` 后缀，即可直接导入了。
+
+5. 静默注释
+    + 文件导入是保证 Sass 的代码可维护性和可读性的重要一环。次之但也非常重要的就是注释了。注释可以帮助样式作者记录写 Sass 的过程中的想法。在原生的 CSS 中，注释对于其他人是直接可见的，但 Sass 提供了一种可在生成 CSS 文件中按需抹掉的注释。

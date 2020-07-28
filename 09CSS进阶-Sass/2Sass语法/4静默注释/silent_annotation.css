@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.div1 {
+  height: 500px;
+  width: 500px;
+  color: #333;
+  padding: 0;
+  /* 这种注释内容会出现在生成的 CSS 文件中 */ }
+
+.div2 {
+  height: 500px;
+  width: 500px;
+  padding: 1 0; }
+
+/*# sourceMappingURL=silent_annotation.css.map */

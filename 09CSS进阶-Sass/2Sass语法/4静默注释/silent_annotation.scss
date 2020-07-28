@@ -1,0 +1,13 @@
+$div-height: 500px;
+$div-width: 500px;
+.div1 {
+	height: $div-height;
+	width: $div-width;
+	color: #333; // 这种注释内容不会出现在生成的 CSS 文件中
+	padding: 0; /* 这种注释内容会出现在生成的 CSS 文件中 */
+}
+.div2 {
+	height: $div-height;
+	width: $div-width;
+	padding: 1 /* 这块注释内容不会出现在生成的 CSS 文件中 */ 0;
+}

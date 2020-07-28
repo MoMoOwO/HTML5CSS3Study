@@ -3482,4 +3482,82 @@
     + 这就是说，你不能用 Sass 的 `@import` 直接导入一个原始的 CSS 文件，因为 Sass 会以为你想用 CSS 原生的 `@import`。但是，因为 Sass 的语法完全兼容 CSS，所以你可以把原始的 CSS 文件改名为 `.scss` 后缀，即可直接导入了。
 
 5. 静默注释
-    + 文件导入是保证 Sass 的代码可维护性和可读性的重要一环。次之但也非常重要的就是注释了。注释可以帮助样式作者记录写 Sass 的过程中的想法。在原生的 CSS 中，注释对于其他人是直接可见的，但 Sass 提供了一种可在生成 CSS 文件中按需抹掉的注释。
+
+    (1) 文件导入是保证 Sass 的代码可维护性和可读性的重要一环。次之但也非常重要的就是注释了。注释可以帮助样式作者记录写 Sass 的过程中的想法。在原生的 CSS 中，注释对于其他人是直接可见的，但 Sass 提供了一种可在生成 CSS 文件中按需抹掉的注释。
+
+    (2) CSS 中注释的作用包括帮助你组织样式、以后你看自己的代码时明白为什么这样写，以及简单的央视说明。但是你并不希望每个浏览网站源码的人都能看到所有注释。Sass 另外提供了一种不同于 CSS 标准注释格式 `/*...*/` 的注释语法，即静默注释，其内容不会出现在生成的 CSS 文件中。静默注释的语法跟 JavaScript 等语言中单行注释的语法相同，它们以 `//` 开头，注释内容直到行末。
+
+    ``` scss
+    body {
+      color: #333; // 这种注释内容不会出现在生成的 CSS 文件中
+      padding: 0; /* 这种注释内容会出现在生成的 CSS 文件中 */
+    }
+    ```
+
+    (3) 实际上，CSS 标准注释格式 `/*...*/` 内的注释内容可再生成CSS 文件中抹去。当注释出现在原生 CSS 不允许的地方，如在 CSS 属性或选择器中，Sass 将不知如何将其生成到对应的 CSS 文件中的相应位置，于是这些注释被抹掉。
+
+    ``` scss
+    body {
+      padding: 1 /* 这块注释内容不会出现在生成的 CSS 文件中 */ 0;
+    }
+    ```
+
+    (4) 注意事项，中文编译报错问题解决方案
+
+    + Sass 文件编译时候使用 Ruby 环境，在 Windows XP 环境中没有任何问题，但是在 Windows 7 环境下无论是界面化的 Koala 工具还是命令行模式的都会出现以下错误：
+
+      ``` shell
+      Syntax error: Invalid GBK character "xE5"
+      ...
+      Use -trace for backtrace
+      ```
+
+    + 解决方法：
+      + Koala 可视化编译工具：找到安装目录里面 sass 模块下面的 engine.rb 文件，例如 `D:\Program Files (x86)\Koala\rubygems\gems\sass-3.5.2\lib\sass\engine.rb`，在文件 engine.rb 文件中添加一行代码：`Encoding.default_external = Encoding.find('utf-8')`，这行代码放在所有 `require` 语句后面就可以。
+      + 命令行工具同理，需要在 Ruby 目录下找到 engine.rb 添加这行代码，路径参考：`C:\Ruby27-x64\lib\ruby\gems\2.7.0\gems\sass-3.7.4\lib\sass`
+
+6. 混合器
+
+    (1) 混合器简介
+
+    + 如果你的整个网站中有几处小小的样式类似（例如一致的颜色和字体），那么使用变量来统一处理这种情况是非常不错的训责。但是当你的样式变得越来越复杂，你需要大段大段的宠用样式的代码，独立的变量就没办法应付这种情况了。你可以通过 Sass 的混合器实现大段样式的重用。
+    + 混合器使用 `@mixin` 标识符定义。看上去很像其他的 CSS `@` 标识符，比如说 `@media` 或者 `@font-face`。这个标识符给一大段样式赋予一个名字，这样你就可以轻易的通过引用这个名字重用这段样式。下面的这段 Sass 代码，定义了一个非常简单的混合器，目的是添加跨浏览器的圆角边框。
+
+      ``` scss
+      @mixin rounded-corners {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+      ```
+
+    + 然后就可以在你的样式中通过 `@include` 来使用这个混合器，放在你希望的任何地方。`@include` 调用会把混合器中所有样式提取出来放在 `@inlude` 被调用的地方，如下所示：
+
+      ``` scss
+      .notice {
+        background-color: green;
+        border: 2px solid #00aa00;
+        @include rounded-corners;
+      }
+      // 最终的 sass 文件
+      .notice {
+        background-color: green;
+        border: 2px solid #00aa00;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+      ```
+
+    + 在 `.notice` 中的属性 `border-radius` `-moz-border-radius` `-webkit-border-radius` 全部来自 `rounded-corners` 这个混合器。这一节将介绍使用混合器来避免重复。通过使用参数，你可以使用混合器把你样式中的通用样式抽离出来，然后轻松地在其他地方重用。实际上，混合器太好用了，一不小心你可能会过度使用。大量的宠用可能会导致生成的样式表过大，导致加载缓慢；所以，首先我们将讨论混合气的适用场景，避免滥用。
+
+    (1) 何时使用混合器？
+
+    + 利用混合器，可以很容易的在样式表的不同地方共享样式。如果你发现自己在不停重复一段样式，那就应该把这段样式构造成优良的混合器，尤其是这段样式本身就是一个逻辑单元，比如说是一组放在一起有意义的属性。
+    + 判断一组属性是否应该组成一个混合器，一条经验法则就是你能否为这个混合器想出一个有意义的名字。如果你能找到一个很好的段名字来描述这些属性修饰的样式，比如 `rounded-corners` `fancy-font` 或者 `no-bullets`，那么往往能够构造一个合适的混合器。如果你找不断哦，这时候构造一个混合器可能并不合适。
+
+    (2) 混合器的 CSS 规则
+
+    (3) 给混合器传参
+
+    (4) 默认参数值

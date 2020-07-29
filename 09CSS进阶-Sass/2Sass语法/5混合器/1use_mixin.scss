@@ -1,0 +1,16 @@
+@mixin rounded-corners {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.box {
+	background-color: #ccc;
+	color: white;
+	@include rounded-corners;
+}
+
+.container {
+	@include rounded-corners();
+	border: 2px red dotted;
+}

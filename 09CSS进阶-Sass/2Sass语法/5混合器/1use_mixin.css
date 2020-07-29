@@ -1,0 +1,14 @@
+.box {
+  background-color: #ccc;
+  color: white;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+
+.container {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px red dotted; }
+
+/*# sourceMappingURL=1use_mixin.css.map */

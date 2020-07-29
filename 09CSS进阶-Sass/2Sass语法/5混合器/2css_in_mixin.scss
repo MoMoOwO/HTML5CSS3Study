@@ -1,0 +1,12 @@
+@mixin no-bullets {
+	list-style: none;
+	li {
+		list-style-image: none;
+		list-style-type: none;
+		margin-left: 0px;
+	}
+}
+ul.plain {
+	color: #444;
+	@include no-bullets();
+}

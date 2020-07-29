@@ -1,0 +1,9 @@
+ul.plain {
+  color: #444;
+  list-style: none; }
+  ul.plain li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0px; }
+
+/*# sourceMappingURL=2css_in_mixin.css.map */

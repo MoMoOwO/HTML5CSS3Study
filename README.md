@@ -3554,6 +3554,42 @@
 
     (2) 混合器的 CSS 规则
 
+    + 混合器中不仅可以包含属性，也可以包含 CSS 规则，包含选择器和选择器中的属性，如下：
+
+      ``` scss
+      @mixin no-bullets {
+        list-style: none;
+        li {
+          list-style-image: none;
+          list-style-type: none;
+          margin-ledt: 0px;
+        }
+      }
+      ```
+
+    + 当一个包含 CSS 规则的混合器通过 `@include` 包含在一个父规则中时，在混合器中的规则最终会生成父规则中的嵌套规则。举个例子，看看下边的 Sass 代码，这个例子中使用了 `no-bullets` 这个混合器
+
+      ``` scss
+      ul.plain {
+        color: #444;
+        @include no-bullets();
+      }
+      ```
+
+    + Sass 的 `@include` 指令将引入混合器的那行代码替换成混合器里边的内容。最终生成如下代码：
+
+      ``` CSS
+      ul.plain {
+        color: #444;
+        list-style: nonel
+      }
+      ul.plain li {
+        list-style-image: none;
+        list-style-type: none;
+        margin-left: 0px;
+      }
+      ```
+
     (3) 给混合器传参
 
     (4) 默认参数值

@@ -3592,4 +3592,56 @@
 
     (3) 给混合器传参
 
+    + 混合器并不一定总得生成相同的样式。可以通过 `@include` 引入混合器时给混合器传参，来定制混合器生成的精确样式。当 `@inlcude` 引入混合器时，参数其实就是可以赋值给 CSS 属性值的变量。如果你写过 JavaScript，这种方式跟 JavaScript 的 function 很像：
+
+      ``` scss
+      @mixin link-colors($normal, $hover, $visited){
+        color: $normal;
+        &:hover {
+          color: $hover;
+        }
+        &:visited {
+          color: $visited;
+        }
+      }
+      // 使用
+      a {
+        @include link-colors(blue, red, green);
+      }
+      // 编译后的 CSS 代码
+      a { color: blue; }
+      a:hover { color: red; }
+      a:visited { color: green; }
+      ```
+
+    + 当混合器被 `@include` 时，有时候可能会很难区分每个参数是什么意思，参数之间是一个什么样的顺序。为了解决这个问题，Sass 允许通过语法 `$name: value` 的形式指定每个参数的值。这种形式的传参，参数顺序就不必在乎了，只需要保证没有漏掉参数即可：
+
+      ``` scss
+      a {
+        @include link-colors(
+          $normal: blue,
+          $visited: green,
+          $hover: red
+        );
+      }
+      ```
+
+    + 尽管给混合器加参数来实现定制很好，但是有时我们没有定制的需要，这时候也需要赋值一个变量就变成很痛苦的事情了。所以 Sass 允许混合器声明时为参数指定默认值。
+
     (4) 默认参数值
+
+    + 为了在 `@include` 混合器时不必传入所有的参数，我们可以给参数指定一个默认值。参数默认值使用 `@name: default-value` 的声明形式，默认值可以是任何有效的 CSS 属性值，甚至是其他参数的引用。如下代码：
+
+      ``` scss
+      @mixin link-colors($normal, $hover: $normal, $visited: $normal){
+        color: $normal;
+        &:hover {
+          color: $hover;
+        }
+        &:visited {
+          color: $visited;
+        }
+      }
+      ```
+
+    + 如果像下边这样调用 `@include link-colors(red)` 那么 `$hover` 与 `$visited` 也会被自动赋值为 `red`。混合器只是 Sass 样式重用特征中的一个。我们已经了解到混合器主要用于央视展示层的重用，如果你想重用语义化的类呢？这就涉及 Sass 的林一个重要的重用特征：选择器继承。

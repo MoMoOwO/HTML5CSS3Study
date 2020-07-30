@@ -1,0 +1,15 @@
+a {
+  color: blue; }
+  a:hover {
+    color: red; }
+  a:visited {
+    color: green; }
+
+.mya {
+  color: blue; }
+  .mya:hover {
+    color: red; }
+  .mya:visited {
+    color: green; }
+
+/*# sourceMappingURL=3mixin_params.css.map */

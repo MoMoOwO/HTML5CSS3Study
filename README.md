@@ -3649,3 +3649,80 @@
       ```
 
     + 如果像下边这样调用 `@include link-colors(red)` 那么 `$hover` 与 `$visited` 也会被自动赋值为 `red`。混合器只是 Sass 样式重用特征中的一个。我们已经了解到混合器主要用于央视展示层的重用，如果你想重用语义化的类呢？这就涉及 Sass 的林一个重要的重用特征：选择器继承。
+
+7. 使用选择器继承来精简 CSS
+
+    (1) 什么是 Sass 继承
+
+    + 使用 Sass 得时候，最后一个减少重复的主要特征就是选择器继承。基于 Nicole Sullivan 面向对象的 CSS 的理念，选择器继承是说一个选择器可以继承为另一个选择器定义的所有样式。这个通过 `@extend` 语法实现，如下：
+
+      ``` scss
+      .error {
+        border: 1px red;
+        background-color: #fdd;
+      }
+      .seriousError {
+        @extend .error;
+        border-width: 3px;
+      }
+      ```
+
+    + 在上边的代码中，`.seriousError` 将会继承样式表中任何位置处为 `.error` 定义的所有样式。以 `class="seriousError"` 修饰的 HTML 元素最终的展示效果就好像 `class="seriousError error"`。相关元素不仅会拥有一个 3px 宽的边框，而且这个边框将会变成红色，这个元素同时还会有一个浅红色的背景，因为这些都是在 `.error` 里面定义的样式。
+    + `.seriousError` 不仅会继承 `.error` 自身的所有样式，任何跟 `.error` 有关的组合选择器样式也会被 `.seriousError` 以组合选择器的形式继承，如下所示，在 `class="seriousError"` 的 HTML 元素内的超链接也会变成红色和粗体。
+
+      ``` scss
+      //.seriousError 也汇集成 .error 有关的组合选择器样式
+      .error a{ // 也会被应用到 .seriousError a
+        color: red;
+        font-weight: 100px;
+      }
+      h1.error { // 也会被应用到 h1.seriousError
+        font-size: 1.2rem;
+      }
+      ```
+
+    (2) 如何使用 Sass 继承
+
+    + 每一个类名都有可能有另一个类名的所有样式和它自己的特定样式的。当一个 `div` 身上有两个类名，一个是 `one` 一个是 `two` 的时候，如下：
+
+      ``` html
+      <style>
+        .one {
+          width: 100px;
+          height: 100px;
+        }
+        .two {
+          background: red;
+          border: 5px solid #000;
+        }
+      </style>
+      <div class="one two"></div>
+      ```
+
+    + 这就意味着，我们要配备一个很好的记忆力才能应急那些棘手的 BUG 问题。很多时候，我们需要一个个的找到类名 `one` 的样式才逐一改过。这样在无形中加大了复杂程度。而在 Sass 中，有那么以恶功能，继承，可以方便轻松的嚷着棘手的问题边得很简单。`@extend` 指令可以继承你想要的类名，如下：
+
+      ``` scss
+      .one {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        @extend .one;
+        background: red;
+        border: 5px solid #000;
+      }
+      // 编译后的 css 代码
+      .one, .two {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        background: red;
+        border: 5px solid #000;
+      }
+      ```
+
+    + 从上面的例子可以看出，类名 `one` 可以被所有的类名继承。而继承类名 `.one` 的类名还可以有专属于自己的类名、专属的样式和风格，并不影响类名 `.one` 本身。
+
+    (3) 如何使用继承
+    (4) 使用继承的最佳实践

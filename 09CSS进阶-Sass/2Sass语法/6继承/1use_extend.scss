@@ -1,0 +1,16 @@
+.error {
+	border: 1px red;
+	background-color: #fdd;
+}
+.seriousError {
+	@extend .error;
+	border-width: 3px;
+}
+
+.error a {
+	color: red;
+	font-weight: 100px;
+}
+h1.error {
+	font-size: 1.2rem;
+}

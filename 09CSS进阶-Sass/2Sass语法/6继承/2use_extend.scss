@@ -1,0 +1,9 @@
+.one {
+	width: 100px;
+	height: 100px;
+}
+.two {
+	@extend .one;
+	background: red;
+	border: 5px solid #000;
+}

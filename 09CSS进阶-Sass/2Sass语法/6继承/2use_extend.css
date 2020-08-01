@@ -1,0 +1,9 @@
+.one, .two {
+  width: 100px;
+  height: 100px; }
+
+.two {
+  background: red;
+  border: 5px solid #000; }
+
+/*# sourceMappingURL=2use_extend.css.map */

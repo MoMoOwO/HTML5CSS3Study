@@ -1,0 +1,11 @@
+/* a {
+	@include link-colors($hover: #ccc);
+} */
+a {
+  color: yellow; }
+  a:hover {
+    color: yellow; }
+  a:visited {
+    color: green; }
+
+/*# sourceMappingURL=5mixin_p_d_v1.css.map */

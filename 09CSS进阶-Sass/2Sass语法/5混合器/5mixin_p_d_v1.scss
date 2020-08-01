@@ -1,0 +1,16 @@
+@mixin link-colors($normal: red, $hover: $normal, $visited: green) {
+	color: $normal;
+	&:hover {
+		color: $hover;
+	}
+	&:visited {
+		color: $visited;
+	}
+}
+/* a {
+	@include link-colors($hover: #ccc);
+} */
+
+a {
+	@include link-colors(yellow);
+}

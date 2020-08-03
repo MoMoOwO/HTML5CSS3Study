@@ -1,0 +1,15 @@
+.one {
+	width: 100px;
+	height: 100px;
+}
+.two {
+	/* 继承的样式 */
+	@extend .one;
+	@extend .three;
+	/* 独立的样式 */
+	background: red;
+	border: 5px solid #000;
+}
+.three {
+	padding: 10px;
+}

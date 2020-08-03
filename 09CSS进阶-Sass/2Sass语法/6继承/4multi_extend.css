@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.one, .two {
+  width: 100px;
+  height: 100px; }
+
+.two {
+  /* 继承的样式 */
+  /* 独立的样式 */
+  background: red;
+  border: 5px solid #000; }
+
+.three, .two {
+  padding: 10px; }
+
+/*# sourceMappingURL=4mulit_extend.css.map */

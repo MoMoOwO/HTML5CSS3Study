@@ -1,0 +1,12 @@
+/* .one {
+	height: 300px;
+} */ // 报错
+@media print {
+	.one {
+		height: 300px;
+	}
+	.two {
+		@extend .one;
+		width: 300px;
+	}
+}

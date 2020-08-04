@@ -1,0 +1,11 @@
+.meng a, .long .link a {
+  font-weight: bold; }
+
+/* .meng a {
+	font-weight: bold;
+}
+.long .link {
+	@extend a;
+} */
+
+/*# sourceMappingURL=6cross_extend.css.map */

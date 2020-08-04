@@ -1,0 +1,12 @@
+.meng a {
+	font-weight: bold;
+}
+.long .link {
+	@extend .meng;
+}
+/* .meng a {
+	font-weight: bold;
+}
+.long .link {
+	@extend a;
+} */

@@ -1,0 +1,18 @@
+.test1 {
+	content: unquote($string: 'Hello Sass!');
+}
+.test2 {
+	content: unquote($string: "'Hello Sass!");
+}
+.test3 {
+	content: unquote($string: "I'm Web Designer!");
+}
+.test4 {
+	content: unquote($string: "'Hello Sass!'");
+}
+.test5 {
+	content: unquote($string: '"Hello Sass!"');
+}
+.test6 {
+	content: unquote(Hello Sass);
+}

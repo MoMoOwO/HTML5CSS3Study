@@ -1,0 +1,21 @@
+.box1 {
+	content: type-of(100);
+}
+.box2 {
+	content: type-of('abcd');
+}
+.box3 {
+	content: type-of(abcd);
+}
+.box4 {
+	content: type-of(true);
+}
+.box5 {
+	content: type-of(#fff);
+}
+.box6 {
+	content: type-of(blue);
+}
+.box7 {
+	content: type-of(1 / 2 = 1);
+}

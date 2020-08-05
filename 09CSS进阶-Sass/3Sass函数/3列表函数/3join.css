@@ -1,0 +1,19 @@
+.box1 {
+  content: 10px 20px 30px 40px; }
+
+.box2 {
+  content: blue, red, #abc, #def; }
+
+.box3 {
+  content: blue, red, #abc, #def; }
+
+.box4 {
+  content: blue, red, #abc, #def, #dee, #eff; }
+
+.box5 {
+  content: 100px, 200px; }
+
+.box6 {
+  content: 100px 200px 300px; }
+
+/*# sourceMappingURL=3join.css.map */

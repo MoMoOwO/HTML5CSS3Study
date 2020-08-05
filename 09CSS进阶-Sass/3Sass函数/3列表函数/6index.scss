@@ -1,0 +1,9 @@
+.box1 {
+	content: index(1px solid red, 1px);
+}
+.box2 {
+	content: index(1px solid red, solid);
+}
+.box3 {
+	content: index(1px solid red, red);
+}

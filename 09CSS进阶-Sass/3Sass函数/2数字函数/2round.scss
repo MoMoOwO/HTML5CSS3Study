@@ -1,0 +1,34 @@
+.box1 {
+	content: round(12.3);
+}
+.box2 {
+	content: round(12.5);
+}
+.box3 {
+	content: round(1.49999);
+}
+.box4 {
+	content: round(2);
+}
+.box5 {
+	content: round(20%);
+}
+.box6 {
+	content: round(2.2%);
+}
+.box7 {
+	content: round(3.9em);
+}
+.box8 {
+	content: round(2.3px);
+}
+.box9 {
+	content: round(2px / 3px);
+}
+.box10 {
+	content: round(1px/ 3px);
+}
+// 报错
+/* .box10 {
+	content: round(3px/ 2em);
+} */

@@ -1,0 +1,30 @@
+.box1 {
+	content: floor(12.3);
+}
+.box2 {
+	content: floor(12.5);
+}
+.box3 {
+	content: floor(1.49999);
+}
+.box4 {
+	content: floor(2);
+}
+.box5 {
+	content: floor(20%);
+}
+.box6 {
+	content: floor(2.2%);
+}
+.box7 {
+	content: floor(3.9em);
+}
+.box8 {
+	content: floor(2.3px);
+}
+.box9 {
+	content: floor(2px / 3px);
+}
+.box10 {
+	content: floor(1px/ 3px);
+}

@@ -1,0 +1,35 @@
+.box1 {
+  content: 12; }
+
+.box2 {
+  content: 13; }
+
+.box3 {
+  content: 1; }
+
+.box4 {
+  content: 2; }
+
+.box5 {
+  content: 20%; }
+
+.box6 {
+  content: 2%; }
+
+.box7 {
+  content: 4em; }
+
+.box8 {
+  content: 2px; }
+
+.box9 {
+  content: 1; }
+
+.box10 {
+  content: 0; }
+
+/* .box10 {
+	content: round(3px/ 2em);
+} */
+
+/*# sourceMappingURL=2round.css.map */

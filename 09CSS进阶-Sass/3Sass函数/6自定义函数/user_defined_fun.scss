@@ -1,0 +1,39 @@
+@function stripUnits($number) {
+	@if (not unitless($number)) {
+		@return $number / ($number * 0 + 1);
+	} @else {
+		@return $number;
+	}
+}
+@function double($number) {
+	@if (type-of($number) == 'number') {
+		@return $number * 2;
+	} @else {
+		@return $number;
+	}
+}
+@function sum($number1, $number2) {
+	@if (comparable($number1, $number2)) {
+		@return $number1 + $number2;
+	} @else {
+		@return -1;
+	}
+}
+.box1 {
+	content: stripUnits(15px);
+}
+.box2 {
+	content: stripUnits(20);
+}
+.box3 {
+	content: double(15px);
+}
+.box4 {
+	content: double('20px');
+}
+.box5 {
+	content: sum(1px, 2px);
+}
+.box6 {
+	content: sum(1px, 2em);
+}

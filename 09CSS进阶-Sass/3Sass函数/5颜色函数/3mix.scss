@@ -1,0 +1,11 @@
+$color1: #a63;
+$color2: #fff;
+$bgColor1: #f36;
+$bgColor2: #e36;
+$borderColor1: #c36;
+$borderColor2: #b36;
+.mix {
+	background: mix($bgColor1, $bgColor2, 0.75);
+	color: mix($color1, $color2, 0.25);
+	border-color: mix($borderColor1, $borderColor2, 0.05);
+}

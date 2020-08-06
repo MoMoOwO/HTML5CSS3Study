@@ -1,0 +1,15 @@
+@for $i from 1 to 5 {
+	.border-#{$i} {
+		border: #{$i}px solid blue;
+	}
+}
+@function sum($start, $end) {
+	$num: 0;
+	@for $i from $start to $end + 1 {
+		$num: $num + $i;
+	}
+	@return $num;
+}
+p {
+	content: sum(1, 10);
+}

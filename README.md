@@ -3721,4 +3721,1262 @@
     + 从上面的例子可以看出，类名 `one` 可以被所有的类名继承。而继承类名 `.one` 的类名还可以有专属于自己的类名、专属的样式和风格，并不影响类名 `.one` 本身。
 
     (3) 如何使用继承
-    (4) 使用继承的最佳实践
+
+    + 继承是如何工作的： Sass 继承（extend）将想要继承的选择器和其引用的选择器组成群组选择器中间用逗号隔开，组成群组选择器。如下：红色背景和边框是类名 `.two` 单加的样式，而宽度高度都是继承类名 `.one` 的。就在合并选择器的时候，Sass 中继承是相当聪明的，会自己避免一些不必要的错误，或者说是不为人知的错误，也不会产生各种多余的东西，比如 `##two`。
+
+      ``` scss
+      .one {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        /* 继承的样式 */
+        @extend .one;
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      // 编译后的 CSS 代码
+      .one, .two {
+        /* 继承的样式 */
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      ```
+
+    + 继承复杂的选择器：要继承的不仅仅是一个类名，可以是一个 ID 也可以是一个元素，也可以是某个状态，任何选择器都能继承。就像下面编译出的的一样，在 `hover` 状态下的样式也能继承。所以不仅是 `a` 的 `hover` 状态，几乎任何选择器都能继承。
+
+      ``` scss
+      .hoverlink {
+        @extend a, :hover;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      // 编译之后的 CSS 代码
+      a:hover, .hoverlink {
+        text-decoration: underline;
+      }
+      ```
+
+    + 继承多个选择器：在编写过程中，往往会遇到一个选择器要继承多个选择器的样式。
+
+      ``` scss
+      .one {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        /* 继承的样式 */
+        @extend .one;
+        @extend .three;
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      .three {
+        padding: 10px;
+      }
+      // 编译后的 CSS 代码
+      .one, .two {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        background: red;
+        border: 5px solid #000;
+      }
+      .three, .two{
+        padding: 10px;
+      }
+      // 多继承简写方式
+      .two {
+        /* 继承的样式 */
+        @extend .one, .three;
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      ```
+
+    + 链式继承：在编写的过程中，不仅仅的单方面的继承，很多时候都是类名 `.three` 继承类名 `.two`，而类名 `.two` 又继承了类名 `.one`。那么这样的情况在 Sass 中应该怎么写呢？
+
+      ``` scss
+      .one {
+        width: 100px;
+        height: 100px;
+      }
+      .two {
+        /* 继承的样式 */
+        @extend .one;
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      .three {
+        /* 继承的样式 */
+        @extend .two;
+        /* 独立的样式 */
+        padding: 10px;
+      }
+      // 编译后的 CSS 代码
+      .one, .two, .three {
+        /* 继承的样式 */
+        width: 100px;
+        height: 100px;
+      }
+      .two, .three {
+        /* 独立的样式 */
+        background: red;
+        border: 5px solid #000;
+      }
+      .three {
+        /* 独立的样式 */
+        padding: 10px;
+      }
+      ```
+
+    + 继承的局限性：虽然能够继承的选择器数量很多，但是也有很多选择器并不支持继承的，如包含选择器 `.one .two` 或者相邻兄弟选择器 `.one+.two` 目前还是不支持继承。但若继承元素是 `a`，恰巧这个元素 `a` 又有 `hover` 状态的样式也会被继承。如下：
+
+      ``` scss
+      .myLink {
+        @extend a;
+      }
+      a {
+        color: blue;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      // 编译后的 CSS 代码
+      a, .myLink {
+        color: blue;
+      }
+      a:hover, .myLink:hover {
+        text-decoration: underline;
+      }
+      ```
+
+    + 继承交叉合并选择：从字面上起始很难理解说的是件什么事。既然有点难理解，那么就通过下面的小例子来理解吧。从下面的例子不难看出，类名 `.meng` 中的 `a` 选择器被类名 `.long` 中类名 `.link` 继承，但是由于没有在统一父级下，会产生交叉合并的编译结果。这种其实是可以解决的，就是把父级改成相同的即可。若父级不能改的话，那么就乖乖的再写一遍，或者将 `.meng a` 直接换成类名 `.meng` 继承这个类名也可以。
+
+      ``` scss
+      .meng a {
+        font-weight: bold;
+      }
+      .long .link {
+        @extend a;
+      }
+      // 编译后的 CSS 代码
+      .meng a, .meng .long .link, .long .meng .link{
+        font-weight: bold;
+      }
+      ```
+
+    + 占位符 `%` 继承：有时候你先继承一个类名，但是并不想这个类名出现在 HTML 标签中，就是单单想写一个能够继承的类名。尤其是不想让它出现在 CSS 样式中。我们可以用占位符来写一些继承的样式，如 `%one`，然后再通过 `@extend` 继承，这样就可以防止被渲染到 CSS 的规则集中，如下实例
+
+      ``` scss
+      #meng a%long {
+        color: blue;
+        font-weight: bold;
+        font-size: 2em;
+      }
+      .notice {
+        @extend %long;
+        padding: 10px;
+      }
+      // 编译后的 CSS 代码
+      #meng a.notice {
+        color: blue;
+        font-weight: bold;
+        font-size: 2em;
+        padding: 10px;
+      }
+      ```
+
+    + 继承再指令中的作用域：集成在指令中是由作用域问题的，继承是无法使在指令如 `@media` 之外的选择器继承的，要是继承就只能写在指令中。从下面实例可见，类名 `.two` 并没有继承类名 `.one` 的样式，那么需要让类名 `.two` 成功继承类名 `.one` 的样式，就应该把类名 `.one` 也放到 `@media` 中。
+
+      ``` scss
+      .one {
+        height: 300px;
+      }
+      @media print {
+        .two {
+          @extend .one;
+          width: 300px;
+        }
+      }
+      // 编译会直接报错，不能引用选择器之外的样式类
+      ```
+
+    (4) 何时使用继承
+
+    + 之前介绍了混合器主要用于展示性样式的重用，而类名用于语义化样式的重用。因为继承是基于类的（有时候是基于其他类型的选择器），所以继承应该是建立在语义化的关系上。当一个元素拥有的类（比如 `.seriousError`）表明它属于另一个类（比如 `.error`），这时候使用继承就再合适不过了。
+    + 这有点抽象，所以我们从几个方面来阐释一下。想象一下你正在编写一个页面，给 HTML 元素添加类名，你发现你的某个类（比如说 `.seriousError`）另一个类（比如说 `.error`）的细化，你会怎么做？
+      + 你可以为这两个类分别写相同的样式，但是如果有大量的重复怎么办？使用 Sass 时，我们提倡的就是不要做重复的工作。
+      + 你可以使用一个选择器（比如 `.error` `.seriousError`）给这两个选择器写相同的样式。如果 `.error` 的所有样式都在同一个地方，这种做法很好，但是如果时分散在样式表的不同地方呢?在这样做就困难多了。
+      + 你可以使用一个混合器为这两个类提供相同的样式，但当 `.error` 的样式修饰遍布样式表中各处时，这种做法面临着跟使用选择器组一样的问题。这两个类也不是恰好有相同的样式。你应该更清楚地表达这种关系。
+      + 综上所述你应该使用 `@xtend`，让 `.seriousError` 从 `.error` 继承样式，使两者之间的关系非常清晰。更重要的是无论你在样式表的哪里使用 `.error` `.seriousError` 都会继承其中的样式。
+
+    (5) 使用继承的最佳实践
+
+    + 尝试用继承会让你的 CSS 美观、整洁。因为继承只会在生成 CSS 时复制选择器，而不会复制大段 CSS 属性。但是如果你不小心，可能会让生成的 CSS 中包含大量的选择器复制。
+    + 避免这种情况出现的最好方法就是不要生成 CSS 规则中使用后代选择器（比如 `.foo .bar`）去继承 CSS 规则。如果你这么做，同时被继承的 CSS 规则又通过后代选择器修饰的样式，生成 CSS 中的选择器的数量很快就会失控:
+
+      ``` scss
+      .foo .bar {
+        @extend .baz;
+      }
+      .bip .baz {
+        color: red;
+      }
+      ```
+
+    + 值得一提的是，只要你想，你完全可以放心的继承有后代选择器修饰规则的选择器，不管后代选择器多长，但有一个前提就是不要用后代选择器去继承。
+
+    (6) 总结
+
+    + 本部分介绍了 Sass 最基本部分，你可以轻松的使用 Sass 编写清晰、无冗余、语义化的 CSS。对于 Sass 提供的工具你已经有了一个比较深入的了解，同时也掌握了何时使用这些工具的指导原则。
+    + 变量是 Sass 提供的最进本的工具。通过变量可以让独立的 CSS 值变得可重用，无论在一条单独的规则范围内还是在整个样式表中。变量、混合器的命名甚至是 Sass 的文件名，可以呼唤通用的 `_` 与 `-`。同样基础的是 Sass 的嵌套机制。嵌套允许 CSS 规则内嵌套 CSS 规则，减少重复编写常用的选择器，同时让样式表的结构一眼望去更加清晰。Sass 同时提供了特殊的父选择器标识符 `&`，通过它可以构造出更高效的嵌套。
+    + 你也已经学到了 Sass 的拎一个重要特性，样式导入。通过央视导入可以把分散在多个 Sass 文件中的内容和并生成一个 CSS 文件，避免了项目中有大量的 CSS 文件通过原生的 CSS `@import` 带来的性能问题。通过潜逃到如何默认变量值，导入可以构建更强有力的、可定制的样式。混合器允许用户编写语义化央视的同时避免视觉层面上样式的重复。你不仅学到了如何使用混合器减少重复，同时学习到了如何使用混合器让你的 CSS 边得更加可维护和语义化。最后，我们学习了与混合器相辅相成的选择器继承。继承允许你声明类之间语义化的关系，通过这些关系可以保持你的 CSS 的整洁和可维护性。
+
+### Sass 函数
+
+1. Sass 内置函数
+
+    (1) 在 Sass 中除了可以定义变量，句有 `@extend`、`%placeholders` 和 Mixins 等特性之外，孩子被了一系列的函数功能。主要包含以下几类：字符串函数、数字函数、列表函数、Introspection 函数、三元函数以及颜色函数等。当然大家还可以根据需求自定义函数。
+
+    (2) 字符串函数：字符串函数顾名思义就是用来处理字符串的函数。Sass 的字符串函数主要包括两个函数：
+
+    + `unquote($string)`：主要用来删除一个字符串中的引号，如果这个字符串没有带有引号，将返回原始的字符串。`unquote(` 函数只能删除字符串最外层的匹配的引号，而无法删除字符串中间的引号。如果字符串没有带引号，返回的将是字符串本身。
+
+      ``` Scss
+      .test1 {
+        content: unquote($string: 'Hello Sass!');
+      }
+      .test2 {
+        content: unquote($string: "'Hello Sass!");
+      }
+      .test3 {
+        content: unquote($string: "I'm Web Designer!");
+      }
+      .test4 {
+        content: unquote($string: "'Hello Sass!'");
+      }
+      .test5 {
+        content: unquote($string: '"Hello Sass!"');
+      }
+      .test6 {
+        content: unquote(Hello Sass); // 会警告
+      }
+      // 编译后
+      .test1 {
+        content: Hello Sass!;
+      }
+      .test2 {
+        content: 'Hello Sass!; }
+      .test3 {
+        content: I' m Web Designer!;
+      }
+      .test4 {
+        content: 'Hello Sass!';
+      }
+      .test5 {
+        content: 'Hello Sass!';
+      }
+      .test6 {
+        content: Hello Sass;
+      }
+      ```
+
+    + `quote()` 刚好与 `unquote()` 函数功能相反，主要用来给字符串添加引号。如果是字符串，自身带的引号会统一换成双引号使用 `quote()` 函数的时候只能给字符串增加双引号，而且字符串中间有单引号或者空格时，需要用单引号或双引号括起，否则编的时候将会报错；同样如果配到特殊符号，比如 `!`、`?`、`>`，除中折号 `-` 和下划线 `_` 都需要使用双引号括起，否则编译在进行编译的时候同样会报错。
+
+      ``` scss
+      .test1 {
+        content: quote($string: 'Hello Sass!');
+      }
+      .test2 {
+        content: quote($string: 'Hello Sass!');
+      }
+      .test3 {
+        content: quote(ImWebDesigner);
+      }
+      .test4 {
+        content: quote($string: ' ');
+      }
+      // 编译后的 CSS 代码
+      .test1 {
+        content: "Hello Sass!";
+      }
+      .test2 {
+        content: "Hello Sass!";
+      }
+      .test3 {
+        content: "ImWebDesigner";
+      }
+      .test4 {
+        content: " ";
+      }
+      ```
+
+    (3) 数字函数：Sass 中的数字函数针对数字方面提供一系列的函数功能。
+
+      | 函数名               | 介绍                                   |
+      | :------------------- | :------------------------------------- |
+      | `percentage($value)` | 将一个不带单位的数转换成百分比值       |
+      | `round($value)`      | 将数值四舍五入，转换成一个最接近的整数 |
+      | `ceil($value)`       | 向上取整                               |
+      | `floor($value)`      | 向下取整                               |
+      | `abs($value)`        | 返回一个数的绝对值                     |
+      | `min($numbers)`      | 找出几个数值之间的最小值               |
+      | `max($numbers)`      | 找出几个数值之间的最大值               |
+
+    + `percentage($value)`：将不带单位的浮点数转换成百分数。如果你想转换的值时带有单位的值，那么在编译的时候会报错误信息。
+
+      ``` scss
+      .box {
+        width: percentage(.2);
+        height: percentage(2px / 10px);
+        border-width: percentage(2em / 10em);
+      }
+      // 编译后的 CSS 代码
+      .box {
+        width: 20%;
+        height: 20%;
+        border-width: 20%;
+      }
+      ```
+
+    + `round($value)`：将一个属四舍五入为一个最接近的整数。可以携带带任何单位的数值。
+
+      ``` scss
+      .box1 {
+        content: round(12.3);
+      }
+      .box2 {
+        content: round(12.5);
+      }
+      .box3 {
+        content: round(1.49999);
+      }
+      .box4 {
+        content: round(2);
+      }
+      .box5 {
+        content: round(20%);
+      }
+      .box6 {
+        content: round(2.2%);
+      }
+      .box7 {
+        content: round(3.9em);
+      }
+      .box8 {
+        content: round(2.3px);
+      }
+      .box9 {
+        content: round(2px / 3px);
+      }
+      .box10 {
+        content: round(1px/ 3px);
+      }
+      // 报错
+      /* .box10 {
+        content: round(3px/ 2em);
+      } */
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 12;
+      }
+      .box2 {
+        content: 13;
+      }
+      .box3 {
+        content: 1;
+      }
+      .box4 {
+        content: 2;
+      }
+      .box5 {
+        content: 20%;
+      }
+      .box6 {
+        content: 2%;
+      }
+      .box7 {
+        content: 4em;
+      }
+      .box8 {
+        content: 2px;
+      }
+      .box9 {
+        content: 1; }
+      .box10 {
+        content: 0;
+      }
+      ```
+
+    + `ceil($value)`：对一个数字向上取整。
+
+      ``` scss
+      .box1 {
+        content: ceil(12.3);
+      }
+      .box2 {
+        content: ceil(12.5);
+      }
+      .box3 {
+        content: ceil(1.49999);
+      }
+      .box4 {
+        content: ceil(2);
+      }
+      .box5 {
+        content: ceil(20%);
+      }
+      .box6 {
+        content: ceil(2.2%);
+      }
+      .box7 {
+        content: ceil(3.9em);
+      }
+      .box8 {
+        content: ceil(2.3px);
+      }
+      .box9 {
+        content: ceil(2px / 3px);
+      }
+      .box10 {
+        content: ceil(1px/ 3px);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 13;
+      }
+      .box2 {
+        content: 13;
+      }
+      .box3 {
+        content: 2;
+      }
+      .box4 {
+        content: 2;
+      }
+      .box5 {
+        content: 20%;
+      }
+      .box6 {
+        content: 3%;
+      }
+      .box7 {
+        content: 4em;
+      }
+      .box8 {
+        content: 3px;
+      }
+      .box9 {
+        content: 1;
+      }
+      .box10 {
+        content: 1;
+      }
+      ```
+
+    + `floor($value)`：对一个数字向下取整。
+
+      ``` scss
+      .box1 {
+        content: floor(12.3);
+      }
+      .box2 {
+        content: floor(12.5);
+      }
+      .box3 {
+        content: floor(1.49999);
+      }
+      .box4 {
+        content: floor(2);
+      }
+      .box5 {
+        content: floor(20%);
+      }
+      .box6 {
+        content: floor(2.2%);
+      }
+      .box7 {
+        content: floor(3.9em);
+      }
+      .box8 {
+        content: floor(2.3px);
+      }
+      .box9 {
+        content: floor(2px / 3px);
+      }
+      .box10 {
+        content: floor(1px/ 3px);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 12;
+      }
+      .box2 {
+        content: 12;
+      }
+      .box3 {
+        content: 1;
+      }
+      .box4 {
+        content: 2;
+      }
+      .box5 {
+        content: 20%;
+      }
+      .box6 {
+        content: 2%;
+      }
+      .box7 {
+        content: 3em;
+      }
+      .box8 {
+        content: 2px;
+      }
+      .box9 {
+        content: 0;
+      }
+      .box10 {
+        content: 0;
+      }
+      ```
+
+    + `min($numbers)`：主要是在多个数之中找到最小的一个，这个函数可以设置任意多个参数，不过如果出现多种不同类型的单位将会报错误信息。
+
+      ``` scss
+      .box1 {
+        content: min(1, 2, 1%, 3, 300%);
+      }
+      .box2 {
+        content: min(1px, 2, 3px);
+      }
+      .box3 {
+        content: min(1em, 2em, 3em);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 1%;
+      }
+      .box2 {
+        content: 1px;
+      }
+      .box3 {
+        content: 1em;
+      }
+      ```
+
+    + `max($numbers)`：与 `min()` 函数正好相反，取一系列数中的最大值。
+
+      ``` scss
+      .box1 {
+        content: max(1, 2, 1%, 3, 300%);
+      }
+      .box2 {
+        content: max(1px, 2, 3px);
+      }
+      .box3 {
+        content: max(1em, 2em, 3em);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 300%;
+      }
+      .box2 {
+        content: 3px;
+      }
+      .box3 {
+        content: 3em;
+      }
+      ```
+
+    (4) 列表函数：列表函数主要包括一些对列表参数的函数使用，主要包括以下几种
+
+      | 函数名                               | 说明                               |
+      | :----------------------------------- | :--------------------------------- |
+      | `length($list)`                      | 返回一个列表的长度                 |
+      | `nth($list, $n)`                     | 返回一个列表中指定的某个标签值     |
+      | `join($list1, $list2, [$separator])` | 将两个列给连接在一起，变成一个列表 |
+      | `append($list1, $val, [$separator])` | 将某个值加入到列表的最后           |
+      | `zip($lists...)`                     | 将几个列表结合成一个多维的列表     |
+      | `index($list, $value)`               | 返回一个值在列表中的位置值         |
+
+    + `length($list)`：返回一个列表的长度。接受的列表参数之间使用空格隔开，不能使用逗号，否则函数将会报错。
+
+      ``` scss
+      .box1 {
+        content: length(10px);
+      }
+      .box2 {
+        content: length(10px 20% 2em);
+      }
+      .box3 {
+        content: length(10px 20px (border 1px solid) 2em);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 1;
+      }
+      .box2 {
+        content: 3;
+      }
+      .box3 {
+        content: 4;
+      }
+      ```
+
+    + `nth($list, $n)`：用来指定列表中某个位置的值。不过 Sass 中，`nth()` 函数与其他语言不同，`$n` 为 1 表示列表中一个值，2 表示列表中第二个值。`$n` 的取值必须是大于 0 的整数。
+
+      ``` scss
+      .box1 {
+        content: nth(10px 20px 30px, 1);
+      }
+      .box2 {
+        content: nth((Helvetica, Arial, sans-self), 2);
+      }
+      .box3 {
+        content: nth((1px solid red) border-top green, 1);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 10px;
+      }
+      .box2 {
+        content: Arial;
+      }
+      .box3 {
+        content: 1px solid red;
+      }
+      ```
+
+    + `join($list1, $list2, [$separator])`：将两个列表连接合并成一个列表，只能将两个列表合并，否则会报错。但很多时不知碰到两个列表连接成一个列表，这个时候就需要将多个 `join()` 函数合并在一起使用。在 `join()` 函数中还有一个很特别参数 `$separator`，这个参数主要是指定用来给列表函数连接列表时使用的分隔符号，默认值为 `auto`。`join()` 函数中`$separator` 参数的值还有 `comma` 和 `space` 分别对应使用 `,` 和空格进行分割。分隔符 `auto` 原则：如果列表中第一个列表中每个值之间使用的是逗号，那么 `join()` 函数合并的列表中每个列表项之间使用逗号分割；但是当第一个列表中只有个列表项，那么 `join()` 函数合并的列表项目中每个列表项目之间使用的分割父会根据第二个列表项中使用的分隔符来决定使用何分隔符。如果感觉到混乱则建议使用 `$separator` 参数来指定列表项分割符。
+
+      ``` scss
+      .box1 {
+        content: join(10px 20px, 30px 40px);
+      }
+      .box2 {
+        content: join((blue, red), (#abc, #def));
+      }
+      .box3 {
+        content: join((blue, red), (#abc #def));
+      }
+      .box4 {
+        content: join((blue, red), join((#abc #def), (#dee #eff)));
+      }
+      .box5 {
+        content: join(100px, 200px, comma);
+      }
+      .box6 {
+        content: join((100px, 200px), 300px, space);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 10px 20px 30px 40px;
+      }
+      .box2 {
+        content: blue, red, #abc, #def;
+      }
+      .box3 {
+        content: blue, red, #abc, #def;
+      }
+      .box4 {
+        content: blue, red, #abc, #def, #dee, #eff;
+      }
+      .box5 {
+        content: 100px, 200px;
+      }
+      .box6 {
+        content: 100px 200px 300px;
+      }
+      ```
+
+    + `append($list1, $val, [$separator])`：是用来将某个值插入到列表末尾的。同样也具有与 `join()` 函数类似的`$separator` 参数。
+
+      ``` scss
+      .box1 {
+        content: append(10px 20px, 30px);
+      }
+      .box2 {
+        content: append((blue, red), #abc);
+      }
+      .box3 {
+        content: append((blue, red), (#abc #def));
+      }
+      .box4 {
+        content: append((blue, red), append((#abc #def), (#dee #eff)));
+      }
+      .box5 {
+        content: append(100px, 200px, comma);
+      }
+      .box6 {
+        content: append((100px, 200px), 300px, space);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 10px 20px 30px;
+      }
+      .box2 {
+        content: blue, red, #abc;
+      }
+      .box3 {
+        content: blue, red, #abc #def;
+      }
+      .box4 {
+        content: blue, red, #abc #def #dee #eff;
+      }
+      .box5 {
+        content: 100px, 200px;
+      }
+      .box6 {
+        content: 100px 200px 300px;
+      }
+      ```
+
+    + `zip($lists...)`：将多个列表值转成一个多维的列表，参数中每个列表长长度要一致。
+
+      ``` scss
+      .box {
+        content: zip(1px 2px 3px, solid dashed dotted, green blue red);
+      }
+      // 编译后的 CSS 代码
+      .box {
+        content: 1px solid green, 2px dashed blue, 3px dotted red;
+      }
+      ```
+
+    + `index($list, $value)`：类似于索引一样，主要让你找到某个值在列表中所处的位置。在 Sass 中，第一个值索引就是 1第二个值索引就是 2...
+
+      ``` scss
+      .box1 {
+        content: index(1px solid red, 1px);
+      }
+      .box2 {
+        content: index(1px solid red, solid);
+      }
+      .box3 {
+        content: index(1px solid red, red);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 1;
+      }
+      .box2 {
+        content: 2;
+      }
+      .box3 {
+        content: 3;
+      }
+      ```
+
+    (5) 三元函数：Introspection 函数包括了几个判断性函数：
+    + `type-of($value)`：返回一个值的类型。
+
+      ``` scss
+      .box1 {
+        content: type-of(100);
+      }
+      .box2 {
+        content: type-of('abcd');
+      }
+      .box3 {
+        content: type-of(abcd);
+      }
+      .box4 {
+        content: type-of(true);
+      }
+      .box5 {
+        content: type-of(#fff);
+      }
+      .box6 {
+        content: type-of(blue);
+      }
+      .box7 {
+        content: type-of(1 / 2 = 1);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: number;
+      }
+      .box2 {
+        content: string;
+      }
+      .box3 {
+        content: string;
+      }
+      .box4 {
+        content: bool;
+      }
+      .box5 {
+        content: color;
+      }
+      .box6 {
+        content: color;
+      }
+      .box7 {
+        content: string;
+      }
+      ```
+
+    + `unit($number)`：返回一个值的单位。碰到复杂的计算时，即能根据运算得到一个多单位组合的值，不过只允许乘除运算；加碰到不同单位是，会报错，除了 `px` `cm` `mm` 单位之外。
+
+      ``` scss
+      .box1 {
+        content: unit(100);
+      }
+      .box2 {
+        content: unit(100px);
+      }
+      .box3 {
+        content: unit(20%);
+      }
+      .box4 {
+        content: unit(1em);
+      }
+      .box5 {
+        content: unit(10px * 3em);
+      }
+      .box6 {
+        content: unit(10px / 3em);
+      }
+      .box7 {
+        content: unit(10px * 2em / 3cm / 1rem);
+      }
+      .box8 {
+        content: unit(1px + 1cm);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: "";
+      }
+      .box2 {
+        content: "px";
+      }
+      .box3 {
+        content: "%";
+      }
+      .box4 {
+        content: "em";
+      }
+      .box5 {
+        content: "em*px";
+      }
+      .box6 {
+        content: "px/em";
+      }
+      .box7 {
+        content: "em/rem";
+      }
+      .box8 {
+        content: "px";
+      }
+      ```
+
+    + `unitless($number)`：判断一个值是否带有单位，如果没有带单位返回值为 true，否则为 false。
+
+      ``` scss
+      .box1 {
+        content: unitless(100);
+      }
+      .box2 {
+        content: unitless(100em);
+      }
+      .box3 {
+        content: unitless(20%);
+      }
+      .box4 {
+        content: unitless(1em);
+      }
+      .box5 {
+        content: unitless(10px * 3em);
+      }
+      .box6 {
+        content: unitless(10px / 3em);
+      }
+      .box7 {
+        content: unitless(10px * 3em / 2em / 1rem);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: true;
+      }
+      .box2 {
+        content: false;
+      }
+      .box3 {
+        content: false;
+      }
+      .box4 {
+        content: false;
+      }
+      .box5 {
+        content: false;
+      }
+      .box6 {
+        content: false;
+      }
+      .box7 {
+        content: false;
+      }
+      ```
+
+    + `comparable($number-1, $number-2)`：判断两个值是否可以做加减以及合并这样的运算的，如果可以返回 true，否则回 false。
+
+      ``` scss
+      .box1 {
+        content: comparable(2px, 1px);
+      }
+      .box2 {
+        content: comparable(2px, 1%);
+      }
+      .box3 {
+        content: comparable(2px, 1em);
+      }
+      .box4 {
+        content: comparable(2rem, 1em);
+      }
+      .box5 {
+        content: comparable(2px, 1cm);
+      }
+      .box6 {
+        content: comparable(2px, 1mm);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: true;
+      }
+      .box2 {
+        content: false;
+      }
+      .box3 {
+        content: false;
+      }
+      .box4 {
+        content: false;
+      }
+      .box5 {
+        content: true;
+      }
+      .box6 {
+        content: true;
+      }
+      ```
+
+    + Mincellaneous 函数：在这里把 Mincellaneous 函数称为三元条件函数，主要因为他和 JavaScript 中的三元判断非常似。它有两个值，当条件成立返回一个值，不成立则返回另一个值。语法：`if($condition, $if-trur, $if-false)`
+
+      ``` scss
+      .box1 {
+        content: if(true, 1px, 2px);
+      }
+      .box1 {
+        content: if(1 > 2, 1px, 2px);
+      }
+      .box3 {
+        content: if(comparable(1px, 2px), 2px + 1px, 'none');
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 1px;
+      }
+      .box1 {
+        content: 2px;
+      }
+      .box3 {
+        content: 3px;
+      }
+      ```
+
+    (6) 颜色函数：在 Sass 官方文档中，列出了 Sass 的颜色函数清单，从大的方面分为 RGB、HSL 和 Opacity 三大类函数，当然其还包括一些其他颜色函数，比如说 adjust-color、change-color 等。
+
+    + RGB 颜色函数：rgb 颜色知识颜色中的一种表达方式，其中 R 表示 red 红色，G 表示 green 绿色，B 表示 blue 蓝色。在 Sass 中为 RGB 颜色提供了六种函数。可以通过 `Sass -i` 命令进入海曙计算来测试练习
+
+      | 函数名                               | 说明                                                          |
+      | :----------------------------------- | :------------------------------------------------------------ |
+      | `rgb($red, $green, $blue)`           | 根据红绿蓝三种颜色值（0-255）创建一种颜色                     |
+      | `rgba($red, $green, $blue, $alpha)`  | 在红绿蓝颜色值之外，另外指定一个透明度值（0-1）来创建一种颜色 |
+      | `red($color)`                        | 从一种颜色中取出红色值                                        |
+      | `green($color)`                      | 从一种颜色中取出绿色值                                        |
+      | `blue($color)`                       | 从一种颜色中取出蓝色值                                        |
+      | `mix($color-1, $color-2, [$weight])` | 根据 `$weight` 权重值混合两种颜色                             |
+
+    + `rgba()`：主要用来建一个颜色根据透明度转换成 rgba 颜色。其语法有两种：`rgba($red, $green, $blue, $alpha)`将一个 rgba 颜色转移出来；`rgba($color, $alpha)`：将一个 Hex 颜色转换成 rgba 颜色。其中 `rgba($color,$alpha)` 函数作用很大，主要运用于在这样的情形之中。假设在实际中知道的颜色值是 `#f36` 或者 `red`，但是在使用中，需给他们配上一个透明度，这个时候在原来的 CSS 中，首先需要通过制图工具，得到 `#f36` 或者 `red` 颜色的 R、G、B 值，然再配置透明度。而 Sass 中 `rgba()` 函数则有效解决了这个繁琐过程。
+
+      ``` scss
+      $bgColor: orange;
+      $borderColor: green;
+      .rgba {
+        color: rgba(#f36, 0.5);
+        background: rgba($bgColor, 0.5);
+        border-color: rgba($borderColor, 0.5);
+      }
+      // 编译后的 CSS 代码
+      .rgba {
+        color: rgba(255, 51, 102, 0.5);
+        background: rgba(255, 165, 0, 0.5);
+        border-color: rgba(0, 128, 0, 0.5);
+      }
+      ```
+
+    + `mix($color-1, $color-2, [$weight])`：是将两种颜色根据一定的比例混合在一起，生成另一种颜色。`$color-1` 和`$color-2` 是指你需要合并的颜色，颜色可以是任何表达式，也可以是颜色变量。`$weight` 为合并的比例（选择权重），默认为 `50%`，其取值范围是 0-1。他是每个 RGB 的百分比来衡量，当然透明度也会有一定的权重。默认的比例是 50%，这意味着两颜色各占一半，如果指定的比例是 `25%`，这意味着第一个颜色所占比例为 `25%`，这意味着第一个颜色所占比例为 `25%`，第二颜色为所占比例为 `75%`。
+
+      ``` scss
+      $color1: #a63;
+      $color2: #fff;
+      $bgColor1: #f36;
+      $bgColor2: #e36;
+      $borderColor1: #c36;
+      $borderColor2: #b36;
+      .mix {
+        background: mix($bgColor1, $bgColor2, 0.75);
+        color: mix($color1, $color2, 0.25);
+        border-color: mix($borderColor1, $borderColor2, 0.05);
+      }
+      // 编译后的 CSS 代码
+      .mix {
+        background: #ee3366;
+        color: #fffffe;
+        border-color: #bb3366;
+      }
+      ```
+
+2. Sass 自定义函数 `@function(){}`
+
+    (1) 自定义函数使用户根据自己的一些特殊的需求编写的 Sass 函数。在很多时候，Sass 自带的函数并不能满足功能上的需求，所以很多时候需要自定义一些函数。
+
+    (2) 例如我们需要去掉一个值的单位，在这种情形之下，Sass 自带的函数是无法帮助我们完成，这个时候我们就需要自定义函数。
+
+      ``` scss
+      @function stripUnits($number) {
+        @if (not unitless($number)) {
+          @return $number / ($number * 0 + 1);
+        } @else {
+          @return $number;
+        }
+      }
+      @function double($number) {
+        @if (type-of($number) == 'number') {
+          @return $number * 2;
+        } @else {
+          @return $number;
+        }
+      }
+      @function sum($number1, $number2) {
+        @if (comparable($number1, $number2)) {
+          @return $number1 + $number2;
+        } @else {
+          @return -1;
+        }
+      }
+      .box1 {
+        content: stripUnits(15px);
+      }
+      .box2 {
+        content: stripUnits(20);
+      }
+      .box3 {
+        content: double(15px);
+      }
+      .box4 {
+        content: double('20px');
+      }
+      .box5 {
+        content: sum(1px, 2px);
+      }
+      .box5 {
+        content: sum(1px, 2em);
+      }
+      // 编译后的 CSS 代码
+      .box1 {
+        content: 15;
+      }
+      .box2 {
+        content: 20;
+      }
+      .box3 {
+        content: 30px;
+      }
+      .box4 {
+        content: "20px";
+      }
+      .box5 {
+        content: 3px;
+      }
+      .box6 {
+        content: -1;
+      }
+      ```
+
+### Sass 高级用法
+
+1. 条件判断语句
+
+    (1) `@if(){}` 用于判断，成立则执行后面的代码。
+
+    ``` scss
+    p {
+      @if (1 + 1 == 2) {
+        border: 1px solid;
+      }
+      @if (5 < 3) {
+        border: 2px dotted;
+      }
+      @if (not 1 + 1 == 2) {
+        content: '1 + 1 != 2';
+      }
+      @if (5 > 3 and 3 > 2) {
+        content: '5 > 3 and 3 > 2';
+      }
+      @if (3 < 2 or 3 > 1) {
+        content: '3 < 2 or 3 > 1';
+      }
+    }
+    // 编译后的 CSS 代码
+    p {
+      border: 1px solid;
+      content: '5 > 3 and 3 > 2';
+      content: '3 < 2 or 3 > 1';
+    }
+    ```
+
+    (2) `@else{}`：与 `@if(){}` 搭配用于表示在条件不成立的情况下执行的代码
+
+    ``` scss
+    @function getColor($color) {
+      @if (lightness($color) >30%) {
+        @return #000;
+      } @else {
+        @return #fff;
+      }
+    }
+    .test {
+      background-color: getColor(red);
+    }
+    // 编译后的 CSS 代码
+    .test {
+      background-color: #000;
+    }
+    ```
+
+2. 循环语句
+
+    (1) `@for(){}`：for 循环
+
+    ``` scss
+    @for $i from 1 to 5 {
+      .border-#{$i} {
+        border: #{$i}px solid blue;
+      }
+    }
+    @function sum($start, $end) {
+      $num: 0;
+      @for $i from $start to $end + 1 {
+        $num: $num + $i;
+      }
+      @return $num;
+    }
+    p {
+      content: sum(1, 10);
+    }
+    // 编译后 CSS 代码
+    .border-1 {
+      border: 1px solid blue;
+    }
+    .border-2 {
+      border: 2px solid blue;
+    }
+    .border-3 {
+      border: 3px solid blue;
+    }
+    .border-4 {
+      border: 4px solid blue;
+    }
+    p {
+      content: 55;
+    }
+    ```
+
+    (2) `@while(){}`：while 循环
+
+    ``` scss
+    $i: 6;
+    @while $i > 0 {
+      .item-#{$i} {
+        width: 2em * $i;
+      }
+      $i: $i - 2;
+    }
+    @function sum($end) {
+      $num: 0;
+      @while $end > 0 {
+        $num: $num + $end;
+        $end: $end - 1;
+      }
+      @return $num;
+    }
+    .box {
+      content: sum(10);
+    }
+    // 编译后的 CSS 代码
+    .item-6 {
+      width: 12em;
+    }
+    .item-4 {
+      width: 8em;
+    }
+    .item-2 {
+      width: 4em;
+    }
+    .box {
+      content: 55;
+    }
+    ```
+
+    (3) `each()`：each 循环
+
+    ``` scss
+    @each $member in a, b, c, d {
+      .#{$member} {
+        background-image: url('/image/#{$member}.jpg');
+      }
+    }
+    @function sum($list) {
+      $num: 0;
+      @each $member in $list {
+        $num: $num + $member;
+      }
+      @return $num;
+    }
+    .box {
+      content: sum(join((1, 2, 3, 4, 5, 6, 7, 8, 9), 10));
+    }
+    // 编译后的 CSS 代码
+    .a {
+      background-image: url("/image/a.jpg");
+    }
+    .b {
+      background-image: url("/image/b.jpg");
+    }
+    .c {
+      background-image: url("/image/c.jpg");
+    }
+    .d {
+      background-image: url("/image/d.jpg");
+    }
+    .box {
+      content: 55;
+    }
+    ```
+
+### 利用 Koala 编译 Sass
+
+1. 利用 Koala 编译 Sass，类似之前的 Koala 编译 Less。另外还可以从[此处](https://blog.csdn.net/qq_27917627/article/details/51274568)学习以下。

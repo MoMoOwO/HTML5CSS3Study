@@ -1,0 +1,21 @@
+.box1 {
+	content: unitless(100);
+}
+.box2 {
+	content: unitless(100em);
+}
+.box3 {
+	content: unitless(20%);
+}
+.box4 {
+	content: unitless(1em);
+}
+.box5 {
+	content: unitless(10px * 3em);
+}
+.box6 {
+	content: unitless(10px / 3em);
+}
+.box7 {
+	content: unitless(10px * 3em / 2em / 1rem);
+}

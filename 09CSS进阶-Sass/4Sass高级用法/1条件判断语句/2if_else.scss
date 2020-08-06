@@ -1,0 +1,10 @@
+@function getColor($color) {
+	@if (lightness($color) >30%) {
+		@return #000;
+	} @else {
+		@return #fff;
+	}
+}
+.test {
+	background-color: getColor(red);
+}

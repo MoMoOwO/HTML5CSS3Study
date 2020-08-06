@@ -1,0 +1,17 @@
+p {
+	@if (1 + 1 == 2) {
+		border: 1px solid;
+	}
+	@if (5 < 3) {
+		border: 2px dotted;
+	}
+	@if (not 1 + 1 == 2) {
+		content: '1 + 1 != 2';
+	}
+	@if (5 > 3 and 3 > 2) {
+		content: '5 > 3 and 3 > 2';
+	}
+	@if (3 < 2 or 3 > 1) {
+		content: '3 < 2 or 3 > 1';
+	}
+}

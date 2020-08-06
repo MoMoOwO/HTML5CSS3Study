@@ -1,0 +1,24 @@
+.box1 {
+	content: unit(100);
+}
+.box2 {
+	content: unit(100px);
+}
+.box3 {
+	content: unit(20%);
+}
+.box4 {
+	content: unit(1em);
+}
+.box5 {
+	content: unit(10px * 3em);
+}
+.box6 {
+	content: unit(10px / 3em);
+}
+.box7 {
+	content: unit(10px * 2em / 3cm / 1rem);
+}
+.box8 {
+	content: unit(1px + 1cm);
+}

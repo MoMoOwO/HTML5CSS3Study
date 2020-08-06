@@ -1,0 +1,15 @@
+@each $member in a, b, c, d {
+	.#{$member} {
+		background-image: url('/image/#{$member}.jpg');
+	}
+}
+@function sum($list) {
+	$num: 0;
+	@each $member in $list {
+		$num: $num + $member;
+	}
+	@return $num;
+}
+.box {
+	content: sum(join((1, 2, 3, 4, 5, 6, 7, 8, 9), 10));
+}

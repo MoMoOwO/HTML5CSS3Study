@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.one, .two, .three {
+  width: 100px;
+  height: 100px; }
+
+.two, .three {
+  /* 继承的样式 */
+  /* 独立的样式 */
+  background: red;
+  border: 5px solid #000; }
+
+.three {
+  /* 继承的样式 */
+  /* 独立的样式 */
+  padding: 10px; }
+
+/*# sourceMappingURL=5chain_extend.css.map */

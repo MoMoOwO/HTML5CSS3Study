@@ -1,0 +1,7 @@
+$bgColor: orange;
+$borderColor: green;
+.rgba {
+	color: rgba(#f36, 0.5);
+	background: rgba($bgColor, 0.5);
+	border-color: rgba($borderColor, 0.5);
+}

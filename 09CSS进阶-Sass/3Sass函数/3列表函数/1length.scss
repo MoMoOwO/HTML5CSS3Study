@@ -1,0 +1,9 @@
+.box1 {
+	content: length(10px);
+}
+.box2 {
+	content: length(10px 20% 2em);
+}
+.box3 {
+	content: length(10px 20px (border 1px solid) 2em);
+}

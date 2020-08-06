@@ -1,0 +1,18 @@
+.box1 {
+	content: join(10px 20px, 30px 40px);
+}
+.box2 {
+	content: join((blue, red), (#abc, #def));
+}
+.box3 {
+	content: join((blue, red), (#abc #def));
+}
+.box4 {
+	content: join((blue, red), join((#abc #def), (#dee #eff)));
+}
+.box5 {
+	content: join(100px, 200px, comma);
+}
+.box6 {
+	content: join((100px, 200px), 300px, space);
+}

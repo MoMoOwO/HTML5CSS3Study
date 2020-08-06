@@ -1,0 +1,11 @@
+/* .one {
+	height: 300px;
+} */
+@media print {
+  .one, .two {
+    height: 300px; }
+
+  .two {
+    width: 300px; } }
+
+/*# sourceMappingURL=8scope_extend.css.map */

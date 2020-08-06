@@ -1,0 +1,9 @@
+.box1 {
+	content: nth(10px 20px 30px, 1);
+}
+.box2 {
+	content: nth((Helvetica, Arial, sans-self), 2);
+}
+.box3 {
+	content: nth((1px solid red) border-top green, 1);
+}

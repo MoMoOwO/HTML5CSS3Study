@@ -1,0 +1,18 @@
+.box1 {
+	content: append(10px 20px, 30px);
+}
+.box2 {
+	content: append((blue, red), #abc);
+}
+.box3 {
+	content: append((blue, red), (#abc #def));
+}
+.box4 {
+	content: append((blue, red), append((#abc #def), (#dee #eff)));
+}
+.box5 {
+	content: append(100px, 200px, comma);
+}
+.box6 {
+	content: append((100px, 200px), 300px, space);
+}

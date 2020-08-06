@@ -1,0 +1,16 @@
+.test1 {
+	content: quote($string: 'Hello Sass!');
+}
+.test2 {
+	content: quote($string: 'Hello Sass!');
+}
+.test3 {
+	content: quote(ImWebDesigner);
+}
+.test4 {
+	content: quote($string: ' ');
+}
+// 报错
+/* .test4 {
+	content: quote(Hello Sass);
+} */

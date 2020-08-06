@@ -1,0 +1,9 @@
+#meng a%long {
+	color: blue;
+	font-weight: bold;
+	font-size: 2em;
+}
+.notice {
+	@extend %long;
+	padding: 10px;
+}
